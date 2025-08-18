@@ -1,0 +1,76 @@
+---
+sidebar: sidebar 
+permalink: openshift/os-dp-velero-backup.html 
+keywords: OpenShift, OCP, Trident, NetApp ONTAP, Red Hat OpenShift, OADP operator, Openshift Data Protection Application operator, Velero 
+summary: Protección de datos de aplicaciones de contenedores Red Hat OpenShift con NetApp ONTAP 
+---
+= Creación de copias de seguridad a pedido para aplicaciones en OpenShift Container Platform
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+En esta sección se describe cómo crear copias de seguridad a pedido para máquinas virtuales en OpenShift Virtualization.
+
+
+
+== Pasos para crear una copia de seguridad de una aplicación
+
+Para crear una copia de seguridad a pedido de una aplicación (metadatos de la aplicación y volúmenes persistentes de la aplicación), haga clic en la pestaña **Copia de seguridad** para crear un recurso personalizado de copia de seguridad (CR).  Se proporciona un yaml de muestra para crear el CR de respaldo.  Usando este yaml, se realizará una copia de seguridad de la aplicación y su almacenamiento persistente en el espacio de nombres especificado.  Se pueden configurar parámetros adicionales como se muestra en lalink:https://docs.openshift.com/container-platform/4.14/backup_and_restore/application_backup_and_restore/backing_up_and_restoring/oadp-creating-backup-cr.html["documentación"] .
+
+El CSI creará una instantánea de los volúmenes persistentes y de los recursos de la aplicación en el espacio de nombres especificado.  Esta instantánea se almacenará en la ubicación de respaldo especificada en el yaml.  La copia de seguridad permanecerá en el sistema durante 30 días según lo especificado en el TTL.
+
+....
+spec:
+  csiSnapshotTimeout: 10m0s
+  defaultVolumesToFsBackup: false
+  includedNamespaces:
+    - postgresql ->namespace of the app
+  itemOperationTimeout: 4h0m0s
+  snapshotMoveData: false
+  storageLocation: velero-container-backup-ontap-1 -->this is the backupStorageLocation previously created when Velero is configured.
+  ttl: 720h0m0s
+....
+Una vez que se complete la copia de seguridad, su fase se mostrará como completada.
+
+image:redhat-openshift-oadp-backup-001.png["Copia de seguridad completada"]
+
+Puede inspeccionar la copia de seguridad en el almacenamiento de objetos con la ayuda de una aplicación de navegador S3.  La ruta de la copia de seguridad aparece en el depósito configurado con el nombre de prefijo (velero/container-demo-backup).  Puede ver que el contenido de la copia de seguridad incluye las instantáneas de volumen, los registros y otros metadatos de la aplicación.
+
+
+NOTE: En StorageGrid, también puede utilizar la consola S3 que está disponible en el Administrador de inquilinos para ver los objetos de respaldo.
+
+image:redhat-openshift-oadp-backup-002.png["Copia de seguridad de objetos en S3"]
+
+
+
+== Creación de copias de seguridad programadas para aplicaciones
+
+Para crear copias de seguridad según un cronograma, debe crear una CR programada.  La programación es simplemente una expresión Cron que le permite especificar la hora en la que desea crear la copia de seguridad.  A continuación se muestra un ejemplo de yaml para crear un CR de programación.
+
+....
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: schedule1
+  namespace: openshift-adp
+spec:
+  schedule: 0 7 * * *
+  template:
+    includedNamespaces:
+      - postgresql
+    storageLocation: velero-container-backup-ontap-1
+....
+La expresión Cron 0 7 * * * significa que se creará una copia de seguridad a las 7:00 todos los días.  También se especifican los espacios de nombres que se incluirán en la copia de seguridad y la ubicación de almacenamiento para la copia de seguridad.  Entonces, en lugar de una CR de respaldo, se utiliza una CR programada para crear una copia de seguridad en el momento y frecuencia especificados.
+
+Una vez creado el cronograma, se habilitará.
+
+image:redhat-openshift-oadp-backup-003.png["Horario creado"]
+
+Se crearán copias de seguridad según este cronograma y se podrán ver desde la pestaña Copia de seguridad.
+
+image:redhat-openshift-oadp-backup-004.png["Copia de seguridad programada completada"]

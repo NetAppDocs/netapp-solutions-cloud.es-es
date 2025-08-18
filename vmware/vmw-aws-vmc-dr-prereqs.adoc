@@ -1,0 +1,710 @@
+---
+sidebar: sidebar 
+permalink: vmware/vmw-aws-vmc-dr-prereqs.html 
+keywords: overview, dr, snapcenter, data replication, snapmirror 
+summary: En esta solución, SnapCenter proporciona instantáneas consistentes con las aplicaciones para los datos de aplicaciones de SQL Server y Oracle.  Esta configuración, junto con la tecnología SnapMirror , proporciona replicación de datos de alta velocidad entre nuestro clúster local AFF y FSx ONTAP .  Además, Veeam Backup & Replication proporciona capacidades de respaldo y restauración para nuestras máquinas virtuales. 
+---
+= Requisitos, prerrequisitos y planificación de la solución DR
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+En esta solución, SnapCenter proporciona instantáneas consistentes con las aplicaciones para los datos de aplicaciones de SQL Server y Oracle.  Esta configuración, junto con la tecnología SnapMirror , proporciona replicación de datos de alta velocidad entre nuestro clúster local AFF y FSx ONTAP .  Además, Veeam Backup & Replication proporciona capacidades de respaldo y restauración para nuestras máquinas virtuales.
+
+
+
+== Tecnología
+
+Esta solución incluye tecnologías innovadoras de NetApp, VMware, Amazon Web Services (AWS) y Veeam.
+
+
+
+=== VMware
+
+.Fundación VMware Cloud
+[%collapsible%open]
+====
+La plataforma VMware Cloud Foundation integra múltiples ofertas de productos que permiten a los administradores aprovisionar infraestructuras lógicas en un entorno heterogéneo.  Estas infraestructuras (conocidas como dominios) proporcionan operaciones consistentes en nubes privadas y públicas.  Junto con el software Cloud Foundation se incluye una lista de materiales que identifica los componentes prevalidados y calificados para reducir el riesgo para los clientes y facilitar la implementación.
+
+Los componentes de la lista de materiales de Cloud Foundation incluyen lo siguiente:
+
+* Constructor de nubes
+* Administrador de SDDC
+* Dispositivo de servidor VMware vCenter
+* VMware ESXi
+* VMware NSX
+* vRealize Automation
+* Administrador del ciclo de vida de vRealize Suite
+* vRealize Log Insight
+
+
+Para obtener más información sobre VMware Cloud Foundation, consulte la https://docs.vmware.com/en/VMware-Cloud-Foundation/index.html["Documentación de VMware Cloud Foundation"^] .
+
+====
+.VMware vSphere
+[%collapsible%open]
+====
+VMware vSphere es una plataforma de virtualización que transforma los recursos físicos en grupos de computación, red y almacenamiento que pueden usarse para satisfacer las necesidades de carga de trabajo y aplicaciones de los clientes.  Los componentes principales de VMware vSphere incluyen los siguientes:
+
+* *ESXi.*  Este hipervisor de VMware permite la abstracción de procesadores de cómputo, memoria, red y otros recursos y los pone a disposición de máquinas virtuales y cargas de trabajo de contenedores.
+* *vCenter.*  VMware vCenter crea una experiencia de administración central para interactuar con recursos informáticos, redes y almacenamiento como parte de su infraestructura virtual.
+
+
+Los clientes aprovechan todo el potencial de su entorno vSphere al utilizar NetApp ONTAP con una profunda integración de productos, un soporte sólido y potentes funciones y eficiencias de almacenamiento para crear una nube múltiple híbrida sólida.
+
+Para obtener más información sobre VMware vSphere, siga https://docs.vmware.com/en/VMware-vSphere/index.html["este enlace"^] .
+
+====
+.VMware NSX
+[%collapsible%open]
+====
+Comúnmente conocido como hipervisor de red, VMware NSX emplea un modelo definido por software para conectar cargas de trabajo virtualizadas.  VMware NSX está presente en todas las instalaciones y en VMware Cloud on AWS, donde potencia la virtualización y la seguridad de la red para las aplicaciones y cargas de trabajo de los clientes.
+
+Para obtener más información sobre VMware NSX, siga https://docs.vmware.com/en/VMware-NSX-T-Data-Center/index.html["este enlace"^] .
+
+====
+
+
+=== NetApp
+
+.ONTAP de NetApp
+[%collapsible%open]
+====
+El software NetApp ONTAP ha sido una solución de almacenamiento líder para entornos VMware vSphere durante casi dos décadas y continúa agregando capacidades innovadoras para simplificar la administración y reducir los costos. El uso de ONTAP junto con vSphere es una excelente combinación que le permite reducir los gastos de hardware del host y software VMware.  También puede proteger sus datos a un menor costo con un alto rendimiento constante y aprovechando las eficiencias del almacenamiento nativo.
+
+Para obtener más información sobre NetApp ONTAP, siga https://docs.vmware.com/en/VMware-Cloud-on-AWS/index.html["este enlace"^] .
+
+====
+.Herramientas NetApp ONTAP para VMware
+[%collapsible%open]
+====
+Las herramientas ONTAP para VMware combinan múltiples complementos en un único dispositivo virtual que proporciona gestión del ciclo de vida de extremo a extremo para máquinas virtuales en entornos VMware que utilizan sistemas de almacenamiento NetApp .  Las herramientas ONTAP para VMware incluyen lo siguiente:
+
+* *Consola de almacenamiento virtual (VSC).*  Realiza tareas administrativas integrales para máquinas virtuales y almacenes de datos que utilizan almacenamiento NetApp .
+* *Proveedor VASA para ONTAP.*  Permite la gestión basada en políticas de almacenamiento (SPBM) con volúmenes virtuales de VMware (vVols) y almacenamiento de NetApp .
+* *Adaptador de replicación de almacenamiento (SRA)*.  Recupera almacenes de datos de vCenter y máquinas virtuales en caso de falla cuando se combina con VMware Site Recovery Manager (SRM).
+
+
+Las herramientas ONTAP para VMware permiten a los usuarios no solo administrar el almacenamiento externo, sino también integrarlo con vVols y VMware Site Recovery Manager.  Esto hace que sea mucho más fácil implementar y operar el almacenamiento de NetApp desde su entorno vCenter.
+
+Para obtener más información sobre las herramientas NetApp ONTAP para VMware, siga https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere/index.html["este enlace"^] .
+
+====
+.SnapCenter de NetApp
+[%collapsible%open]
+====
+El software NetApp SnapCenter software es una plataforma empresarial fácil de usar para coordinar y administrar de forma segura la protección de datos en aplicaciones, bases de datos y sistemas de archivos. SnapCenter simplifica la gestión del ciclo de vida de las copias de seguridad, la restauración y la clonación al delegar estas tareas a los propietarios de las aplicaciones sin sacrificar la capacidad de supervisar y regular la actividad en los sistemas de almacenamiento.  Al aprovechar la gestión de datos basada en almacenamiento, SnapCenter aumenta el rendimiento y la disponibilidad, además de reducir los tiempos de prueba y desarrollo.
+
+El SnapCenter Plug-in for VMware vSphere admite operaciones de copia de seguridad y restauración consistentes con fallas y con máquinas virtuales para máquinas virtuales (VM), almacenes de datos y discos de máquinas virtuales (VMDK).  También es compatible con complementos específicos de la aplicación SnapCenter para proteger operaciones de copia de seguridad y restauración consistentes con la aplicación para bases de datos y sistemas de archivos virtualizados.
+
+Para obtener más información sobre NetApp SnapCenter, siga https://docs.netapp.com/us-en/snapcenter/["este enlace"^] .
+
+====
+
+
+=== Protección de datos de terceros
+
+.Veeam Backup & Replication
+[%collapsible%open]
+====
+Veeam Backup & Replication es una solución de respaldo, recuperación y gestión de datos para cargas de trabajo físicas, virtuales y en la nube.  Veeam Backup & Replication tiene integraciones especializadas con la tecnología NetApp Snapshot que protegen aún más los entornos vSphere.
+
+Para obtener más información sobre Veeam Backup & Replication, siga https://www.veeam.com/vm-backup-recovery-replication-software.html["este enlace"^] .
+
+====
+
+
+=== Nube pública
+
+.Gestión de identidad y acceso de AWS
+[%collapsible%open]
+====
+Los entornos de AWS contienen una amplia variedad de productos, incluidos computación, almacenamiento, bases de datos, redes, análisis y mucho más, para ayudar a resolver los desafíos comerciales.  Las empresas deben poder definir quién está autorizado a acceder a estos productos, servicios y recursos.  Es igualmente importante determinar bajo qué condiciones se permite a los usuarios manipular, cambiar o agregar configuraciones.
+
+AWS Identity and Access Management (AIM) proporciona un plano de control seguro para administrar el acceso a los servicios y productos de AWS.  Los usuarios, las claves de acceso y los permisos configurados correctamente permiten la implementación de VMware Cloud on AWS y Amazon FSx.
+
+Para obtener más información sobre AIM, siga https://docs.aws.amazon.com/iam/index.html["este enlace"^] .
+
+====
+.VMware Cloud en AWS
+[%collapsible%open]
+====
+VMware Cloud on AWS lleva el software SDDC de clase empresarial de VMware a la nube de AWS con acceso optimizado a los servicios nativos de AWS.  VMware Cloud on AWS, impulsado por VMware Cloud Foundation, integra los productos de virtualización de red, almacenamiento y computación de VMware (VMware vSphere, VMware vSAN y VMware NSX) junto con la gestión de VMware vCenter Server optimizada para ejecutarse en una infraestructura de AWS dedicada, elástica y completa.
+
+Para obtener más información sobre VMware Cloud en AWS, siga https://docs.vmware.com/en/VMware-Cloud-on-AWS/index.html["este enlace"^] .
+
+====
+.Amazon FSx ONTAP
+[%collapsible%open]
+====
+Amazon FSx ONTAP es un sistema ONTAP totalmente administrado y con todas las funciones, disponible como servicio nativo de AWS.  Desarrollado sobre NetApp ONTAP, ofrece funciones familiares a la vez que ofrece la simplicidad de un servicio de nube totalmente administrado.
+
+Amazon FSx ONTAP ofrece soporte multiprotocolo para una variedad de tipos de computación, incluido VMware en la nube pública o en las instalaciones.  Amazon FSx ONTAP, disponible hoy para casos de uso conectados a invitados y para almacenes de datos NFS en versión preliminar tecnológica, permite a las empresas aprovechar las características familiares de sus entornos locales y en la nube.
+
+Para obtener más información sobre Amazon FSx ONTAP, siga https://aws.amazon.com/fsx/netapp-ontap/["este enlace"] .
+
+====
+
+
+== Descripción general: recuperación ante desastres del almacenamiento conectado a invitados de AWS
+
+Esta sección proporciona instrucciones para ayudar a los usuarios a verificar, configurar y validar sus entornos locales y en la nube para su uso con NetApp y VMware.  Específicamente, esta solución se centra en el caso de uso conectado a invitados de VMware con ONTAP AFF local y VMware Cloud y AWS FSx ONTAP para la nube.  Esta solución se demuestra con dos aplicaciones: Oracle y MS SQL en un escenario de recuperación ante desastres.
+
+.Habilidades y conocimientos
+[%collapsible%open]
+====
+Se requieren las siguientes habilidades e información para acceder a Google Cloud NetApp Volumes para AWS:
+
+* Acceso y conocimiento de su entorno local de VMware y ONTAP .
+* Acceso y conocimiento de VMware Cloud y AWS.
+* Acceso y conocimiento de AWS y Amazon FSx ONTAP.
+* Conocimiento de sus recursos SDDC y AWS.
+* Conocimiento de la conectividad de red entre sus recursos locales y en la nube.
+* Conocimiento práctico de escenarios de recuperación ante desastres.
+* Conocimiento práctico de aplicaciones implementadas en VMware.
+
+
+====
+.Administrativo
+[%collapsible%open]
+====
+Ya sea que interactúen con recursos locales o en la nube, los usuarios y administradores deben tener la capacidad y los derechos para aprovisionar esos recursos donde los necesiten, cuando los necesiten, de acuerdo con sus derechos.  La interacción de sus roles y permisos para sus sistemas locales, incluidos ONTAP y VMware, y sus recursos en la nube, incluidos VMware Cloud y AWS, es fundamental para una implementación exitosa de la nube híbrida.
+
+Las siguientes tareas administrativas deben estar implementadas para construir una solución de recuperación ante desastres con VMware y ONTAP local y VMware Cloud en AWS y FSx ONTAP.
+
+* Roles y cuentas que permiten el aprovisionamiento de lo siguiente:
++
+** Recursos de almacenamiento de ONTAP
+** Máquinas virtuales de VMware, almacenes de datos, etc.
+** AWS VPC y grupos de seguridad
+
+
+* Aprovisionamiento de entorno VMware local y ONTAP
+* Entorno de nube de VMware
+* Un sistema de archivos ONTAP de Amazon para FSx
+* Conectividad entre su entorno local y AWS
+* Conectividad para su VPC de AWS
+
+
+====
+.En las instalaciones
+[%collapsible%open]
+====
+El entorno virtual de VMware incluye licencias de hosts ESXi, VMware vCenter Server, redes NSX y otros componentes, como se puede ver en la siguiente figura.  Todos tienen licencias diferentes y es importante comprender cómo los componentes subyacentes consumen la capacidad licenciada disponible.
+
+image:dr-vmc-aws-002.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]
+
+.Hosts ESXi
+[%collapsible%open]
+=====
+Los hosts de cómputo en un entorno VMware se implementan con ESXi.  Cuando se licencian con vSphere en distintos niveles de capacidad, las máquinas virtuales pueden aprovechar las CPU físicas de cada host y las funciones autorizadas correspondientes.
+
+=====
+.VMware vCenter
+[%collapsible%open]
+=====
+Administrar hosts y almacenamiento ESXi es una de las muchas capacidades disponibles para el administrador de VMware con vCenter Server.  A partir de VMware vCenter 7.0, hay tres ediciones de VMware vCenter disponibles, según la licencia:
+
+* Conceptos básicos de vCenter Server
+* Fundación vCenter Server
+* vCenter Server Standard
+
+
+=====
+.VMware NSX
+[%collapsible%open]
+=====
+VMware NSX proporciona a los administradores la flexibilidad necesaria para habilitar funciones avanzadas.  Las funciones se habilitan según la versión de NSX-T Edition que tenga licencia:
+
+* Profesional
+* Avanzado
+* Empresa Plus
+* Oficina remota/sucursal
+
+
+=====
+.ONTAP de NetApp
+[%collapsible%open]
+=====
+La licencia con NetApp ONTAP se refiere a cómo los administradores obtienen acceso a diversas capacidades y características dentro del almacenamiento de NetApp .  Una licencia es un registro de uno o más derechos de software.  La instalación de claves de licencia, también conocidas como códigos de licencia, le permite utilizar ciertas funciones o servicios en su sistema de almacenamiento.  Por ejemplo, ONTAP admite todos los principales protocolos de cliente estándar de la industria (NFS, SMB, FC, FCoE, iSCSI y NVMe/FC) a través de licencias.
+
+Las licencias de funciones de Data ONTAP se emiten como paquetes, cada uno de los cuales contiene varias funciones o una sola función.  Un paquete requiere una clave de licencia, y la instalación de la clave le permite acceder a todas las funciones del paquete.
+
+Los tipos de licencia son los siguientes:
+
+* *Licencia bloqueada por nodo.*  La instalación de una licencia bloqueada por nodo le otorga derecho a un nodo a utilizar la funcionalidad licenciada.  Para que el clúster utilice la funcionalidad con licencia, al menos un nodo debe tener licencia para la funcionalidad.
+* *Licencia maestra/de sitio.*  Una licencia maestra o de sitio no está vinculada a un número de serie de sistema específico.  Cuando instala una licencia de sitio, todos los nodos del clúster tienen derecho a la funcionalidad licenciada.
+* *Licencia demo/temporal.*  Una licencia de demostración o temporal caduca después de un tiempo determinado.  Esta licencia le permite probar ciertas funciones del software sin necesidad de adquirir un derecho.
+* *Licencia de capacidad (solo ONTAP Select y FabricPool ).*  Una instancia de ONTAP Select se licencia según la cantidad de datos que el usuario desea administrar.  A partir de ONTAP 9.4, FabricPool requiere una licencia de capacidad para usarse con un nivel de almacenamiento de terceros (por ejemplo, AWS).
+
+
+=====
+.SnapCenter de NetApp
+[%collapsible%open]
+=====
+SnapCenter requiere varias licencias para habilitar operaciones de protección de datos.  El tipo de licencias de SnapCenter que instale dependerá de su entorno de almacenamiento y de las funciones que desee utilizar.  La licencia estándar de SnapCenter protege aplicaciones, bases de datos, sistemas de archivos y máquinas virtuales.  Antes de agregar un sistema de almacenamiento a SnapCenter, debe instalar una o más licencias de SnapCenter .
+
+Para habilitar la protección de aplicaciones, bases de datos, sistemas de archivos y máquinas virtuales, debe tener una licencia estándar basada en controlador instalada en su sistema de almacenamiento FAS o AFF o una licencia estándar basada en capacidad instalada en sus plataformas ONTAP Select y Cloud Volumes ONTAP .
+
+Consulte los siguientes requisitos previos de SnapCenter Backup para esta solución:
+
+* Un volumen y un recurso compartido SMB creados en el sistema ONTAP local para ubicar la base de datos respaldada y los archivos de configuración.
+* Una relación SnapMirror entre el sistema ONTAP local y FSx o CVO en la cuenta de AWS.  Se utiliza para transportar la instantánea que contiene la base de datos de SnapCenter respaldada y los archivos de configuración.
+* Windows Server instalado en la cuenta en la nube, ya sea en una instancia EC2 o en una VM en VMware Cloud SDDC.
+* SnapCenter instalado en la instancia EC2 de Windows o en la máquina virtual en VMware Cloud.
+
+
+=====
+.MS SQL
+[%collapsible%open]
+=====
+Como parte de esta validación de la solución, utilizamos MS SQL para demostrar la recuperación ante desastres.
+
+Para obtener más información sobre las mejores prácticas con MS SQL y NetApp ONTAP, siga https://www.netapp.com/media/8585-tr4590.pdf["este enlace"^] .
+
+=====
+.Oráculo
+[%collapsible%open]
+=====
+Como parte de esta validación de la solución, utilizamos ORACLE para demostrar la recuperación ante desastres.  Para obtener más información sobre las mejores prácticas con ORACLE y NetApp ONTAP, siga https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/oracle-overview.html["este enlace"^] .
+
+=====
+.Veeam
+[%collapsible%open]
+=====
+Como parte de esta validación de la solución, utilizamos Veeam para demostrar la recuperación ante desastres.  Para obtener más información sobre las mejores prácticas con Veeam y NetApp ONTAP, siga https://www.veeam.com/wp-netapp-configuration-best-practices-guide.html["este enlace"^] .
+
+=====
+====
+.Nube
+[%collapsible%open]
+====
+.AWS
+[%collapsible%open]
+=====
+Debes poder realizar las siguientes tareas:
+
+* Implementar y configurar servicios de dominio.
+* Implemente FSx ONTAP según los requisitos de la aplicación en una VPC determinada.
+* Configure VMware Cloud en la puerta de enlace de AWS Compute para permitir el tráfico desde FSx ONTAP.
+* Configure un grupo de seguridad de AWS para permitir la comunicación entre las subredes de VMware Cloud on AWS y las subredes de AWS VPC donde se implementa el servicio FSx ONTAP .
+
+
+=====
+.Nube de VMware
+[%collapsible%open]
+=====
+Debes poder realizar las siguientes tareas:
+
+* Configurar VMware Cloud en AWS SDDC.
+
+
+=====
+.Verificación de la cuenta de Cloud Manager
+[%collapsible%open]
+=====
+Debe poder implementar recursos con NetApp Cloud Manager.  Para comprobar que puede hacerlo, realice las siguientes tareas:
+
+* https://docs.netapp.com/us-en/bluexp-setup-admin/concept-modes.html["Regístrate en Cloud Central"^]Si aún no lo has hecho.
+* https://docs.netapp.com/us-en/cloud-manager-setup-admin/task-logging-in.html["Iniciar sesión en Cloud Manager"^] .
+* https://docs.netapp.com/us-en/cloud-manager-setup-admin/task-setting-up-netapp-accounts.html["Configurar espacios de trabajo y usuarios"^] .
+* https://docs.netapp.com/us-en/cloud-manager-setup-admin/concept-connectors.html["Crear un conector"^] .
+
+
+=====
+.Amazon FSx ONTAP
+[%collapsible%open]
+=====
+Debe poder realizar la siguiente tarea después de tener una cuenta de AWS:
+
+* Cree un usuario administrativo de IAM capaz de aprovisionar Amazon FSx para el sistema de archivos NetApp ONTAP .
+
+
+=====
+====
+.Requisitos previos de configuración
+[%collapsible%open]
+====
+Dadas las diferentes topologías que tienen los clientes, esta sección se centra en los puertos necesarios para permitir la comunicación desde los recursos locales a los recursos en la nube.
+
+.Consideraciones sobre puertos y firewall necesarios
+[%collapsible%open]
+=====
+Las siguientes tablas describen los puertos que deben habilitarse en toda su infraestructura.
+
+Para obtener una lista más completa de los puertos necesarios para el software Veeam Backup & Replication, siga https://helpcenter.veeam.com/docs/backup/vsphere/used_ports.html?zoom_highlight=port+requirements&ver=110["este enlace"^] .
+
+Para obtener una lista más completa de los requisitos de puerto para SnapCenter, siga https://docs.netapp.com/ocsc-41/index.jsp?topic=%2Fcom.netapp.doc.ocsc-isg%2FGUID-6B5E4464-FE9A-4D2A-B526-E6F4298C9550.html["este enlace"^] .
+
+La siguiente tabla enumera los requisitos del puerto de Veeam para Microsoft Windows Server.
+
+|===
+| De | A | Protocolo | Puerto | Notas 
+
+
+| Servidor de respaldo | Servidor Microsoft Windows | TCP | 445 | Puerto necesario para implementar componentes de Veeam Backup & Replication. 
+
+
+| Proxy de respaldo |  | TCP | 6160 | Puerto predeterminado utilizado por el servicio de instalación de Veeam. 
+
+
+| Repositorio de respaldo |  | TCP | 2500 a 3500 | Rango predeterminado de puertos utilizados como canales de transmisión de datos y para recopilar archivos de registro. 
+
+
+| Montar servidor |  | TCP | 6162 | Puerto predeterminado utilizado por Veeam Data Mover. 
+|===
+
+NOTE: Para cada conexión TCP que utiliza un trabajo, se asigna un puerto de este rango.
+
+La siguiente tabla enumera los requisitos del puerto de Veeam para el servidor Linux.
+
+|===
+| De | A | Protocolo | Puerto | Notas 
+
+
+| Servidor de respaldo | Servidor Linux | TCP | 22 | Puerto utilizado como canal de control desde la consola al host Linux de destino. 
+
+
+|  |  | TCP | 6162 | Puerto predeterminado utilizado por Veeam Data Mover. 
+
+
+|  |  | TCP | 2500 a 3500 | Rango predeterminado de puertos utilizados como canales de transmisión de datos y para recopilar archivos de registro. 
+|===
+
+NOTE: Para cada conexión TCP que utiliza un trabajo, se asigna un puerto de este rango.
+
+La siguiente tabla enumera los requisitos de puerto de Veeam Backup Server.
+
+|===
+| De | A | Protocolo | Puerto | Notas 
+
+
+| Servidor de respaldo | Servidor vCenter | HTTPS, TCP | 443 | Puerto predeterminado utilizado para conexiones a vCenter Server.  Puerto utilizado como canal de control desde la consola al host Linux de destino. 
+
+
+|  | Microsoft SQL Server que aloja la base de datos de configuración de Veeam Backup & Replication | TCP | 1443 | Puerto utilizado para la comunicación con Microsoft SQL Server en el que está implementada la base de datos de configuración de Veeam Backup & Replication (si utiliza una instancia predeterminada de Microsoft SQL Server). 
+
+
+|  | Servidor DNS con resolución de nombres de todos los servidores de respaldo | TCP | 3389 | Puerto utilizado para la comunicación con el servidor DNS 
+|===
+
+NOTE: Si usa vCloud Director, asegúrese de abrir el puerto 443 en los servidores vCenter subyacentes.
+
+La siguiente tabla enumera los requisitos del puerto de Veeam Backup Proxy.
+
+|===
+| De | A | Protocolo | Puerto | Notas 
+
+
+| Servidor de respaldo | Proxy de respaldo | TCP | 6210 | Puerto predeterminado utilizado por el servicio de integración VSS de Veeam Backup para tomar una instantánea VSS durante la copia de seguridad del recurso compartido de archivos SMB. 
+
+
+| Proxy de respaldo | Servidor vCenter | TCP | 1443 | Puerto de servicio web de VMware predeterminado que se puede personalizar en la configuración de vCenter. 
+|===
+La siguiente tabla enumera los requisitos del puerto de SnapCenter .
+
+|===
+| Tipo de puerto | Protocolo | Puerto | Notas 
+
+
+| Puerto de administración de SnapCenter | HTTPS | 8146 | Este puerto se utiliza para la comunicación entre el cliente de SnapCenter (el usuario de SnapCenter ) y el servidor de SnapCenter .  También se utiliza para la comunicación desde los hosts del complemento al servidor SnapCenter . 
+
+
+| Puerto de comunicación SMCore de SnapCenter | HTTPS | 8043 | Este puerto se utiliza para la comunicación entre el servidor SnapCenter y los hosts donde están instalados los complementos de SnapCenter . 
+
+
+| Hosts de complementos de Windows, instalación | TCP | 135, 445 | Estos puertos se utilizan para la comunicación entre el servidor SnapCenter y el host donde se está instalando el complemento.  Los puertos se pueden cerrar después de la instalación.  Además, los Servicios de Instrumentación de Windows buscan los puertos 49152 a 65535, que deben estar abiertos. 
+
+
+| Hosts de complementos de Linux, instalación | SSH | 22 | Estos puertos se utilizan para la comunicación entre el servidor SnapCenter y el host donde se está instalando el complemento.  SnapCenter utiliza los puertos para copiar binarios de paquetes de complementos a los hosts de complementos de Linux. 
+
+
+| Paquete de complementos de SnapCenter para Windows/Linux | HTTPS | 8145 | Este puerto se utiliza para la comunicación entre SMCore y los hosts donde están instalados los complementos de SnapCenter . 
+
+
+| Puerto de VMware vSphere vCenter Server | HTTPS | 443 | Este puerto se utiliza para la comunicación entre el complemento SnapCenter para VMware vSphere y el servidor vCenter. 
+
+
+| Complemento de SnapCenter para el puerto de VMware vSphere | HTTPS | 8144 | Este puerto se utiliza para la comunicación desde el cliente web vSphere de vCenter y desde el servidor SnapCenter . 
+|===
+=====
+====
+
+
+== Redes
+
+Esta solución requiere una comunicación exitosa desde el clúster ONTAP local a las direcciones de red del clúster de interconexión AWS FSx ONTAP para realizar operaciones de NetApp SyncMirror .  Además, un servidor de respaldo de Veeam debe tener acceso a un bucket de AWS S3.  En lugar de utilizar el transporte de Internet, se puede utilizar un enlace VPN o Direct Connect existente como enlace privado a un bucket S3.
+
+.En las instalaciones
+[%collapsible%open]
+====
+ONTAP admite todos los principales protocolos de almacenamiento utilizados para la virtualización, incluidos iSCSI, Fibre Channel (FC), Fibre Channel over Ethernet (FCoE) o Non-Volatile Memory Express over Fibre Channel (NVMe/FC) para entornos SAN.  ONTAP también admite NFS (v3 y v4.1) y SMB o S3 para conexiones de invitados.  Usted es libre de elegir lo que funcione mejor para su entorno y puede combinar protocolos según sea necesario en un solo sistema.  Por ejemplo, puede ampliar el uso general de los almacenes de datos NFS con unos pocos LUN iSCSI o recursos compartidos invitados.
+
+Esta solución aprovecha los almacenes de datos NFS para almacenes de datos locales para VMDK invitados y tanto iSCSI como NFS para datos de aplicaciones invitadas.
+
+.Redes de clientes
+[%collapsible%open]
+=====
+Los puertos de red VMkernel y las redes definidas por software proporcionan conectividad a los hosts ESXi, lo que les permite comunicarse con elementos fuera del entorno VMware.  La conectividad depende del tipo de interfaces VMkernel utilizadas.
+
+Para esta solución, se configuraron las siguientes interfaces VMkernel:
+
+* Gestión
+* vMotion
+* Sistema Nacional de Archivos
+* iSCSI
+
+
+=====
+.Redes de almacenamiento aprovisionadas
+[%collapsible%open]
+=====
+Una LIF (interfaz lógica) representa un punto de acceso de red a un nodo del clúster.  Esto permite la comunicación con las máquinas virtuales de almacenamiento que albergan los datos a los que acceden los clientes.  Puede configurar LIF en los puertos a través de los cuales el clúster envía y recibe comunicaciones a través de la red.
+
+Para esta solución, los LIF se configuran para los siguientes protocolos de almacenamiento:
+
+* Sistema Nacional de Archivos
+* iSCSI
+
+
+=====
+====
+.Opciones de conectividad en la nube
+[%collapsible%open]
+====
+Los clientes tienen muchas opciones al conectar su entorno local a los recursos de la nube, incluida la implementación de topologías VPN o de conexión directa.
+
+.Red privada virtual (VPN)
+[%collapsible%open]
+=====
+Las VPN (redes privadas virtuales) se utilizan a menudo para crear un túnel IPSec seguro con redes MPLS privadas o basadas en Internet.  Una VPN es fácil de configurar, pero carece de confiabilidad (si se basa en Internet) y velocidad.  El punto final se puede finalizar en AWS VPC o en VMware Cloud SDDC.  Para esta solución de recuperación ante desastres, creamos conectividad a AWS FSx ONTAP desde la red local.  Por lo tanto, se puede finalizar en la VPC de AWS (puerta de enlace privada virtual o puerta de enlace de tránsito) donde está conectado FSx ONTAP .
+
+La configuración de VPN puede basarse en rutas o en políticas.  Con una configuración basada en rutas, los puntos finales intercambian las rutas automáticamente y la configuración aprende la ruta a las subredes recién creadas.  Con una configuración basada en políticas, debe definir las subredes locales y remotas y, cuando se agregan nuevas subredes y se les permite comunicarse en el túnel IPSec, debe actualizar las rutas.
+
+
+NOTE: Si el túnel VPN IPSec no se crea en la puerta de enlace predeterminada, las rutas de red remotas se deben definir en las tablas de rutas a través del punto final del túnel VPN local.
+
+La siguiente figura muestra las opciones típicas de conexión VPN.
+
+image:dr-vmc-aws-003.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]
+
+=====
+.Conexión directa
+[%collapsible%open]
+=====
+Direct Connect proporciona un enlace dedicado a la red de AWS.  Las conexiones dedicadas crean enlaces a AWS mediante un puerto Ethernet de 1 Gbps, 10 Gbps o 100 Gbps.  Los socios de AWS Direct Connect proporcionan conexiones alojadas mediante enlaces de red preestablecidos entre ellos y AWS y están disponibles desde 50 Mbps hasta 10 Gbps.  De forma predeterminada, el tráfico no está cifrado.  Sin embargo, hay opciones disponibles para proteger el tráfico con MACsec o IPsec.  MACsec proporciona cifrado de capa 2 mientras que IPsec proporciona cifrado de capa 3.  MACsec proporciona mayor seguridad al ocultar qué dispositivos se están comunicando.
+
+Los clientes deben tener su equipo enrutador en una ubicación de AWS Direct Connect.  Para configurar esto, puede trabajar con AWS Partner Network (APN).  Se establece una conexión física entre ese enrutador y el enrutador AWS.  Para habilitar el acceso a FSx ONTAP en VPC, debe tener una interfaz virtual privada o una interfaz virtual de tránsito de Direct Connect a una VPC.  Con una interfaz virtual privada, la escalabilidad de la conexión directa a VPC es limitada.
+
+La siguiente figura muestra las opciones de la interfaz de Conexión Directa.
+
+image:dr-vmc-aws-004.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]
+
+=====
+.Puerta de tránsito
+[%collapsible%open]
+=====
+La puerta de enlace de tránsito es una construcción a nivel de región que permite una mayor escalabilidad de una conexión directa a VPC dentro de una región.  Si se requiere una conexión entre regiones, las puertas de enlace de tránsito deben estar emparejadas.  Para obtener más información, consulte la https://docs.aws.amazon.com/directconnect/latest/UserGuide/Welcome.html["Documentación de AWS Direct Connect"^] .
+
+=====
+====
+.Consideraciones sobre la red en la nube
+[%collapsible%open]
+====
+En la nube, la infraestructura de red subyacente es administrada por el proveedor de servicios en la nube, mientras que los clientes deben administrar las redes VPC, subredes, tablas de rutas, etc. en AWS.  También deben administrar segmentos de red NSX en el borde computacional.  SDDC agrupa rutas para la VPC externa y Transit Connect.
+
+Cuando se implementa FSx ONTAP con disponibilidad Multi-AZ en una VPC conectada a VMware Cloud, el tráfico iSCSI recibe las actualizaciones de tabla de rutas necesarias para habilitar la comunicación.  De forma predeterminada, no hay ninguna ruta disponible desde VMware Cloud a la subred NFS/SMB de FSx ONTAP en la VPC conectada para la implementación de Multi-AZ.  Para definir esa ruta, utilizamos el grupo VMware Cloud SDDC, que es una puerta de enlace de tránsito administrada por VMware, para permitir la comunicación entre los VMware Cloud SDDC en la misma región, así como con VPC externas y otras puertas de enlace de tránsito.
+
+
+NOTE: Existen costos de transferencia de datos asociados con el uso de una puerta de enlace de tránsito.  Para conocer los detalles de costos específicos de una región, consulte https://aws.amazon.com/transit-gateway/pricing/["este enlace"^] .
+
+VMware Cloud SDDC se puede implementar en una única zona de disponibilidad, lo que es como tener un único centro de datos.  También está disponible una opción de clúster extendido, que es como una solución NetApp MetroCluster que puede proporcionar mayor disponibilidad y menor tiempo de inactividad en caso de falla en la zona de disponibilidad.
+
+Para minimizar el costo de transferencia de datos, mantenga VMware Cloud SDDC y las instancias o servicios de AWS en la misma zona de disponibilidad.  Es mejor hacer coincidir con un ID de zona de disponibilidad en lugar de un nombre porque AWS proporciona la lista de pedidos de AZ específica de la cuenta para distribuir la carga entre las zonas de disponibilidad.  Por ejemplo, una cuenta (US-East-1a) podría apuntar a AZ ID 1, mientras que otra cuenta (US-East-1c) podría apuntar a AZ ID 1.  El ID de la zona de disponibilidad se puede recuperar de varias maneras.  En el siguiente ejemplo, recuperamos el ID de AZ de la subred de VPC.
+
+image:dr-vmc-aws-005.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]
+
+En VMware Cloud SDDC, la red se administra con NSX y el gateway de borde (enrutador de nivel 0) que maneja el puerto de enlace ascendente del tráfico norte-sur está conectado a AWS VPC.  La puerta de enlace de cómputo y las puertas de enlace de administración (enrutadores de nivel 1) manejan el tráfico de este a oeste.  Si los puertos de enlace ascendente del borde se utilizan intensivamente, puede crear grupos de tráfico para asociarlos con IP de host o subredes específicas.  La creación de un grupo de tráfico crea nodos de borde adicionales para separar el tráfico.  Comprueba el https://docs.vmware.com/en/VMware-Cloud-on-AWS/services/com.vmware.vmc-aws-networking-security/GUID-306D3EDC-F94E-4216-B306-413905A4A784.html["Documentación de VMware"^] sobre la cantidad mínima de hosts vSphere necesarios para utilizar una configuración de múltiples bordes.
+
+.Redes de clientes
+[%collapsible%open]
+=====
+Cuando se aprovisiona VMware Cloud SDDC, los puertos VMKernel ya están configurados y listos para su consumo.  VMware administra esos puertos y no es necesario realizar ninguna actualización.
+
+La siguiente figura muestra un ejemplo de información del Host VMKernel.
+
+image:dr-vmc-aws-006.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]
+
+=====
+.Redes de almacenamiento aprovisionadas (iSCSI, NFS)
+[%collapsible%open]
+=====
+Para las redes de almacenamiento de invitados de VM, normalmente creamos grupos de puertos.  Con NSX, creamos segmentos que se consumen en vCenter como grupos de puertos.  Debido a que las redes de almacenamiento están en una subred enrutable, puede acceder a los LUN o montar las exportaciones NFS utilizando la NIC predeterminada incluso sin crear segmentos de red separados.  Para separar el tráfico de almacenamiento, puede crear segmentos adicionales, definir reglas y controlar el tamaño de MTU en esos segmentos.  Para proporcionar tolerancia a fallas, es mejor tener al menos dos segmentos dedicados a la red de almacenamiento.  Como mencionamos anteriormente, si el ancho de banda del enlace ascendente se convierte en un problema, puede crear grupos de tráfico y asignar prefijos IP y puertas de enlace para realizar un enrutamiento basado en la fuente.
+
+Recomendamos hacer coincidir los segmentos en el SDDC de DR con el entorno de origen para evitar adivinar la asignación de segmentos de red durante la conmutación por error.
+
+=====
+.Grupos de seguridad
+[%collapsible%open]
+=====
+Muchas opciones de seguridad proporcionan una comunicación segura en la VPC de AWS y la red SDDC de VMware Cloud.  Dentro de la red VMware Cloud SDDC, puede usar el flujo de seguimiento de NSX para identificar la ruta, incluidas las reglas utilizadas.  Luego, puede usar un analizador de red en la red VPC para identificar la ruta, incluidas las tablas de rutas, los grupos de seguridad y las listas de control de acceso a la red, que se consume durante el flujo.
+
+=====
+====
+
+
+== Almacenamiento
+
+Los sistemas NetApp AFF Serie A ofrecen una infraestructura de almacenamiento de alto rendimiento con opciones de gestión de datos flexibles que están habilitadas para la nube para satisfacer una amplia variedad de escenarios empresariales.  En esta solución, utilizamos un ONTAP AFF A300 como nuestro sistema de almacenamiento local principal.
+
+Se utilizó NetApp ONTAP junto con ONTAP Tools para VMware y SnapCenter en la solución para brindar capacidades integrales de administración y respaldo de aplicaciones que están estrechamente integradas con VMware vSphere.
+
+.En las instalaciones
+[%collapsible%open]
+====
+Utilizamos almacenamiento ONTAP para los almacenes de datos de VMware que alojaban las máquinas virtuales y sus archivos VMDK.  VMware admite múltiples protocolos de almacenamiento para almacenes de datos conectados y, en esta solución, utilizamos volúmenes NFS para almacenes de datos en los hosts ESXi.  Sin embargo, los sistemas de almacenamiento ONTAP admiten todos los protocolos compatibles con VMware.
+
+La siguiente figura muestra las opciones de almacenamiento de VMware.
+
+image:dr-vmc-aws-007.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]
+
+Los volúmenes ONTAP se utilizaron para el almacenamiento conectado a invitados iSCSI y NFS para nuestras máquinas virtuales de aplicación.  Utilizamos los siguientes protocolos de almacenamiento para los datos de la aplicación:
+
+* Volúmenes NFS para archivos de base de datos Oracle conectados a invitados.
+* LUN iSCSI para bases de datos de Microsoft SQL Server y registros de transacciones conectados a invitados.
+
+
+|===
+| Sistema operativo | Tipo de base de datos | Protocolo de almacenamiento | Descripción del volumen 
+
+
+| Servidor Windows 2019 | Servidor SQL 2019 | iSCSI | Archivos de base de datos 
+
+
+|  |  | iSCSI | Archivos de registro 
+
+
+| Oracle Linux 8,5 | Oráculo 19c | Sistema Nacional de Archivos | binario de Oracle 
+
+
+|  |  | Sistema Nacional de Archivos | Datos de Oracle 
+
+
+|  |  | Sistema Nacional de Archivos | Archivos de recuperación de Oracle 
+|===
+También utilizamos el almacenamiento ONTAP para el repositorio de respaldo principal de Veeam, así como para un destino de respaldo para las copias de seguridad de la base de datos de SnapCenter .
+
+* Recurso compartido SMB para el repositorio de backup de Veeam.
+* Uso compartido SMB como destino para las copias de seguridad de la base de datos de SnapCenter .
+
+
+====
+.almacenamiento en la nube
+[%collapsible%open]
+====
+Esta solución incluye VMware Cloud on AWS para alojar máquinas virtuales que se restauran como parte del proceso de conmutación por error.  Al momento de escribir este artículo, VMware admite el almacenamiento vSAN para los almacenes de datos que alojan las máquinas virtuales y los VMDK.
+
+FSx ONTAP se utiliza como almacenamiento secundario para datos de aplicaciones que se reflejan mediante SnapCenter y SyncMirror.  Como parte del proceso de conmutación por error, el clúster FSx ONTAP se convierte en almacenamiento principal y las aplicaciones de base de datos pueden reanudar su funcionamiento normal en el clúster de almacenamiento FSx.
+
+.Configuración de Amazon FSx ONTAP
+[%collapsible%open]
+=====
+Para implementar AWS FSx ONTAP mediante Cloud Manager, siga las instrucciones en https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/start/task-getting-started-fsx.html["este enlace"^] .
+
+Una vez implementado FSx ONTAP , arrastre y suelte las instancias de ONTAP locales en FSx ONTAP para iniciar la configuración de la replicación de los volúmenes.
+
+La siguiente figura representa nuestro entorno FSx ONTAP .
+
+image:dr-vmc-aws-008.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]
+
+=====
+.Interfaces de red creadas
+[%collapsible%open]
+=====
+FSx ONTAP tiene interfaces de red preconfiguradas y listas para usar para iSCSI, NFS, SMB y redes entre clústeres.
+
+=====
+.Almacenamiento en almacén de datos de máquinas virtuales
+[%collapsible%open]
+=====
+VMware Cloud SDDC viene con dos almacenes de datos VSAN denominados `vsandatastore` y `workloaddatastore` .  Nosotros usamos `vsandatastore` para alojar máquinas virtuales de administración con acceso restringido a credenciales de cloudadmin.  Para las cargas de trabajo, utilizamos `workloaddatastore` .
+
+=====
+====
+
+
+== Calcular
+
+VMware vSphere proporciona infraestructura virtualizada en el centro de datos y en todos los principales proveedores de nube.  Este ecosistema es ideal para escenarios de recuperación ante desastres en los que el cómputo virtualizado se mantiene constante independientemente de la ubicación.  Esta solución utiliza recursos informáticos virtualizados de VMware tanto en la ubicación del centro de datos como en VMware Cloud en AWS.
+
+.En las instalaciones
+[%collapsible%open]
+====
+Esta solución utiliza servidores HPE Proliant DL360 Gen 10 que ejecutan VMware vSphere v7.0U3.  Implementamos seis instancias de cómputo para proporcionar recursos adecuados para nuestro servidor SQL y nuestros servidores Oracle.
+
+Implementamos 10 máquinas virtuales Windows Server 2019 que ejecutan SQL Server 2019 con diferentes tamaños de base de datos y 10 máquinas virtuales Oracle Linux 8.5 que ejecutan Oracle 19c, nuevamente, con diferentes tamaños de base de datos.
+
+====
+.Nube
+[%collapsible%open]
+====
+Implementamos un SDDC en VMware Cloud on AWS con dos hosts para proporcionar recursos adecuados para ejecutar las máquinas virtuales restauradas desde nuestro sitio principal.
+
+image:dr-vmc-aws-009.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]
+
+====
+
+
+== Herramientas de BlueXP backup and recovery
+
+Para realizar una conmutación por error de nuestras máquinas virtuales de aplicaciones y volúmenes de bases de datos a los servicios de VMware Cloud Volume que se ejecutan en AWS, fue necesario instalar y configurar una instancia en ejecución de SnapCenter Server y Veeam Backup and Replication Server.  Una vez completada la conmutación por error, estas herramientas también deben configurarse para reanudar las operaciones de respaldo normales hasta que se planifique y ejecute una conmutación por error al centro de datos local.
+
+.Implementación de herramientas de backup
+[%collapsible%open]
+====
+El servidor SnapCenter y el servidor Veeam Backup & Replication se pueden instalar en VMware Cloud SDDC o en instancias EC2 que residen en una VPC con conectividad de red al entorno de VMware Cloud.
+
+.Servidor SnapCenter
+[%collapsible%open]
+=====
+El SnapCenter software está disponible en el sitio de soporte de NetApp y se puede instalar en sistemas Microsoft Windows que residan en un dominio o grupo de trabajo.  Puede encontrar una guía de planificación detallada e instrucciones de instalación enlink:https://docs.netapp.com/us-en/snapcenter/install/install_workflow.html["Centro de documentación de NetApp"^] .
+
+El SnapCenter software se puede encontrar en https://mysupport.netapp.com["este enlace"^] .
+
+=====
+.Servidor de Veeam Backup & Replication
+[%collapsible%open]
+=====
+Puede instalar el servidor Veeam Backup & Replication en un servidor Windows en VMware Cloud on AWS o en una instancia EC2.  Para obtener una guía de implementación detallada, consulte la https://www.veeam.com/documentation-guides-datasheets.html["Documentación técnica del Centro de ayuda de Veeam"^] .
+
+=====
+====
+.Herramientas y configuración de respaldo
+[%collapsible%open]
+====
+Una vez instalados, SnapCenter y Veeam Backup & Replication deben configurarse para realizar las tareas necesarias para restaurar datos en VMware Cloud on AWS.
+
+. Configuración de SnapCenter
+
+
+[]
+=====
+Para restaurar los datos de la aplicación que se han reflejado en FSx ONTAP, primero debe realizar una restauración completa de la base de datos de SnapCenter local.  Una vez completado este proceso, se restablece la comunicación con las máquinas virtuales y las copias de seguridad de las aplicaciones ahora pueden reanudarse utilizando FSx ONTAP como almacenamiento principal.
+
+Para obtener una lista de los pasos que deben completarse en el servidor SnapCenter que reside en AWS, consulte la secciónlink:vmw-aws-vmc-guest-storage-dr.html#deploy-secondary-snapcenter["Implementar un servidor secundario de Windows SnapCenter"] .
+
+=====
+.Configuración de Veeam Backup & Replication
+[%collapsible%open]
+=====
+Para restaurar máquinas virtuales que se han respaldado en el almacenamiento de Amazon S3, Veeam Server debe estar instalado en un servidor Windows y configurado para comunicarse con VMware Cloud, FSx ONTAP y el depósito S3 que contiene el repositorio de respaldo original.  También debe tener un nuevo repositorio de respaldo configurado en FSx ONTAP para realizar nuevas copias de seguridad de las máquinas virtuales una vez que se restauren.
+
+Para obtener una lista completa de los pasos necesarios para completar la conmutación por error de las máquinas virtuales de la aplicación, consulte la secciónlink:vmw-aws-vmc-guest-storage-dr.html#deploy-secondary-veeam["Implementar un servidor secundario de Veeam Backup  Replication"] .
+
+=====
+====

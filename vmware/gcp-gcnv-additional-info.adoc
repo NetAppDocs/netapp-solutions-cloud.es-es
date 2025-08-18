@@ -1,0 +1,51 @@
+---
+sidebar: sidebar 
+permalink: vmware/gcp-gcnv-additional-info.html 
+keywords:  
+summary:  
+---
+= Información adicional e información de contacto
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Para obtener más información sobre la información que se describe en este documento, revise los siguientes documentos y/o sitios web:
+
+* Documentación de Google Cloud para Google Cloud NetApp Volumes
++
+https://cloud.google.com/architecture/partners/netapp-cloud-volumes/["https://cloud.google.com/architecture/partners/netapp-cloud-volumes/"^]
+
+* Acceso al servicio privado de Google
++
+https://cloud.google.com/vpc/docs/private-services-access?hl=en_US["https://cloud.google.com/vpc/docs/private-services-access?hl=en_US"^]
+
+* Documentación de productos de NetApp
++
+https://www.netapp.com/support-and-training/documentation/["https://www.netapp.com/support-and-training/documentation/"^]
+
+* Programa de módulo de validación criptográfica: NetApp CryptoMod
++
+https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/4144["https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/4144"^]
+
+* La solución de NetApp para ransomware
++
+https://www.netapp.com/pdf.html?item=/media/16716-sb-3938pdf.pdf&v=202093745["https://www.netapp.com/pdf.html?item=/media/16716-sb-3938pdf.pdf&v=202093745"^]
+
+* TR-4616: Kerberos NFS en ONTAP
++
+https://www.netapp.com/pdf.html?item=/media/19384-tr-4616.pdf["https://www.netapp.com/pdf.html?item=/media/19384-tr-4616.pdf"^]
+
+
+
+
+
+== Contáctanos
+
+Permítanos saber cómo podemos mejorar este informe técnico.
+
+Contáctenos en mailto:doccomments@netapp.com[doccomments@netapp.com^].  Incluya en el asunto INFORME TÉCNICO 4918.

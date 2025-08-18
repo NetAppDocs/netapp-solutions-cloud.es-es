@@ -1,0 +1,58 @@
+---
+sidebar: sidebar 
+permalink: vmware/vmw-hybrid-use-cases.html 
+keywords: NetApp Solutions, ehc, enterprise hybrid cloud, use case, hyperscalers, vmware 
+summary:  
+---
+= Casos de uso de NetApp Hybrid Multicloud con VMware
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Una descripción general de los casos de uso importantes para la organización de TI al planificar implementaciones de nube híbrida o de nube primero.
+
+
+
+== Casos de uso populares
+
+Los casos de uso incluyen:
+
+* Recuperación ante desastres,
+* Cargas de trabajo de alojamiento durante el mantenimiento del centro de datos, * picos repentinos en los que se requieren recursos adicionales a los que están aprovisionados en el centro de datos local,
+* Expansión del sitio de VMware,
+* Migración rápida a la nube,
+* Desarrollo/prueba, y
+* Modernización de aplicaciones aprovechando tecnologías complementarias de la nube.
+
+
+A lo largo de esta documentación, se detallarán referencias de carga de trabajo en la nube utilizando los casos de uso de VMware.  Estos casos de uso son:
+
+* Proteger (incluye recuperación ante desastres y copia de seguridad/restauración)
+* Emigrar
+* Extender
+
+
+
+
+=== Dentro del viaje de TI
+
+La mayoría de las organizaciones están en un viaje hacia la transformación y la modernización.  Como parte de este proceso, las empresas están intentando utilizar sus inversiones existentes en VMware mientras aprovechan los beneficios de la nube y exploran formas de hacer que el proceso de migración sea lo más fluido posible.  Este enfoque haría que sus esfuerzos de modernización fueran muy fáciles porque los datos ya están en la nube.
+
+La respuesta más fácil a este escenario son las ofertas de VMware en cada hiperescalador.  Al igual que NetApp Cloud Volumes, VMware ofrece una manera de trasladar o ampliar los entornos locales de VMware a cualquier nube, lo que le permite conservar los activos, las habilidades y las herramientas locales existentes mientras ejecuta cargas de trabajo de forma nativa en la nube.  Esto reduce el riesgo porque no habrá interrupciones del servicio ni necesidad de cambios de IP y proporciona al equipo de TI la capacidad de operar como lo hace localmente utilizando habilidades y herramientas existentes.  Esto puede conducir a migraciones a la nube aceleradas y a una transición mucho más fluida hacia una arquitectura multicloud híbrida.
+
+
+
+=== Comprender la importancia de las opciones de almacenamiento NFS suplementarias
+
+Si bien VMware en cualquier nube ofrece capacidades híbridas únicas para cada cliente, las opciones limitadas de almacenamiento NFS complementario han restringido su utilidad para las organizaciones con cargas de trabajo con gran capacidad de almacenamiento.  Debido a que el almacenamiento está directamente vinculado a los hosts, la única forma de escalar el almacenamiento es agregar más hosts, y eso puede aumentar los costos entre un 35 y un 40 por ciento o más para cargas de trabajo intensivas en almacenamiento.  Estas cargas de trabajo solo necesitan almacenamiento adicional, no potencia adicional.  Pero eso significa pagar por hosts adicionales.
+
+Consideremos este escenario:
+
+Un cliente requiere solo cinco hosts para CPU y memoria, pero tiene muchas necesidades de almacenamiento y necesita 12 hosts para satisfacer los requisitos de almacenamiento.  Este requisito termina inclinando realmente la balanza financiera al tener que comprar caballos de fuerza adicionales, cuando solo necesitan incrementar el almacenamiento.
+
+Al planificar la adopción y las migraciones a la nube, siempre es importante evaluar el mejor enfoque y tomar el camino más fácil que reduzca las inversiones totales.  El enfoque más común y sencillo para cualquier migración de aplicaciones es el rehosting (también conocido como lift and shift) donde no hay una máquina virtual (VM) ni conversión de datos.  El uso de NetApp Cloud Volumes con el centro de datos definido por software (SDDC) de VMware, además de complementar vSAN, proporciona una opción sencilla de elevación y traslado.

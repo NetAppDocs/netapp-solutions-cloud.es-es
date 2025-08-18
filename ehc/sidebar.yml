@@ -1,0 +1,219 @@
+---
+section: ehc
+title: Multicloud híbrida de NetApp con VMware
+url: "/ehc/index.html"
+entries:
+- title: VMware para la nube pública
+  pdf-filename: VMware para la nube pública en NetApp
+  entries:
+  - title: Descripción general de la solución
+    url: "/vmware/vmw-hybrid-overview.html"
+  - title: VMware Cloud en nubes de hiperescala
+    url: "/vmware/vmw-hybrid-hyperscalers.html"
+  - title: Configuraciones compatibles
+    url: "/vmware/vmw-hybrid-support-configs.html"
+  - title: VMware en la configuración de hiperescaladores
+    entries:
+    - title: Introducción
+      url: "/vmware/vmw-hybrid-compute-config.html"
+    - title: Configurar VMC para AWS
+      url: "/vmware/vmw-aws-vmc-setup.html"
+    - title: Configurar AVS para Azure
+      url: "/vmware/vmw-azure-avs-setup.html"
+    - title: Configurar GCVE para GCP
+      url: "/vmware/vmw-gcp-gcve-setup.html"
+  - title: Almacenamiento de NetApp en nubes públicas
+    entries:
+    - title: Opciones de almacenamiento para proveedores de nube pública
+      url: "/vmware/vmw-hybrid-storage.html"
+    - title: Opciones de almacenamiento para VMC en AWS
+      url: "/vmware/vmw-aws-vmc-storage.html"
+    - title: Acerca del almacén de datos NFS complementario para VMC
+      url: "/vmware/vmw-aws-vmc-nfs-ds-overview.html"
+    - title: Crear almacenes de datos NFS complementarios en AWS
+      url: "/vmware/vmw-aws-vmc-nfs-ds-config.html"
+    - title: Almacenamiento conectado para invitados para VMC
+      url: "/vmware/vmw-aws-vmc-guest-storage.html"
+    - title: Opciones de almacenamiento para AVS en Azure
+      url: "/vmware/vmw-azure-avs-storage.html"
+    - title: Acerca de los almacenes de datos NFS complementarios para AVS
+      url: "/vmware/vmw-azure-avs-nfs-ds-overview.html"
+    - title: Crear almacenes de datos NFS complementarios en Azure
+      url: "/vmware/vmw-azure-avs-nfs-ds-config.html"
+    - title: Almacenamiento conectado para invitados para AVS
+      url: "/vmware/vmw-azure-avs-guest-storage.html"
+    - title: Opciones de almacenamiento para GCVE en Google Cloud
+      url: "/vmware/vmw-gcp-gcve-storage.html"
+    - title: Acerca de los almacenes de datos NFS complementarios para GCVE
+      url: "/vmware/vmw-gcp-gcve-nfs-ds-overview.html"
+    - title: Almacenamiento conectado para invitados para GCVE
+      url: "/vmware/vmw-gcp-gcve-guest-storage.html"
+  - title: Resumen y conclusión
+    url: "/vmware/vmw-hybrid-summary.html"
+- title: Casos de uso de la nube híbrida de VMware
+  pdf-filename: Casos de uso de la nube híbrida de VMware
+  entries:
+  - title: Descripción general del caso de uso
+    url: "/vmware/vmw-hybrid-use-cases.html"
+  - title: Descripción general de las soluciones
+    url: "/vmware/vmw-hybrid-solutions.html"
+  - title: Soluciones para AWS/VMC
+    url: "/vmware/vmw-aws-vmc-solutions.html"
+  - title: Soluciones para Azure/AVS
+    url: "/vmware/vmw-azure-avs-solutions.html"
+  - title: Soluciones para GCP/GCVE
+    url: "/vmware/vmw-gcp-gcve-solutions.html"
+- title: NetApp para AWS/VMC
+  entries:
+  - title: Descripción general
+    pdf-filename: Acerca de NetApp para AWS
+    url: "/vmware/vmw-aws-vmc-overview.html"
+  - title: Proteja las cargas de trabajo en AWS/VMC
+    entries:
+    - title: Recuperación ante desastres con VMC en AWS
+      pdf-filename: Recuperación ante desastres con VMC en AWS (conexión de invitado)
+      url: "/vmware/vmw-aws-vmc-guest-storage-dr.html"
+    - title: Copia de seguridad y restauración de Veeam en VMware Cloud
+      pdf-filename: Veeam Backup and Restore en VMware Cloud, con AWS FSx ONTAP
+      url: "/vmware/vmw-aws-vmc-backup-restore-veeam.html"
+    - title: Recuperación ante desastres con FSx ONTAP y VMC
+      pdf-filename: Recuperación ante desastres (DRO) con FSx ONTAP y VMC
+      url: "/vmware/vmw-aws-vmc-dro.html"
+    - title: Recuperación ante desastres mediante la replicación de Veeam y FSx ONTAP
+      pdf-filename: Uso de Veeam Replication y FSx ONTAP para la recuperación ante
+        desastres en VMware Cloud en AWS
+      url: "/vmware/vmw-aws-fsxn-vmc-ds-dr-veeam.html"
+  - title: Migrar cargas de trabajo en AWS/VMC
+    entries:
+    - title: Migrar cargas de trabajo al almacén de datos de FSx ONTAP mediante VMware
+        HCX
+      pdf-filename: Migración de cargas de trabajo al almacén de datos de FSx ONTAP
+        mediante VMware HCX
+      url: "/vmware/vmw-aws-vmc-migrate-hcx.html"
+- title: NetApp para AWS/EVS
+  entries:
+  - title: Montar FSx ONTAP como almacén de datos externo para EVS
+    entries:
+    - title: Introducción
+      url: "/vmware/evs-mount-fsxn-intro.html"
+    - title: Implementar como un almacén de datos NFS
+      url: "/vmware/evs-mount-fsxn-nfs.html"
+    - title: Implementar como un almacén de datos iSCSI
+      url: "/vmware/evs-mount-fsxn-iscsi.html"
+    - title: Conclusión
+      url: "/vmware/evs-mount-fsxn-conclusion.html"
+- title: NetApp para Azure/AVS
+  entries:
+  - title: Descripción general de NetApp para Azure
+    pdf-filename: Descripción general de NetApp para Azure
+    url: "/vmware/vmw-azure-avs-overview.html"
+  - title: Proteger las cargas de trabajo en Azure/AVS
+    entries:
+    - title: Recuperación ante desastres con ANF y JetStream
+      pdf-filename: Recuperación ante desastres con ANF y JetStream (almacén de datos
+        NFS complementario)
+      url: "/vmware/vmw-azure-avs-dr-jetstream.html"
+    - title: Recuperación ante desastres con ANF y CVO
+      pdf-filename: Recuperación ante desastres con ANF y CVO (almacenamiento conectado
+        para invitados)
+      url: "/vmware/vmw-azure-avs-guest-storage-dr.html"
+    - title: Recuperación ante desastres con Azure NetApp Files y AVS
+      pdf-filename: Recuperación ante desastres (DRO) con Azure NetApp Files y AVS
+      url: "/vmware/vmw-azure-avs-dro.html"
+    - title: Recuperación ante desastres con replicación de Veeam y Azure NetApp Files
+      pdf-filename: Uso de Veeam Replication y el almacén de datos de Azure NetApp
+        Files para la recuperación ante desastres en Azure VMware Solution
+      url: "/vmware/vmw-azure-anf-avs-ds-dr-veeam.html"
+  - title: Migrar cargas de trabajo en Azure/AVS
+    entries:
+    - title: Migrar cargas de trabajo al almacén de datos ANF mediante VMware HCX
+      pdf-filename: Migrar cargas de trabajo al almacén de datos ANF mediante VMware
+        HCX
+      url: "/vmware/vmw-azure-avs-migrate-hcx.html"
+- title: NetApp para GCP/GCVE
+  entries:
+  - title: Descripción general de Netapp para Google Cloud
+    pdf-filename: Descripción general de Netapp para Google Cloud
+    url: "/vmware/vmw-gcp-gcve-overview.html"
+  - title: Proteger las cargas de trabajo en GCP/GCVE
+    entries:
+    - title: Recuperación ante desastres con el almacén de datos NFS complementario
+        de Veeam
+      pdf-filename: Recuperación ante desastres con Veeam (almacén de datos NFS complementario)
+      url: "/vmware/vmw-gcp-gcve-app-dr-ds-veeam.html"
+    - title: Recuperación ante desastres con el almacenamiento conectado para invitados
+        de Veeam
+      pdf-filename: Recuperación ante desastres con Veeam (almacenamiento conectado
+        para invitados)
+      url: "/vmware/vmw-gcp-gcve-app-dr-guest-veeam.html"
+    - title: Recuperación ante desastres con replicación de Veeam y Google Cloud NetApp
+        Volumes
+      pdf-filename: Uso del almacén de datos Veeam Replication y Google Cloud NetApp
+        Volumes para la recuperación ante desastres en GCVE
+      url: "/vmware/vmw-gcp-gcnv-gcve-ds-dr-veeam.html"
+  - title: Migrar cargas de trabajo en GCP/GCVE
+    entries:
+    - title: Migrar cargas de trabajo a Cloud Volume Service mediante VMware HCX
+      pdf-filename: Migrar cargas de trabajo al almacén de datos NFS de Cloud Volume
+        Service mediante VMware HCX
+      url: "/vmware/vmw-gcp-gcve-migrate-hcx.html"
+    - title: Migrar cargas de trabajo de máquinas virtuales a Google Cloud NetApp
+        Volumes mediante Veeam Replication
+      pdf-filename: Migrar cargas de trabajo de máquinas virtuales al almacén de datos
+        NFS de Google Cloud NetApp Volumes mediante Veeam Replication
+      url: "/vmware/vmw-gcp-gcve-migrate-veeam.html"
+  - title: Proteja sus datos con Google Cloud NetApp Volumes en Google Cloud
+    entries:
+    - title: Descripción general de seguridad
+      url: "/google/gcp-gcnv-overview.html"
+    - title: Cómo Google Cloud NetApp Volumes en Google Cloud protege tus datos
+      url: "/google/gcp-gcnv-security-overview.html"
+    - title: Consideraciones de seguridad y superficies de ataque
+      url: "/google/gcp-gcnv-security-considerations.html"
+    - title: Descripción general de la arquitectura
+      url: "/google/gcp-gcnv-arch-overview.html"
+    - title: Arquitectura de Google Cloud NetApp Volumes
+      url: "/google/gcp-gcnv-arch-detail.html"
+    - title: Arquitectura del plano de control
+      url: "/google/gcp-gcnv-control-plane-arch.html"
+    - title: Arquitectura del plano de datos
+      url: "/google/gcp-gcnv-data-plane-arch.html"
+    - title: Cifrado de datos en tránsito
+      url: "/google/gcp-gcnv-data-encrypt-in-transit.html"
+    - title: Cifrado de datos en reposo
+      url: "/google/gcp-gcnv-data-encrypt-at-rest.html"
+    - title: Cortafuegos
+      url: "/google/gcp-gcnv-firewall.html"
+    - title: Descripción general de los protocolos NAS
+      url: "/google/gcp-gcnv-nas-overview.html"
+    - title: Conceptos básicos de los protocolos NAS
+      url: "/google/gcp-gcnv-nas-basics.html"
+    - title: Sistema Nacional de Archivos
+      url: "/google/gcp-gcnv-nfs.html"
+    - title: SMB
+      url: "/google/gcp-gcnv-smb.html"
+    - title: Protocolo dual/multiprotocolo
+      url: "/google/gcp-gcnv-multiprotocol.html"
+    - title: Consideraciones para crear conexiones de Active Directory
+      url: "/google/gcp-gcnv-ad-connections.html"
+    - title: Otras dependencias del servicio de infraestructura NAS (KDC, LDAP, DNS)
+      url: "/google/gcp-gcnv-nas-dependencies.html"
+    - title: Operación del servicio
+      url: "/google/gcp-gcnv-service-operation.html"
+    - title: Información adicional
+      url: "/vmware/gcp-gcnv-additional-info.html"
+- title: BlueXP disaster recovery
+  entries:
+  - title: Proteja los datos de VMware con el complemento SnapCenter y BlueXP
+    pdf-filename: Protección de datos 3-2-1 para VMware con complemento SnapCenter
+      y BlueXP backup and recovery para máquinas virtuales
+    url: "/vmware/vmw-hybrid-321-dp-scv.html"
+  - title: Recuperación ante desastres mediante BlueXP DRaaS
+    pdf-filename: Recuperación ante desastres mediante BlueXP DRaaS
+    entries:
+    - title: Descripción general de la solución
+      url: "/vmware/vmw-hybrid-dr-overview.html"
+    - title: Recuperación ante desastres para almacenes de datos NFS
+      url: "/vmware/vmw-hybrid-dr-nfs.html"
+    - title: Recuperación ante desastres para almacenes de datos VMFS
+      url: "/vmware/vmw-hybrid-dr-vmfs.html"

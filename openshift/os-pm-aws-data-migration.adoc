@@ -1,0 +1,49 @@
+---
+sidebar: sidebar 
+permalink: openshift/os-pm-aws-data-migration.html 
+keywords: NetApp Solutions, redhat OpenShift, red hat OpenShift, redhat openshift container platform, ocp, openshift container platform, Advanced Cluster Management, ACM, Hub Cluster, containers, container workloads, VMware, customer managed storage, ONTAP, Ansible Automation Platform, BlueXP 
+summary:  
+---
+= Migración de datos
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Esta página muestra las opciones de migración de datos para cargas de trabajo de contenedores en clústeres de Red Hat OpenShift administrados mediante FSx ONTAP para almacenamiento persistente.
+
+
+
+== Migración de datos
+
+El servicio Red Hat OpenShift en AWS así como Amazon FSx for NetApp ONTAP (FSx ONTAP) forman parte de la cartera de servicios de AWS.  FSx ONTAP está disponible en opciones Single AZ o Multi-AZ.  La opción Multi-Az proporciona protección de datos ante fallas en la zona de disponibilidad.  FSx ONTAP se puede integrar con Trident para proporcionar almacenamiento persistente para aplicaciones en clústeres ROSA.
+
+
+
+=== Integración de FSx ONTAP con Trident mediante el gráfico Helm
+
+.Integración del clúster ROSA con Amazon FSx ONTAP
+video::621ae20d-7567-4bbf-809d-b01200fa7a68[panopto]
+La migración de aplicaciones de contenedores implica:
+
+* Volúmenes persistentes: esto se puede lograr utilizando BlueXP.  Otra opción es utilizar Trident Protect para gestionar las migraciones de aplicaciones de contenedores desde el entorno local al entorno de la nube.  La automatización se puede utilizar para el mismo propósito.
+* Metadatos de la aplicación: esto se puede lograr utilizando OpenShift GitOps (Argo CD).
+
+
+
+
+=== Conmutación por error y recuperación de aplicaciones en el clúster ROSA mediante FSx ONTAP para almacenamiento persistente
+
+El siguiente vídeo es una demostración de escenarios de conmutación por error y recuperación de aplicaciones utilizando BlueXP y Argo CD.
+
+.Conmutación por error y recuperación de aplicaciones en el clúster ROSA
+video::e9a07d79-42a1-4480-86be-b01200fa62f5[panopto]
+
+
+=== Solución de protección y migración de datos para cargas de trabajo de contenedores OpenShift
+
+image:rhhc-rosa-with-fsxn.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]

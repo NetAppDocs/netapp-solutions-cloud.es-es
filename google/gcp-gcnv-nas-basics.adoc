@@ -1,0 +1,25 @@
+---
+sidebar: sidebar 
+permalink: google/gcp-gcnv-nas-basics.html 
+keywords: nas, basics, gcp, nfs, smb 
+summary: Los protocolos NAS son formas para que varios clientes de una red accedan a los mismos datos en un sistema de almacenamiento, como Google Cloud NetApp Volumes en GCP.  NFS y SMB son los protocolos NAS definidos y funcionan sobre una base cliente/servidor, donde Google Cloud NetApp Volumes actúa como servidor. 
+---
+= Conceptos básicos de los protocolos NAS
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Los protocolos NAS son formas para que varios clientes de una red accedan a los mismos datos en un sistema de almacenamiento, como Google Cloud NetApp Volumes en GCP.  NFS y SMB son los protocolos NAS definidos y funcionan sobre una base cliente/servidor, donde Google Cloud NetApp Volumes actúa como servidor.  Los clientes envían solicitudes de acceso, lectura y escritura al servidor, y el servidor es responsable de coordinar los mecanismos de bloqueo de archivos, almacenar permisos y gestionar las solicitudes de identidad y autenticación.
+
+Por ejemplo, se sigue el siguiente proceso general si un cliente NAS desea crear un nuevo archivo en una carpeta.
+
+. El cliente solicita al servidor información sobre el directorio (permisos, propietario, grupo, ID de archivo, espacio disponible, etc.); el servidor responde con la información si el cliente y el usuario solicitantes tienen los permisos necesarios en la carpeta principal.
+. Si los permisos del directorio permiten el acceso, el cliente pregunta al servidor si el nombre del archivo que se está creando ya existe en el sistema de archivos.  Si el nombre del archivo ya está en uso, la creación falla.  Si el nombre del archivo no existe, el servidor le informa al cliente que puede continuar.
+. El cliente emite una llamada al servidor para crear el archivo con el identificador de directorio y el nombre del archivo y establece los tiempos de acceso y modificación.  El servidor emite un ID de archivo único para el archivo para asegurarse de que no se creen otros archivos con el mismo ID de archivo.
+. El cliente envía una llamada para verificar los atributos del archivo antes de la operación ESCRIBIR.  Si los permisos lo permiten, el cliente escribe el nuevo archivo.  Si el protocolo o la aplicación utilizan el bloqueo, el cliente solicita al servidor un bloqueo para evitar que otros clientes accedan al archivo mientras está bloqueado para evitar la corrupción de datos.
+

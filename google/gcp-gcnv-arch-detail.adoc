@@ -1,0 +1,78 @@
+---
+sidebar: sidebar 
+permalink: google/gcp-gcnv-arch-detail.html 
+keywords: tenancy model, shared vpcs, service controls, packet sniffing, trace considerations 
+summary: 'De manera similar a otros servicios nativos de Google Cloud, como CloudSQL, Google Cloud VMware Engine (GCVE) y FileStore, Google Cloud NetApp Volumes utiliza Google PSA para brindar el servicio.' 
+---
+= Arquitectura de Google Cloud NetApp Volumes
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+De manera similar a otros servicios nativos de Google Cloud, como CloudSQL, Google Cloud VMware Engine (GCVE) y FileStore, Google Cloud NetApp Volumes utiliza https://cloud.google.com/vpc/docs/private-services-access?hl=en_US["Anuncio de servicio público de Google"^] para prestar el servicio.  En PSA, los servicios se construyen dentro de un proyecto de productor de servicios, que utiliza https://cloud.google.com/vpc/docs/vpc-peering?hl=en_US["Intercambio de redes VPC"^] para conectarse con el consumidor del servicio.  El productor de servicios es proporcionado y operado por NetApp, y el consumidor de servicios es una VPC en un proyecto de cliente, que aloja a los clientes que desean acceder a los recursos compartidos de archivos de Google Cloud NetApp Volumes .
+
+La siguiente figura, referenciada desde el https://cloud.google.com/architecture/partners/netapp-cloud-volumes/architecture?hl=en_US["sección de arquitectura"^] de la documentación de Google Cloud NetApp Volumes , muestra una vista de alto nivel.
+
+image:ncvs-gc-001.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]
+
+La parte sobre la línea punteada muestra el plano de control del servicio, que controla el ciclo de vida del volumen.  La parte debajo de la línea punteada muestra el plano de datos.  El cuadro azul de la izquierda representa el VPC del usuario (consumidor de servicios), el cuadro azul de la derecha es el productor de servicios proporcionado por NetApp.  Ambos están conectados a través del peering VPC.
+
+
+
+== Modelo de arrendamiento
+
+En Google Cloud NetApp Volumes, los proyectos individuales se consideran inquilinos únicos.  Esto significa que la manipulación de volúmenes, copias instantáneas, etc., se realizan proyecto por proyecto.  En otras palabras, todos los volúmenes son propiedad del proyecto en el que fueron creados y solo ese proyecto puede administrar y acceder a los datos dentro de ellos de forma predeterminada.  Esta se considera la vista del plano de control del servicio.
+
+
+
+=== VPC compartidas
+
+En la vista del plano de datos, Google Cloud NetApp Volumes puede conectarse a una VPC compartida.  Puede crear volúmenes en el proyecto de alojamiento o en uno de los proyectos de servicio conectados a la VPC compartida.  Todos los proyectos (host o servicio) conectados a esa VPC compartida pueden alcanzar los volúmenes en la capa de red (TCP/IP).  Debido a que todos los clientes con conectividad de red en la VPC compartida pueden acceder potencialmente a los datos a través de protocolos NAS, se debe usar el control de acceso en el volumen individual (como listas de control de acceso de usuarios/grupos (ACL) y nombres de host/direcciones IP para exportaciones NFS) para controlar quién puede acceder a los datos.
+
+Puede conectar Google Cloud NetApp Volumes a hasta cinco VPC por proyecto de cliente.  En el plano de control, el proyecto le permite administrar todos los volúmenes creados, sin importar a qué VPC estén conectados.  En el plano de datos, las VPC están aisladas entre sí y cada volumen solo se puede conectar a una VPC.
+
+El acceso a los volúmenes individuales está controlado por mecanismos de control de acceso específicos del protocolo (NFS/SMB).
+
+En otras palabras, en la capa de red, todos los proyectos conectados a la VPC compartida pueden ver el volumen, mientras que, en el lado de administración, el plano de control solo permite que el proyecto propietario vea el volumen.
+
+
+
+=== Controles de servicio de VPC
+
+Los controles de servicio de VPC establecen un perímetro de control de acceso alrededor de los servicios de Google Cloud que están conectados a Internet y son accesibles en todo el mundo.  Estos servicios proporcionan control de acceso a través de las identidades de los usuarios, pero no pueden restringir desde qué ubicación de red se originan las solicitudes.  Los controles de servicio de VPC cierran esa brecha al introducir la capacidad de restringir el acceso a redes definidas.
+
+El plano de datos de Google Cloud NetApp Volumes no está conectado a Internet externo, sino a VPC privadas con límites de red bien definidos (perímetros).  Dentro de esa red, cada volumen utiliza un control de acceso específico del protocolo.  Cualquier conectividad de red externa es creada explícitamente por los administradores de proyectos de Google Cloud.  Sin embargo, el plano de control no proporciona las mismas protecciones que el plano de datos y cualquier persona puede acceder a él desde cualquier lugar con credenciales válidas ( https://datatracker.ietf.org/doc/html/rfc7519["Tokens JWT"^] ).
+
+En resumen, el plano de datos de Google Cloud NetApp Volumes proporciona la capacidad de control de acceso a la red, sin el requisito de admitir controles de servicio de VPC y no los utiliza explícitamente.
+
+
+
+=== Consideraciones sobre rastreo y detección de paquetes
+
+Las capturas de paquetes pueden ser útiles para solucionar problemas de red u otros problemas (como permisos NAS, conectividad LDAP, etc.), pero también pueden usarse de forma maliciosa para obtener información sobre direcciones IP de red, direcciones MAC, nombres de usuarios y grupos, y qué nivel de seguridad se está utilizando en los puntos finales.  Debido a la forma en que se configuran las redes, las VPC y las reglas de firewall de Google Cloud, debería ser difícil obtener acceso no deseado a los paquetes de red sin credenciales de inicio de sesión del usuario olink:gcp-gcnv-control-plane-arch.html#jwt-tokens["Tokens JWT"] en las instancias de la nube.  Las capturas de paquetes solo son posibles en puntos finales (como máquinas virtuales [VM]) y solo son posibles en puntos finales internos a la VPC, a menos que se utilice una VPC compartida o un túnel de red externo/reenvío de IP para permitir explícitamente el tráfico externo a los puntos finales.  No hay forma de rastrear el tráfico fuera de los clientes.
+
+Cuando se utilizan VPC compartidas, el cifrado en tránsito con NFS Kerberos y/olink:gcp-gcnv-data-encrypt-in-transit.html#smb-encryption["Cifrado SMB"] Puede enmascarar gran parte de la información obtenida de los rastros.  Sin embargo, parte del tráfico todavía se envía en texto sin formato, comolink:gcp-gcnv-nas-dependencies.html#dns["DNS"] ylink:gcp-gcnv-nas-dependencies.html#ldap-queries["Consultas LDAP"] .  La siguiente figura muestra una captura de paquetes de una consulta LDAP de texto sin formato que se origina en Google Cloud NetApp Volumes y la posible información de identificación que está expuesta.  Las consultas LDAP en Google Cloud NetApp Volumes actualmente no admiten cifrado ni LDAP sobre SSL.  Soporte de NetApp Volumes-Performance para firma LDAP, si Active Directory lo solicita.  NetApp Volumes-SW no admite la firma LDAP.
+
+image:ncvs-gc-002.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]
+
+
+NOTE: unixUserPassword es consultado por LDAP y no se envía en texto simple sino en un hash salado.  De forma predeterminada, Windows LDAP no rellena los campos unixUserPassword.  Este campo solo es necesario si necesita aprovechar Windows LDAP para inicios de sesión interactivos a través de LDAP para los clientes.  Google Cloud NetApp Volumes no admite inicios de sesión LDAP interactivos en las instancias.
+
+La siguiente figura muestra una captura de paquetes de una conversación NFS Kerberos junto a una captura de NFS sobre AUTH_SYS.  Observe cómo la información disponible en un seguimiento difiere entre los dos y cómo habilitar el cifrado en vuelo ofrece una mayor seguridad general para el tráfico NAS.
+
+image:ncvs-gc-003.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]
+
+image:ncvs-gc-004.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]
+
+
+
+=== Interfaces de red de VM
+
+Un truco que los atacantes podrían intentar es agregar una nueva tarjeta de interfaz de red (NIC) a una máquina virtual en https://en.wikipedia.org/wiki/Promiscuous_mode["modo promiscuo"^] (duplicación de puertos) o habilitar el modo promiscuo en una NIC existente para rastrear todo el tráfico.  En Google Cloud, agregar una nueva NIC requiere que una máquina virtual se apague por completo, lo que genera alertas para que los atacantes no puedan hacerlo sin ser detectados.
+
+Además, las NIC no se pueden configurar en modo promiscuo y activarán alertas en Google Cloud.

@@ -1,0 +1,152 @@
+---
+sidebar: sidebar 
+permalink: google/gcp-gcnv-ad-connections.html 
+keywords: active directory, credentials, permissions, smb machine accounts, region, backup users, security privilege, 
+summary: Google Cloud NetApp Volumes brinda la posibilidad de conectar su instancia de Google Cloud NetApp Volumes a un servidor externo de Active Directory para la administración de identidades para usuarios de SMB y UNIX.  Es necesario crear una conexión de Active Directory para usar SMB en Google Cloud NetApp Volumes. 
+---
+= Consideraciones para crear conexiones de Active Directory
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Google Cloud NetApp Volumes brinda la posibilidad de conectar su instancia de Google Cloud NetApp Volumes a un servidor externo de Active Directory para la administración de identidades para usuarios de SMB y UNIX.  Es necesario crear una conexión de Active Directory para usar SMB en Google Cloud NetApp Volumes.
+
+La configuración para esto proporciona varias opciones que requieren cierta consideración por motivos de seguridad.  El servidor externo de Active Directory puede ser una instancia local o nativa de la nube.  Si está utilizando un servidor Active Directory local, no exponga el dominio a la red externa (por ejemplo, con una DMZ o una dirección IP externa).  En su lugar, utilice túneles privados seguros o VPN, confianzas de bosque unidireccionales o conexiones de red dedicadas a las redes locales con https://cloud.google.com/vpc/docs/private-google-access["Acceso privado a Google"^] .  Consulte la documentación de Google Cloud para obtener más información sobre https://cloud.google.com/managed-microsoft-ad/docs/best-practices["Mejores prácticas para usar Active Directory en Google Cloud"^] .
+
+
+NOTE: NetApp Volumes-SW requiere que los servidores de Active Directory estén ubicados en la misma región.  Si se intenta una conexión DC en NetApp Volumes-SW a otra región, el intento falla.  Al utilizar NetApp Volumes-SW, asegúrese de crear sitios de Active Directory que incluyan los DC de Active Directory y luego especifique los sitios en Google Cloud NetApp Volumes para evitar intentos de conexión de DC entre regiones.
+
+
+
+== Credenciales de Active Directory
+
+Cuando SMB o LDAP para NFS está habilitado, Google Cloud NetApp Volumes interactúa con los controladores de Active Directory para crear un objeto de cuenta de máquina para usar en la autenticación.  Esto no es diferente de cómo un cliente SMB de Windows se une a un dominio y requiere los mismos derechos de acceso a las unidades organizativas (OU) en Active Directory.
+
+En muchos casos, los grupos de seguridad no permiten el uso de una cuenta de administrador de Windows en servidores externos como Google Cloud NetApp Volumes.  En algunos casos, el usuario Administrador de Windows se deshabilita por completo como práctica recomendada de seguridad.
+
+
+
+=== Permisos necesarios para crear cuentas de máquinas SMB
+
+Para agregar objetos de máquina de Google Cloud NetApp Volumes a un Active Directory, se necesita una cuenta que tenga derechos administrativos en el dominio o https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/plan/delegating-administration-by-using-ou-objects["permisos delegados para crear y modificar objetos de cuenta de máquina"^] Se requiere una OU específica.  Puede hacer esto con el Asistente para delegación de control en Active Directory creando una tarea personalizada que proporcione a un usuario acceso para la creación o eliminación de objetos de computadora con los siguientes permisos de acceso proporcionados:
+
+* Leer/Escribir
+* Crear/eliminar todos los objetos secundarios
+* Leer/escribir todas las propiedades
+* Cambiar/Restablecer contraseña
+
+
+Al hacer esto, se agrega automáticamente una ACL de seguridad para el usuario definido a la OU en Active Directory y se minimiza el acceso al entorno de Active Directory.  Una vez delegado un usuario, ese nombre de usuario y contraseña se pueden proporcionar como credenciales de Active Directory en esta ventana.
+
+
+NOTE: El nombre de usuario y la contraseña que se pasan al dominio de Active Directory aprovechan el cifrado Kerberos durante la consulta y creación de objetos de la cuenta de la máquina para mayor seguridad.
+
+
+
+== Detalles de la conexión de Active Directory
+
+El https://cloud.google.com/architecture/partners/netapp-cloud-volumes/creating-smb-volumes["Detalles de la conexión de Active Directory"^] Proporcionar campos para que los administradores proporcionen información específica del esquema de Active Directory para la ubicación de la cuenta de la máquina, como la siguiente:
+
+* *Tipo de conexión de Active Directory.*  Se utiliza para especificar si la conexión de Active Directory en una región se utiliza para volúmenes de tipo de servicio Google Cloud NetApp Volumes o NetApp Volumes-Performance.  Si esta configuración se configura incorrectamente en una conexión existente, es posible que no funcione correctamente al usarla o editarla.
+* *Dominio.*  El nombre de dominio de Active Directory.
+* *Sitio.*  Limita los servidores de Active Directory a un sitio específico por motivos de seguridad y rendimiento https://cloud.google.com/architecture/partners/netapp-cloud-volumes/managing-active-directory-connections["Consideraciones"^] .  Esto es necesario cuando varios servidores de Active Directory abarcan regiones porque Google Cloud NetApp Volumes actualmente no permite permitir solicitudes de autenticación de Active Directory a servidores de Active Directory en una región diferente a la instancia de Google Cloud NetApp Volumes .  (Por ejemplo, el controlador de dominio de Active Directory está en una región que solo admite NetApp Volumes-Performance, pero desea un recurso compartido SMB en una instancia de NetApp Volumes-SW).
+* *Servidores DNS.*  Servidores DNS para utilizar en búsquedas de nombres.
+* *Nombre NetBIOS (opcional).*  Si lo desea, el nombre NetBIOS del servidor.  Esto es lo que se utiliza cuando se crean nuevas cuentas de máquina mediante la conexión de Active Directory.  Por ejemplo, si el nombre NetBIOS se establece en NetApp Volumes-EAST, los nombres de las cuentas de la máquina serán NetApp Volumes-EAST-{1234}. Ver la secciónlink:gcp-gcnv-ad-connections.html#how-cloud-volumes-service-shows-up-in-active-directory["Cómo aparecen los Google Cloud NetApp Volumes en Active Directory"] Para más información.
+* *Unidad organizativa (OU).*  La unidad organizativa específica para crear la cuenta de computadora.  Esto es útil si está delegando el control a un usuario para cuentas de máquina en una unidad organizativa específica.
+* *Cifrado AES.*  También puede marcar o desmarcar la casilla de verificación Habilitar cifrado AES para autenticación de AD.  Habilitar el cifrado AES para la autenticación de Active Directory proporciona seguridad adicional para la comunicación de Google Cloud NetApp Volumes con Active Directory durante las búsquedas de usuarios y grupos.  Antes de habilitar esta opción, consulte con su administrador de dominio para confirmar que los controladores de dominio de Active Directory admiten la autenticación AES.
+
+
+
+NOTE: De forma predeterminada, la mayoría de los servidores Windows no deshabilitan cifrados más débiles (como DES o RC4-HMAC), pero si elige deshabilitar cifrados más débiles, confirme que la conexión de Active Directory de Google Cloud NetApp Volumes se haya configurado para habilitar AES.  De lo contrario, se producen fallos de autenticación.  Habilitar el cifrado AES no deshabilita los cifrados más débiles, sino que agrega compatibilidad con cifrados AES a la cuenta de máquina SMB de Google Cloud NetApp Volumes .
+
+
+
+== Detalles del dominio Kerberos
+
+Esta opción no se aplica a servidores SMB.  Más bien, se utiliza al configurar NFS Kerberos para el sistema Google Cloud NetApp Volumes .  Cuando se completan estos detalles, se configura el dominio NFS Kerberos (similar a un archivo krb5.conf en Linux) y se utiliza cuando se especifica NFS Kerberos en la creación del volumen de Google Cloud NetApp Volumes , ya que la conexión de Active Directory actúa como Centro de distribución NFS Kerberos (KDC).
+
+
+NOTE: Actualmente, los KDC que no son de Windows no son compatibles con Google Cloud NetApp Volumes.
+
+
+
+== Región
+
+Una región le permite especificar la ubicación donde reside la conexión de Active Directory.  Esta región debe ser la misma región que el volumen Google Cloud NetApp Volumes .
+
+* *Usuarios NFS locales con LDAP.*  En esta sección, también hay una opción para Permitir usuarios NFS locales con LDAP.  Esta opción debe dejarse sin seleccionar si desea ampliar el soporte de membresía de grupos de usuarios de UNIX más allá de la limitación de 16 grupos de NFS (grupos extendidos).  Sin embargo, el uso de grupos extendidos requiere un servidor LDAP configurado para identidades UNIX.  Si no tiene un servidor LDAP, deje esta opción sin seleccionar.  Si tiene un servidor LDAP y también desea utilizar usuarios UNIX locales (como root), seleccione esta opción.
+
+
+
+
+== Usuarios de respaldo
+
+Esta opción le permite especificar los usuarios de Windows que tienen permisos de respaldo en el volumen de Google Cloud NetApp Volumes .  Los privilegios de respaldo (SeBackupPrivilege) son necesarios para que algunas aplicaciones realicen copias de seguridad y restauren correctamente los datos en volúmenes NAS.  Este usuario tiene un alto nivel de acceso a los datos en el volumen, por lo que debe considerar https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/audit-audit-the-use-of-backup-and-restore-privilege["Habilitar la auditoría del acceso de ese usuario"^] .  Una vez habilitado, los eventos de auditoría se muestran en Visor de eventos > Registros de Windows > Seguridad.
+
+image:ncvs-gc-019.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]
+
+
+
+== Usuarios con privilegios de seguridad
+
+Esta opción le permite especificar usuarios de Windows que tienen permisos de modificación de seguridad en el volumen de Google Cloud NetApp Volumes .  Los privilegios de seguridad (SeSecurityPrivilege) son necesarios para algunas aplicaciones(https://docs.netapp.com/us-en/ontap/smb-hyper-v-sql/add-sesecurityprivilege-user-account-task.html["como SQL Server"^] ) para configurar correctamente los permisos durante la instalación.  Este privilegio es necesario para administrar el registro de seguridad.  Aunque este privilegio no es tan poderoso como SeBackupPrivilege, NetApp recomienda https://docs.microsoft.com/en-us/windows/security/threat-protection/auditing/basic-audit-privilege-use["auditar el acceso de los usuarios"^] con este nivel de privilegio si es necesario.
+
+Para obtener más información, consulte  https://docs.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4672["Privilegios especiales asignados al nuevo inicio de sesión"^] .
+
+
+
+== Cómo aparecen los Google Cloud NetApp Volumes en Active Directory
+
+Los Google Cloud NetApp Volumes aparecen en Active Directory como un objeto de cuenta de máquina normal.  Las convenciones de nomenclatura son las siguientes:
+
+* CIFS/SMB y NFS Kerberos crean objetos de cuenta de máquina separados.
+* NFS con LDAP habilitado crea una cuenta de máquina en Active Directory para enlaces LDAP de Kerberos.
+* Los volúmenes de protocolo dual con LDAP comparten la cuenta de máquina CIFS/SMB para LDAP y SMB.
+* Las cuentas de máquina CIFS/SMB utilizan una convención de nombres de NOMBRE-1234 (ID aleatoria de cuatro dígitos con guion agregado a cada nombre de <10 caracteres) para la cuenta de máquina.  Puede definir NOMBRE mediante la configuración del nombre NetBIOS en la conexión de Active Directory (consulte la sección "<<Detalles de la conexión de Active Directory>> ").
+* NFS Kerberos utiliza NFS-NAME-1234 como convención de nomenclatura (hasta 15 caracteres).  Si se utilizan más de 15 caracteres, el nombre es NFS-TRUNCATED-NAME-1234.
+* Las instancias de NetApp Volumes-Performance solo para NFS con LDAP habilitado crean una cuenta de máquina SMB para vincularse al servidor LDAP con la misma convención de nombres que las instancias CIFS/SMB.
+* Cuando se crea una cuenta de máquina SMB, se ocultan los recursos compartidos de administrador predeterminados (consulte la secciónlink:gcp-gcnv-smb.html#default-hidden-shares["Acciones ocultas predeterminadas"] ) también se crean (c$, admin$, ipc$), pero esos recursos compartidos no tienen ACL asignadas y son inaccesibles.
+* Los objetos de la cuenta de la máquina se colocan en CN=Computers de manera predeterminada, pero puede especificar una OU diferente cuando sea necesario.  Ver la sección "<<Permisos necesarios para crear cuentas de máquinas SMB>> " para obtener información sobre qué derechos de acceso se necesitan para agregar o eliminar objetos de cuenta de máquina para Google Cloud NetApp Volumes.
+
+
+Cuando Google Cloud NetApp Volumes agrega la cuenta de máquina SMB a Active Directory, se completan los siguientes campos:
+
+* cn (con el nombre del servidor SMB especificado)
+* dNSHostName (con SMBserver.domain.com)
+* msDS-SupportedEncryptionTypes (permite DES_CBC_MD5, RC4_HMAC_MD5 si el cifrado AES no está habilitado; si el cifrado AES está habilitado, se permiten DES_CBC_MD5, RC4_HMAC_MD5, AES128_CTS_HMAC_SHA1_96, AES256_CTS_HMAC_SHA1_96 para el intercambio de tickets Kerberos con la cuenta de la máquina para SMB)
+* nombre (con el nombre del servidor SMB)
+* sAMAccountName (con SMBserver$)
+* servicePrincipalName (con los SPN host/smbserver.domain.com y host/smbserver para Kerberos)
+
+
+Si desea deshabilitar tipos de cifrado Kerberos más débiles (enctype) en la cuenta de la máquina, puede cambiar el valor msDS-SupportedEncryptionTypes en la cuenta de la máquina a uno de los valores de la siguiente tabla para permitir solo AES.
+
+|===
+| Valor de msDS-SupportedEncryptionTypes | Enctype habilitado 
+
+
+| 2 | DES_CBC_MD5 
+
+
+| 4 | RC4_HMAC 
+
+
+| 8 | Sólo AES128_CTS_HMAC_SHA1_96 
+
+
+| 16 | Sólo AES256_CTS_HMAC_SHA1_96 
+
+
+| 24 | AES128_CTS_HMAC_SHA1_96 y AES256_CTS_HMAC_SHA1_96 
+
+
+| 30 | DES_CBC_MD5, RC4_HMAC, AES128_CTS_HMAC_SHA1_96 y AES256_CTS_HMAC_SHA1_96 
+|===
+Para habilitar el cifrado AES para las cuentas de máquinas SMB, haga clic en Habilitar cifrado AES para la autenticación de AD al crear la conexión de Active Directory.
+
+Para habilitar el cifrado AES para NFS Kerberos, https://cloud.google.com/architecture/partners/netapp-cloud-volumes/creating-nfs-volumes["Consulte la documentación de Google Cloud NetApp Volumes"^] .

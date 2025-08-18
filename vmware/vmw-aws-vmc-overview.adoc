@@ -1,0 +1,73 @@
+---
+sidebar: sidebar 
+permalink: vmware/vmw-aws-vmc-overview.html 
+keywords: NetApp Solutions, hyperscalers, amazon, vmc, vmware managed cloud, enterprise, hybrid, cloud, migrate, migration, disaster recovery, dr 
+summary:  
+---
+= Capacidades de NetApp para AWS VMC
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Obtenga más información sobre las capacidades que NetApp aporta a AWS VMware Cloud (VMC), desde NetApp como un dispositivo de almacenamiento conectado invitado o un almacén de datos NFS complementario hasta la migración de flujos de trabajo, la extensión/ampliación a la nube, la copia de seguridad/restauración y la recuperación ante desastres.
+
+Salte a la sección del contenido deseado seleccionando entre las siguientes opciones:
+
+* link:#config["Configuración de VMC en AWS"]
+* link:#datastore["Opciones de almacenamiento de NetApp para VMC"]
+* link:#solutions["Soluciones en la nube NetApp /VMware"]
+
+
+
+
+== Configuración de VMC en AWS
+
+Al igual que en las instalaciones locales, la planificación de un entorno de virtualización basado en la nube es fundamental para lograr un entorno exitoso listo para producción para la creación de máquinas virtuales y la migración.
+
+Esta sección describe cómo configurar y administrar VMware Cloud on AWS SDDC y usarlo en combinación con las opciones disponibles para conectar el almacenamiento de NetApp .
+
+
+NOTE: El almacenamiento en el host es el único método compatible para conectar Cloud Volumes ONTAP a AWS VMC.
+
+El proceso de configuración se puede dividir en los siguientes pasos:
+
+* Implementar y configurar VMware Cloud para AWS
+* Conecte VMware Cloud a FSx ONTAP
+
+
+Ver el detallelink:../vmware/vmw-aws-vmc-setup.html["Pasos de configuración para VMC"] .
+
+
+
+== Opciones de almacenamiento de NetApp para VMC
+
+El almacenamiento de NetApp se puede utilizar de varias maneras, ya sea como almacenamiento conectado a una instancia específica o como un almacén de datos NFS complementario, dentro de AWS VMC.
+
+Por favor visitelink:vmw-hybrid-support-configs.html["Opciones de almacenamiento de NetApp compatibles"] Para más información.
+
+AWS admite el almacenamiento de NetApp en las siguientes configuraciones:
+
+* FSx ONTAP como almacenamiento conectado para invitados
+* Cloud Volumes ONTAP (CVO) como almacenamiento conectado para invitados
+* FSx ONTAP como almacén de datos NFS complementario
+
+
+Ver el detallelink:aws-guest.html["Opciones de almacenamiento de conexión de invitados para VMC"] .  Ver el detallelink:aws-native-nfs-datastore-option.html["Opciones de almacén de datos NFS complementario para VMC"] .
+
+
+
+== Casos de uso de soluciones
+
+Con las soluciones de nube de NetApp y VMware, muchos casos de uso son fáciles de implementar en su AWS VMC.  Se definen casos de uso para cada una de las áreas de nube definidas por VMware:
+
+* Proteger (incluye recuperación ante desastres y copia de seguridad/restauración)
+* Extender
+* Emigrar
+
+
+link:vmw-aws-vmc-solutions.html["Explorar las soluciones de NetApp para AWS VMC"]

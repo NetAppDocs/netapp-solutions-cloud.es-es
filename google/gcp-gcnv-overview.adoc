@@ -1,0 +1,47 @@
+---
+sidebar: sidebar 
+permalink: google/gcp-gcnv-overview.html 
+keywords: 4918, tr4918, overview, introduction, scope, audience, abbreviation, definition 
+summary: La seguridad, especialmente en la nube, donde la infraestructura está fuera del control de los administradores de almacenamiento, es fundamental para confiar sus datos a las ofertas de servicios proporcionadas por los proveedores de la nube.  Este documento es una descripción general de las ofertas de seguridad que ofrece Google Cloud NetApp Volumes en Google Cloud. 
+---
+= TR-4918: Descripción general de seguridad - Google Cloud NetApp Volumes en Google Cloud
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+Oliver Krause, Justin Parisi, NetApp
+
+[role="lead"]
+La seguridad, especialmente en la nube, donde la infraestructura está fuera del control de los administradores de almacenamiento, es fundamental para confiar sus datos a las ofertas de servicios proporcionadas por los proveedores de la nube.  Este documento es una descripción general de las ofertas de seguridad que https://cloud.netapp.com/cloud-volumes-service-for-gcp["Google Cloud NetApp Volumes se proporciona en Google Cloud"^] .
+
+
+
+== Público objetivo
+
+El público al que va dirigido este documento incluye, entre otros, los siguientes roles:
+
+* Proveedores de nube
+* administradores de almacenamiento
+* Arquitectos de almacenamiento
+* Recursos de campo
+* tomadores de decisiones empresariales
+
+
+Si tiene preguntas sobre el contenido de este informe técnico, consulte la secciónlink:../vmware/gcp-gcnv-additional-info.html#contact-us["Contáctanos."]
+
+|===
+| Abreviatura | Definición 
+
+
+| Volúmenes NetApp -SW | Google Cloud NetApp Volumes, tipo de servicio Volúmenes NetApp 
+
+
+| Volúmenes NetApp - Rendimiento | Servicio de volumen en la nube, tipo de servicio NetApp Volumes-Rendimiento 
+
+
+| Anuncio de servicio público |  
+|===

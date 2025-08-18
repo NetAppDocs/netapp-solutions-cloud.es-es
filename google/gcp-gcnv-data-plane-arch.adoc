@@ -1,0 +1,35 @@
+---
+sidebar: sidebar 
+permalink: google/gcp-gcnv-data-plane-arch.html 
+keywords: cloud volumes service, google cloud, service networking, vpc peering 
+summary: Google Cloud NetApp Volumes para Google Cloud aprovecha el marco de acceso a servicios privados de Google Cloud.  En este marco, los usuarios pueden conectarse a Google Cloud NetApp Volumes.  Este marco utiliza redes de servicios y estructuras de peering de VPC como otros servicios de Google Cloud, lo que garantiza un aislamiento completo entre inquilinos. 
+---
+= Arquitectura del plano de datos
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Google Cloud NetApp Volumes para Google Cloud aprovecha Google Cloud https://cloud.google.com/vpc/docs/configure-private-services-access["acceso a servicios privados"^] estructura.  En este marco, los usuarios pueden conectarse a Google Cloud NetApp Volumes.  Este marco utiliza redes de servicios y estructuras de peering de VPC como otros servicios de Google Cloud, lo que garantiza un aislamiento completo entre inquilinos.
+
+Para obtener una descripción general de la arquitectura de Google Cloud NetApp Volumes para Google Cloud, consulte https://cloud.google.com/architecture/partners/netapp-cloud-volumes/architecture["Arquitectura para Google Cloud NetApp Volumes"^] .
+
+Las VPC de usuario (independientes o compartidas) se conectan a las VPC dentro de los proyectos de inquilinos administrados Google Cloud NetApp Volumes , que alojan los volúmenes.
+
+image:ncvs-gc-005.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]
+
+La figura anterior muestra un proyecto (el proyecto de consumidor de NetApp Volumes en el medio) con tres redes de VPC conectadas a Google Cloud NetApp Volumes y varias máquinas virtuales de Compute Engine (GCE1-7) que comparten volúmenes:
+
+* VPC1 permite que GCE1 acceda a los volúmenes A y B.
+* VPC2 permite que GCE2 y GCE4 accedan al volumen C.
+* La tercera red VPC es una VPC compartida, compartida con dos proyectos de servicio.  Permite que GCE3, GCE4, GCE5 y GCE6 accedan a los volúmenes D y E. Las redes VPC compartidas solo son compatibles con volúmenes del tipo de servicio NetApp Volumes-Performance.
+
+
+
+NOTE: GCE7 no puede acceder a ningún volumen.
+
+Los datos se pueden cifrar tanto en tránsito (mediante cifrado Kerberos o SMB) como en reposo en Google Cloud NetApp Volumes.

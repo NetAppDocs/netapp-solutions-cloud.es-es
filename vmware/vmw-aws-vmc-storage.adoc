@@ -1,0 +1,57 @@
+---
+sidebar: sidebar 
+permalink: vmware/vmw-aws-vmc-storage.html 
+keywords: aws, netapp, fsxn, storage, options, nfs, supplemental, cvo 
+summary: El almacenamiento de NetApp se puede conectar al servicio VMware de Azure como almacenamiento complementario o conectado como invitado. 
+---
+= Amazon Web Services: Opciones para utilizar el almacenamiento de NetApp
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+El almacenamiento de NetApp se puede conectar a Amazon Web Services como almacenamiento complementario o conectado por invitado.
+
+
+
+== Amazon FSx for NetApp ONTAP (FSx ONTAP) como almacén de datos NFS complementario
+
+Amazon FSx ONTAP ofrece excelentes opciones para implementar y administrar cargas de trabajo de aplicaciones junto con servicios de archivos, al tiempo que reduce el TCO al hacer que los requisitos de datos se integren perfectamente en la capa de aplicación.  Cualquiera que sea el caso de uso, elija VMware Cloud on AWS junto con Amazon FSx ONTAP para obtener rápidamente los beneficios de la nube, una infraestructura consistente y operaciones desde las instalaciones locales hasta AWS, portabilidad bidireccional de cargas de trabajo y capacidad y rendimiento de nivel empresarial.  Es el mismo proceso y procedimientos familiares utilizados para conectar el almacenamiento.
+
+Para obtener más información, visite:
+
+* link:vmw-aws-vmc-nfs-ds-overview.html["FSx ONTAP como almacén de datos NFS complementario: descripción general"]
+* link:vmw-aws-vmc-nfs-ds-config.html["Amazon FSx para ONTAP como almacén de datos complementario"]
+
+
+
+
+== Amazon FSx for NetApp ONTAP como almacenamiento conectado para invitados
+
+Amazon FSx ONTAP es un servicio completamente administrado que proporciona almacenamiento de archivos altamente confiable, escalable, de alto rendimiento y rico en funciones, creado sobre el popular sistema de archivos ONTAP de NetApp.  FSx ONTAP combina las características, el rendimiento, las capacidades y las operaciones API familiares de los sistemas de archivos NetApp con la agilidad, la escalabilidad y la simplicidad de un servicio de AWS completamente administrado.
+
+FSx ONTAP ofrece almacenamiento de archivos compartido rápido, flexible y repleto de funciones, al que se puede acceder ampliamente desde instancias de cómputo de Linux, Windows y macOS que se ejecutan en AWS o en las instalaciones.  FSx ONTAP ofrece almacenamiento en unidad de estado sólido (SSD) de alto rendimiento con latencias de submilisegundos.  Con FSx ONTAP, puede lograr niveles de rendimiento SSD para su carga de trabajo mientras paga por almacenamiento SSD solo para una pequeña fracción de sus datos.
+
+Administrar sus datos con FSx ONTAP es más fácil porque puede tomar instantáneas, clonar y replicar sus archivos con solo hacer clic en un botón.  Además, FSx ONTAP organiza automáticamente sus datos en un almacenamiento elástico de menor costo, lo que reduce la necesidad de aprovisionar o administrar capacidad.
+
+FSx ONTAP también proporciona almacenamiento duradero y de alta disponibilidad con copias de seguridad totalmente administradas y soporte para recuperación ante desastres entre regiones.  Para facilitar la protección y seguridad de sus datos, FSx ONTAP admite aplicaciones antivirus y de seguridad de datos populares.
+
+Para obtener más información, visitelink:vmw-aws-vmc-guest-storage.html#fsx-ontap["FSx ONTAP como almacenamiento conectado para invitados"]
+
+
+
+== Cloud Volumes ONTAP (CVO) como almacenamiento conectado para invitados
+
+Cloud Volumes ONTAP, o CVO, es la solución de gestión de datos en la nube líder en la industria basada en el software de almacenamiento ONTAP de NetApp, disponible de forma nativa en Amazon Web Services (AWS), Microsoft Azure y Google Cloud Platform (GCP).
+
+Es una versión definida por software de ONTAP que consume almacenamiento nativo de la nube, lo que le permite tener el mismo software de almacenamiento en la nube y en las instalaciones, lo que reduce la necesidad de volver a capacitar a su personal de TI en métodos completamente nuevos para administrar sus datos.
+
+CVO brinda a los clientes la capacidad de mover datos sin problemas desde el borde al centro de datos, a la nube y viceversa, unificando su nube híbrida, todo administrado con una consola de administración de panel único, NetApp Cloud Manager.
+
+Por diseño, CVO ofrece un rendimiento extremo y capacidades avanzadas de gestión de datos para satisfacer incluso sus aplicaciones más exigentes en la nube.
+
+Para obtener más información, visitelink:vmw-aws-vmc-guest-storage.html#aws-cvo["CVO como almacenamiento conectado para invitados"] .

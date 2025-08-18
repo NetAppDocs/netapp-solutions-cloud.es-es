@@ -1,0 +1,86 @@
+---
+section: rhhc
+title: Multicloud híbrido de NetApp con Red Hat OpenShift
+url: "/rhhc/index.html"
+entries:
+- title: Empezar
+  pdf-filename: Red Hat Openshift para multicloud híbrido
+  entries:
+  - title: Descripción general de la solución
+    url: "/openshift/os-solutions-overview.html"
+  - title: Propuestas de valor
+    url: "/openshift/os-solutions-value-prop.html"
+  - title: Soluciones validadas
+    url: "/openshift/os-solutions-validated.html"
+  - title: Versiones validadas
+    url: "/openshift/os-solutions-versions.html"
+  - title: Opciones de almacenamiento compatibles
+    url: "/openshift/os-solutions-storage-options.html"
+  - title: Recursos adicionales
+    url: "/openshift/os-solutions-resources.html"
+- title: Openshift para instalaciones locales
+  pdf-filename: Red Hat Openshift para instalaciones locales
+  entries:
+  - title: Descripción general de la solución
+    url: "/openshift/os-op-solution.html"
+  - title: Configurar cargas de trabajo de contenedores OpenShift en VMware
+    url: "/openshift/os-op-setup.html"
+  - title: Proteja las cargas de trabajo de contenedores en VMware
+    url: "/openshift/os-op-data-protection.html"
+  - title: Migrar cargas de trabajo de contenedores en VMware
+    url: "/openshift/os-op-data-migration.html"
+- title: Nube híbrida con componentes autogestionados
+  pdf-filename: Nube híbrida con componentes autogestionados de Red Hat OpenShift
+    (local/AWS/GCP/Azure)
+  entries:
+  - title: Descripción general de la solución
+    url: "/openshift/os-sm-solution.html"
+  - title: Configurar cargas de trabajo de contenedores OpenShift en AWS
+    url: "/openshift/os-sm-setup.html"
+  - title: Configurar cargas de trabajo de contenedores de OpenShift en GCP
+    url: "/openshift/os-sm-gcp-setup.html"
+  - title: Configurar cargas de trabajo de contenedores de OpenShift en Azure
+    url: "/openshift/os-sm-azure-setup.html"
+  - title: Proteja las cargas de trabajo de contenedores en AWS/GCP/Azure
+    url: "/openshift/os-sm-data-protection.html"
+  - title: Migrar cargas de trabajo de contenedores a AWS/GCP/Azure
+    url: "/openshift/os-sm-data-migration.html"
+- title: Nube híbrida con componentes administrados por el proveedor
+  pdf-filename: Nube híbrida con componentes administrados por el proveedor de Red
+    Hat OpenShift
+  entries:
+  - title: Descripción general de la solución
+    url: "/openshift/os-pm-solution.html"
+  - title: Configurar cargas de trabajo de contenedores OpenShift en AWS
+    url: "/openshift/os-pm-setup.html"
+  - title: Configurar OpenShift Dedicated en Google Cloud
+    url: "/openshift/os-pm-gcnv-setup.html"
+  - title: Proteja las cargas de trabajo de contenedores en AWS
+    url: "/openshift/os-pm-aws-dp.html"
+  - title: Migrar cargas de trabajo de contenedores en AWS
+    url: "/openshift/os-pm-aws-data-migration.html"
+  - title: Soluciones adicionales de ROSA para contenedores y virtualización
+    url: "/openshift/os-pm-rosa-additional.html"
+- title: Proteja sus datos con Trident Protect
+  pdf-filename: Protección de datos mediante Trident Protect
+  entries:
+  - title: Proteja las aplicaciones de contenedores con Trident Protect
+    url: "/openshift/os-dp-tp-solution.html"
+  - title: Proteja las máquinas virtuales con Trident Protect
+    url: "/openshift/osv-vm-dp-using-tp.html"
+- title: Proteja las aplicaciones de contenedores mediante herramientas de terceros
+  pdf-filename: Protección de datos de aplicaciones de contenedores mediante herramientas
+    de terceros
+  entries:
+  - title: Descripción general de la solución
+    url: "/openshift/os-dp-velero-solution.html"
+  - title: Instalar OADP
+    url: "/openshift/os-dp-velero-installation.html"
+  - title: Copia de seguridad de aplicaciones de contenedores con Velero
+    url: "/openshift/os-dp-velero-backup.html"
+  - title: Migrar aplicaciones
+    url: "/openshift/os-dp-velero-migrate.html"
+  - title: Restaurar desde una copia de seguridad usando Velero
+    url: "/openshift/os-dp-velero-restore.html"
+  - title: Eliminar copias de seguridad y restauraciones
+    url: "/openshift/os-dp-velero-delete.html"

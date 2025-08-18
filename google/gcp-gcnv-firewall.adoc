@@ -1,0 +1,27 @@
+---
+sidebar: sidebar 
+permalink: google/gcp-gcnv-firewall.html 
+keywords: tcp, nfs, smb share, kerberos, active directory, dns 
+summary: Google Cloud NetApp Volumes expone múltiples puertos TCP para servir recursos compartidos NFS y SMB. 
+---
+= Cortafuegos
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Google Cloud NetApp Volumes expone múltiples puertos TCP para servir recursos compartidos NFS y SMB:
+
+* https://cloud.google.com/architecture/partners/netapp-cloud-volumes/security-considerations?hl=en_US["Puertos necesarios para el acceso NFS"^]
+* https://cloud.google.com/architecture/partners/netapp-cloud-volumes/security-considerations?hl=en_US["Puertos necesarios para el acceso SMB"^]
+
+
+Además, SMB, NFS con LDAP incluido Kerberos y configuraciones de protocolo dual requieren acceso a un dominio de Windows Active Directory.  Las conexiones de Active Directory deben ser https://cloud.google.com/architecture/partners/netapp-cloud-volumes/creating-smb-volumes?hl=en_US["configurado"^] sobre una base por región.  Los controladores de dominio (DC) de Active Directory se identifican mediante https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/7fcdce70-5205-44d6-9c3a-260e616a2f04["Descubrimiento de DC basado en DNS"^] utilizando los servidores DNS especificados.  Se utiliza cualquiera de los DC devueltos.  La lista de controladores de dominio elegibles se puede limitar especificando un sitio de Active Directory.
+
+Google Cloud NetApp Volumes se comunica con direcciones IP del rango CIDR asignado con el `gcloud compute address` comando mientras https://cloud.google.com/architecture/partners/netapp-cloud-volumes/setting-up-private-services-access?hl=en_US["Incorporación de Google Cloud NetApp Volumes"^] .  Puede utilizar este CIDR como dirección de origen para configurar firewalls entrantes a sus controladores de dominio de Active Directory.
+
+Los controladores de dominio de Active Directory deben https://cloud.google.com/architecture/partners/netapp-cloud-volumes/security-considerations?hl=en_US["Exponer puertos a los CIDR de Google Cloud NetApp Volumes como se menciona aquí"^] .

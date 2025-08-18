@@ -1,0 +1,41 @@
+---
+sidebar: sidebar 
+permalink: openshift/os-sm-data-migration.html 
+keywords: NetApp Solutions, redhat OpenShift, red hat OpenShift, redhat openshift container platform, ocp, openshift container platform, Advanced Cluster Management, ACM, Hub Cluster, containers, container workloads, VMware, customer managed storage, ONTAP 
+summary:  
+---
+= Migración de datos mediante Trident Protect
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Esta página muestra las opciones de migración de datos para cargas de trabajo de contenedores en clústeres de Red Hat OpenShift con Trident Protect (ACC).  En concreto, los clientes pueden usar Trident Protect para: mover algunas cargas de trabajo seleccionadas o todas las cargas de trabajo desde sus centros de datos locales a la nube, clonar sus aplicaciones en la nube ya sea para fines de prueba o moverlas del centro de datos a la nube.
+
+
+
+== Migración de datos
+
+Para migrar una aplicación de un entorno a otro, puede utilizar una de las siguientes funciones de ACC:
+
+* ** replicación **
+* ** copia de seguridad y restauración **
+* ** clon **
+
+
+Consulte lalink:os-sm-data-protection.html["sección de protección de datos"] para las opciones de **replicación y copia de seguridad y restauración**.
+
+Referirselink:https://docs.netapp.com/us-en/astra-control-center/use/clone-apps.html["aquí"] para obtener detalles adicionales sobre la **clonación**.
+
+
+NOTE: La función de replicación de Astra solo es compatible con la interfaz de almacenamiento de contenedores Trident (CSI).  Sin embargo, la replicación no está respaldada por los controladores nas-economy y san-economy.
+
+
+
+=== Realizar la replicación de datos mediante ACC
+
+image:rhhc-onprem-dp-rep.png["Replicación de Trident Protect"]
