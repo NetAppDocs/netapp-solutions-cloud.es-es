@@ -57,7 +57,7 @@ AWS admite el almacenamiento de NetApp en las siguientes configuraciones:
 * FSx ONTAP como almacén de datos NFS complementario
 
 
-Ver el detallelink:aws-guest.html["Opciones de almacenamiento de conexión de invitados para VMC"] .  Ver el detallelink:aws-native-nfs-datastore-option.html["Opciones de almacén de datos NFS complementario para VMC"] .
+Ver el detallelink:../vmware/vmw-aws-vmc-guest-storage.html["Opciones de almacenamiento de conexión de invitados para VMC"] . Ver el detallelink:../vmware/vmw-aws-vmc-nfs-ds-config.html["Opciones de almacén de datos NFS complementario para VMC"] .
 
 
 

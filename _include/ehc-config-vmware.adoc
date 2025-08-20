@@ -36,9 +36,9 @@ El proceso de configuración se puede dividir en los siguientes pasos:
 * Validar la conectividad de la red y acceder a la nube privada
 
 
-Ver el detallelink:azure-setup.html["Pasos de configuración para AVS"] .
+Ver el detallelink:../vmware/vmw-azure-avs-setup.html["Pasos de configuración para AVS"] .
 
-Ver el detallelink:azure-setup.html["Pasos de configuración para AVS"] .
+Ver el detallelink:../vmware/vmw-azure-avs-setup.html["Pasos de configuración para AVS"] .
 
 --
 .GCP / GCVE
@@ -54,9 +54,9 @@ El proceso de configuración se puede dividir en los siguientes pasos:
 * Habilitar el acceso privado a GCVE
 
 
-Ver el detallelink:gcp-setup.html["Pasos de configuración para GCVE"] .
+Ver el detallelink:../vmware/vmw-gcp-gcve-setup.html["Pasos de configuración para GCVE"] .
 
-Ver el detallelink:gcp-setup.html["Pasos de configuración para GCVE"] .
+Ver el detallelink:../vmware/vmw-gcp-gcve-setup.html["Pasos de configuración para GCVE"] .
 
 --
 ====

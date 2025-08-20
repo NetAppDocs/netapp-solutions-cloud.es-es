@@ -68,7 +68,7 @@ El proceso de configuración se puede dividir en los siguientes pasos:
 * Validar la conectividad de la red y acceder a la nube privada
 
 
-Ver el detallelink:azure-setup.html["Pasos de configuración para AVS"] .
+Ver el detallelink:../vmware/vmw-azure-avs-setup.html["Pasos de configuración para AVS"] .
 
 --
 .GCP / GCVE
@@ -84,7 +84,7 @@ El proceso de configuración se puede dividir en los siguientes pasos:
 * Habilitar el acceso privado a GCVE
 
 
-Ver el detallelink:gcp-setup.html["Pasos de configuración para GCVE"] .
+Ver el detallelink:../vmware/vmw-gcp-gcve-setup.html["Pasos de configuración para GCVE"] .
 
 --
 ====
@@ -107,7 +107,7 @@ AWS admite el almacenamiento de NetApp en las siguientes configuraciones:
 * FSx ONTAP como almacén de datos NFS complementario
 
 
-Ver el detallelink:aws-guest.html["Opciones de almacenamiento de conexión de invitados para VMC"] .  Ver el detallelink:aws-native-nfs-datastore-option.html["Opciones de almacén de datos NFS complementario para VMC"] .
+Ver el detallelink:../vmware/vmw-aws-vmc-guest-storage.html["Opciones de almacenamiento de conexión de invitados para VMC"] . Ver el detallelink:../vmware/vmw-aws-vmc-nfs-ds-config.html["Opciones de almacén de datos NFS complementario para VMC"] .
 
 --
 .Azure/AVS
@@ -119,7 +119,7 @@ Azure admite el almacenamiento de NetApp en las siguientes configuraciones:
 * Azure NetApp Files (ANF) como almacén de datos NFS complementario
 
 
-Ver el detallelink:azure-guest.html["Opciones de almacenamiento de conexión de invitados para AVS"] .  Ver el detallelink:azure-native-nfs-datastore-option.html["Opciones de almacén de datos NFS complementarias para AVS"] .
+Ver el detallelink:../vmware/vmw-azure-avs-guest-storage.html["Opciones de almacenamiento de conexión de invitados para AVS"] . Ver el detallelink:../vmware/vmw-azure-avs-nfs-ds-config.html["Opciones de almacén de datos NFS complementarias para AVS"] .
 
 --
 .GCP / GCVE
@@ -131,7 +131,7 @@ Google Cloud admite el almacenamiento de NetApp en las siguientes configuracione
 * Google Cloud NetApp Volumes (NetApp Volumes) como almacén de datos NFS complementario
 
 
-Ver el detallelink:gcp-guest.html["Opciones de almacenamiento de conexión de invitados para GCVE"] .  Ver el detallelink:gcp-ncvs-datastore.html["Opciones de almacén de datos NFS suplementarias para GCVE"] .
+Ver el detallelink:../vmware/vmw-gcp-gcve-guest-storage.html["Opciones de almacenamiento de conexión de invitados para GCVE"] . Ver el detallelink:../vmware/vmw-gcp-gcve-nfs-ds-overview.html["Opciones de almacén de datos NFS suplementarias para GCVE"] .
 
 Leer más sobrelink:https://www.netapp.com/blog/cloud-volumes-service-google-cloud-vmware-engine/["Compatibilidad del almacén de datos de Google Cloud NetApp Volumes con Google Cloud VMware Engine (blog de NetApp )"^] olink:https://cloud.google.com/blog/products/compute/how-to-use-netapp-cvs-as-datastores-with-vmware-engine["Cómo usar Google Cloud NetApp Volumes como almacenes de datos para Google Cloud VMware Engine (blog de Google)"^]
 
