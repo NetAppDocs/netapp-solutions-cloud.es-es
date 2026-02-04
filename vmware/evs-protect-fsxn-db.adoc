@@ -1,0 +1,143 @@
+---
+sidebar: sidebar 
+permalink: vmware/evs-protect-fsxn-db.html 
+keywords: Amazon, AWS, EVS, Elastic VMware Service, ONTAP, FSx, iscsi 
+summary: 'Esta sección cubre los pasos para proteger las bases de datos que se ejecutan en VMware VMDKs con SnapCenter para SQL (SCSQL).' 
+---
+= Procedimientos de protección para bases de datos que se ejecutan en VMware VMDKs con SnapCenter for SQL (SCSQL)
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+La siguiente sección muestra cómo proteger las bases de datos que se ejecutan en VMware VMDKs con SnapCenter for SQL (SCSQL).
+
+
+
+== Configurar SCSQL
+
+La configuración para usar SCSQL para proteger bases de datos en VMDKs es la siguiente:
+
+. link:https://docs.netapp.com/us-en/snapcenter/install/task_install_the_snapcenter_server_using_the_install_wizard.html["Instala y configura"] Servidor SnapCenter.
+. Inicia sesión en SnapCenter.
+. Configura el entorno de SnapCenter:
++
+** link:https://docs.netapp.com/us-en/snapcenter/install/task_add_storage_systems.html["Agregar o asignar"] conexiones de sistemas de almacenamiento.
+** link:https://docs.netapp.com/us-en/snapcenter/install/concept_svm_connections_and_credentials.html["Crear"] credenciales.
+
+
+. Para bases de datos Microsoft SQL Server en VMware VMDKs:
++
+** link:https://docs.netapp.com/us-en/snapcenter/install/concept_svm_connections_and_credentials.html["Implementa SCV"] (ya cubierto en la sección de configuración).
+** Registra el plug-in en SnapCenter.
+
+
+. Agrega link:https://docs.netapp.com/us-en/snapcenter/protect-scsql/task_add_hosts_and_install_snapcenter_plug_ins_package_for_windows.html["Hosts de SQL Server e instalación de plug-ins"]:
++
+** link:https://docs.netapp.com/us-en/snapcenter/protect-scsql/task_add_hosts_and_install_snapcenter_plug_ins_package_for_windows.html["Configura los plug-ins SQL"].
+** link:https://docs.netapp.com/us-en/snapcenter/protect-scsql/task_create_backup_policies_for_sql_server_databases.html["Configura el plan de protección y los horarios para la base de datos y los registros"].
++
+image:evs-protect-fsxn-027.png["Figura que representa el diálogo para el paso anterior"]
+
+
+
+
+
+
+
+== Configurar una política de backup
+
+Los siguientes pasos te mostrarán cómo configurar una política de backup.
+
+. Selecciona la base de datos en la pestaña de recursos y elige "Proteger" en la esquina superior derecha.
++
+
+NOTE: Las validaciones se realizan contra una base de datos SQL Server que se ejecuta en la máquina virtual invitada.
+
++
+image:evs-protect-fsxn-028.png["Figura que representa el diálogo para el paso anterior"]
+
+. Haz clic en el icono del signo más para configurar una política de backup de SQL Server.
++
+image:evs-protect-fsxn-029.png["Figura que representa el diálogo para el paso anterior"]
+
+. En esta demo, está seleccionado "backup completo". Selecciona "Siguiente" para continuar.
++
+image:evs-protect-fsxn-030.png["Figura que representa el diálogo para el paso anterior"]
+
+. En la página de resumen, selecciona "Finalizar".
++
+image:evs-protect-fsxn-031.png["Figura que representa el diálogo para el paso anterior"]
+
+. Continúa a "Finalizar".
++
+image:evs-protect-fsxn-032.png["Figura que representa el diálogo para el paso anterior"]
+
+
+
+
+
+== Supervisar una copia de seguridad
+
+Una vez que hayas configurado una política de backup, puedes supervisar tus operaciones de backup a medida que se realizan. Puedes hacer esto haciendo clic en Backup now para iniciar una operación de backup bajo demanda o esperando a que tu política de backup programada entre en acción.
+
+. Supervisa el progreso del trabajo usando "Monitor > Jobs".
+. Selecciona el trabajo de copia de seguridad y luego haz clic en "Detalles" para ver los detalles del trabajo como se muestra abajo.
++
+image:evs-protect-fsxn-033.png["Figura que representa el diálogo para el paso anterior"]
+
+
+
+
+
+== Restauración de bases de datos que residen en los VMDKs
+
+La base de datos en el VMDK se puede restaurar a un momento específico.
+
+Podemos simular la importancia de esto borrando algunas tablas en tu base de datos, que luego se corregirán realizando una restauración a un momento específico.
+
+A continuación puedes ver que varias tablas de nuestra base de datos mostradas en la primera captura de pantalla han sido eliminadas en la segunda captura de pantalla:
+
+image:evs-protect-fsxn-034.png["Figura que representa el diálogo para el paso anterior"]
+
+image:evs-protect-fsxn-035.png["Figura que representa el diálogo para el paso anterior"]
+
+Los siguientes pasos muestran cómo llevar a cabo una restauración para recuperar esas tablas eliminadas:
+
+. Selecciona la base de datos del grupo de recursos.
++
+image:evs-protect-fsxn-036.png["Figura que representa el diálogo para el paso anterior"]
+
+. En la página Restaurar, selecciona la opción "Restaurar la base de datos en el mismo host donde se creó el backup".
++
+image:evs-protect-fsxn-037.png["Figura que representa el diálogo para el paso anterior"]
+
+. Selecciona la opción para usar una copia de seguridad del registro hasta un momento específico.
++
+image:evs-protect-fsxn-038.png["Figura que representa el diálogo para el paso anterior"]
+
+. Selecciona "Sobrescribir base de datos con el mismo nombre durante la restauración, Crear copia de seguridad del registro de transacciones antes de la restauración" y selecciona "Siguiente".
++
+image:evs-protect-fsxn-039.png["Figura que representa el diálogo para el paso anterior"]
+
+. Selecciona el estado posterior a la restauración que quieres que adopte la base de datos de la lista de opciones y selecciona "Siguiente".
++
+image:evs-protect-fsxn-040.png["Figura que representa el diálogo para el paso anterior"]
+
+. En la página de resumen, selecciona "Finalizar".
++
+image:evs-protect-fsxn-041.png["Figura que representa el diálogo para el paso anterior"]
+
+. Supervisa el trabajo hasta que termine.
++
+image:evs-protect-fsxn-042.png["Figura que representa el diálogo para el paso anterior"]
+
+. Verifica que las tablas eliminadas se hayan restaurado correctamente.
++
+image:evs-protect-fsxn-043.png["Figura que representa el diálogo para el paso anterior"]
+
+

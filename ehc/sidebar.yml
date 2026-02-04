@@ -102,6 +102,22 @@ entries:
       url: "/vmware/evs-mount-fsxn-iscsi.html"
     - title: Conclusión
       url: "/vmware/evs-mount-fsxn-conclusion.html"
+  - title: Proteger datastore FSx ONTAP para EVS
+    entries:
+    - title: Introducción
+      url: "/vmware/evs-protect-fsxn-intro.html"
+    - title: Configura el SnapCenter Plug-in para VMware
+      url: "/vmware/evs-protect-fsxn-setup-sc.html"
+    - title: Configura el SnapCenter Plug-in para VMware
+      url: "/vmware/evs-protect-fsxn-configure.html"
+    - title: Restaurar máquinas virtuales a partir de copias de seguridad
+      url: "/vmware/evs-protect-fsxn-restore-vm.html"
+    - title: Restaura archivos y carpetas de invitados desde VMDKs
+      url: "/vmware/evs-protect-fsxn-restore-guest-files.html"
+    - title: Proteger bases de datos en VMDK
+      url: "/vmware/evs-protect-fsxn-db.html"
+    - title: Conclusión
+      url: "/vmware/evs-protect-fsxn-conclusion.html"
 - title: NetApp para Azure/AVS
   entries:
   - title: Descripción general de NetApp para Azure
@@ -132,7 +148,7 @@ entries:
       url: "/vmware/vmw-azure-avs-migrate-hcx.html"
 - title: NetApp para GCP/GCVE
   entries:
-  - title: Descripción general de Netapp para Google Cloud
+  - title: 'NetApp para Google Cloud: descripción general'
     pdf-filename: Descripción general de Netapp para Google Cloud
     url: "/vmware/vmw-gcp-gcve-overview.html"
   - title: Proteger las cargas de trabajo en GCP/GCVE

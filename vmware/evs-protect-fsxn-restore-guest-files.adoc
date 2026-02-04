@@ -1,0 +1,55 @@
+---
+sidebar: sidebar 
+permalink: vmware/evs-protect-fsxn-restore-guest-files.html 
+keywords: Amazon, AWS, EVS, Elastic VMware Service, ONTAP, FSx, iscsi 
+summary: Esta sección cubre los pasos para restaurar archivos y carpetas de invitados protegidos por SnapCenter Plug-in for VMware. 
+---
+= Procedimiento de restauración para archivos y carpetas de invitados protegidos por SnapCenter Plug-in for VMware
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+La siguiente sección muestra cómo restaurar archivos y carpetas de invitados desde VMDKs.
+
+
+NOTE: SnapCenter admite la restauración de archivos y carpetas desde VMDK solo cuando el sistema operativo invitado es Windows.
+
+Consideraciones para la restauración de archivos y carpetas de invitados con SCV:
+
+* VMware tools debe estar ejecutándose en la máquina virtual.
+* El VMDK adjunto es accesible por 24 horas por defecto.
+* Solo se puede realizar una operación de restauración o conexión en una máquina virtual a la vez.
+* Los archivos de sistema, ocultos y cifrados pueden restaurarse; sin embargo, sus atributos originales no se conservarán.
+* Evita restaurar archivos encriptados en carpetas encriptadas o sobrescribir archivos del sistema.
+
+
+Pasos para la restauración de archivos y carpetas de invitados:
+
+. Haz clic derecho en la VM de destino y selecciona "NetApp SnapCenter > Guest File Restore".
++
+image:evs-protect-fsxn-022.png["Figura que representa el diálogo para el paso anterior"]
+
+. Elige la copia de seguridad que contiene el VMDK necesario. Especifica el VMDK y su ubicación (primaria o secundaria).
++
+image:evs-protect-fsxn-023.png["Figura que representa el diálogo para el paso anterior"]
+
+. Elige "Disk Attachment Method".
++
+image:evs-protect-fsxn-024.png["Figura que representa el diálogo para el paso anterior"]
+
++
+** Opción de VM huésped: adjunta el disco a la VM original (requiere credenciales preconfiguradas). Esta es la opción que se usa en esta demostración.
+** Opción de VM proxy: adjunta el disco a una VM proxy designada (debe configurarse previamente).
+
+
+. Espera a que termine la operación de adjuntar antes de explorar y restaurar archivos. Una vez que la operación se complete, SnapCenter crea automáticamente una sesión de restauración de archivos de invitado. image:evs-protect-fsxn-025.png["Figura que representa el diálogo para el paso anterior"]
++
+image:evs-protect-fsxn-026.png["Figura que representa el diálogo para el paso anterior"]
+
+. Ve al VMDK en la sesión de Guest File Restore, selecciona los archivos o carpetas que necesites y restáuralos en la ubicación especificada.
+

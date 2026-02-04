@@ -1,0 +1,97 @@
+---
+sidebar: sidebar 
+permalink: vmware/evs-protect-fsxn-restore-vm.html 
+keywords: Amazon, AWS, EVS, Elastic VMware Service, ONTAP, FSx, iscsi 
+summary: Esta sección cubre los pasos para restaurar máquinas virtuales desde backups. 
+---
+= Procedimiento de restauración para VMs protegidas por SnapCenter Plug-in for VMware
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Esta sección cubre los pasos para restaurar VMs desde backups. SCV se puede usar para restaurar VMs dentro de vCenter, permitiendo recuperarlas en el datastore original en el host ESXi original (sobrescribiendo el contenido existente), restaurar VMs eliminadas o renombradas desde una copia de backup, en un datastore diferente en el host ESXi original, en el datastore original en un host ESXi diferente gestionado por el mismo vCenter, o en un datastore diferente en otro host ESXi dentro del mismo entorno vCenter.
+
+
+
+== Pasos para realizar la operación de restauración
+
+Para realizar la operación de restauración, sigue estos pasos:
+
+. En la interfaz gráfica de usuario del cliente web de EVS vSphere, ve a "Inventory > Datastores" y selecciona el datastore que quieras. Luego navega a "Configure > Backups" en la sección "SnapCenter Plug-in for VMware vSphere".
++
+image:evs-protect-fsxn-009.png["Figura que representa el diálogo para el paso anterior"]
+
+. Haz doble clic en una copia de seguridad para ver todas las máquinas virtuales incluidas en esa copia de seguridad. Busca la máquina virtual que quieres restaurar en la lista y selecciona "Restaurar".
++
+image:evs-protect-fsxn-010.png["Figura que representa el diálogo para el paso anterior"]
+
+. En la página "Seleccionar ámbito", selecciona "Máquina virtual completa" en el campo "Ámbito de restauración", luego selecciona "Ubicación de restauración" e ingresa la información del ESXi de destino donde se debe montar el backup.
+. Activa la casilla "Reiniciar VM" si la VM necesita encenderse después de la operación de restauración.
+. En la página "Seleccionar ubicación", selecciona una ubicación principal.
++
+image:evs-protect-fsxn-011.png["Figura que representa el diálogo para el paso anterior"]
+
+. Revisa la página "Resumen" y luego selecciona "Finalizar".
++
+image:evs-protect-fsxn-012.png["Figura que representa el diálogo para el paso anterior"]
+
+. Supervisa el progreso de la operación seleccionando "Tareas recientes" en la parte inferior de la pantalla.
++
+image:evs-protect-fsxn-013.png["Figura que representa el diálogo para el paso anterior"]
+
+
+
+
+NOTE: Aunque las máquinas virtuales se restauran, no se añaden automáticamente a sus antiguos grupos de recursos. Si quieres proteger esas máquinas virtuales, añádelas manualmente a los grupos de recursos adecuados.
+
+
+NOTE: La operación de restauración también puede activarse desde el nivel individual de la VM.
+
+
+
+== Pasos para restaurar una VM eliminada
+
+Restaurar una VM eliminada es un proceso sencillo con SCV.
+
+La operación de restauración de una máquina virtual eliminada se puede realizar desde el nivel del almacén de datos.
+
+. Ve al Datastore respectivo > Configure > Backups. Ahí, selecciona la VM eliminada y selecciona "Restore".
++
+image:evs-protect-fsxn-014.png["Figura que representa el diálogo para el paso anterior"]
+
++
+image:evs-protect-fsxn-015.png["Figura que representa el diálogo para el paso anterior"]
+
+. El flujo de capturas de pantalla que se muestra a continuación cubre la restauración de una VM en un host ESXi alternativo y en un datastore diferente.
++
+image:evs-protect-fsxn-016.png["Figura que representa el diálogo para el paso anterior"]
+
++
+image:evs-protect-fsxn-017.png["Figura que representa el diálogo para el paso anterior"]
+
++
+image:evs-protect-fsxn-018.png["Figura que representa el diálogo para el paso anterior"]
+
++
+image:evs-protect-fsxn-019.png["Figura que representa el diálogo para el paso anterior"]
+
++
+image:evs-protect-fsxn-020.png["Figura que representa el diálogo para el paso anterior"]
+
+
+
+
+NOTE: El almacén de datos de destino debe tener espacio libre suficiente y el vCenter especificado en el campo "Restaurar en ubicación alternativa" debe poder resolverse mediante DNS.
+
+
+NOTE: Para mejorar la eficiencia de la restauración en entornos NFS, activa la API de VMware vStorage para la integración de matrices (VAAI).
+
+
+NOTE: Las restauraciones también pueden realizarse desde ubicaciones secundarias, como un SnapMirror destino.
+
++ image:evs-protect-fsxn-021.png["Figura que representa el diálogo para el paso anterior"]
