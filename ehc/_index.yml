@@ -72,7 +72,7 @@ indexpage:
     - title: Calculadora TCO de FSx ONTAP + EVS
       url: https://docs.netapp.com/us-en/workload-vmware/calculate-evs-savings.html#explore-savings-for-evs-environments
     - title: Calculadora de TCO ANF + AVS
-      url: hhttps://tco.solutions.netapp.com/anfavstco/
+      url: https://tco.solutions.netapp.com/anfavstco/
     - title: Estimador de TCO de volúmenes GCVE + NetApp
       url: https://tco.solutions.netapp.com/gcvegcnvtco/
   - title: BlueXP disaster recovery
