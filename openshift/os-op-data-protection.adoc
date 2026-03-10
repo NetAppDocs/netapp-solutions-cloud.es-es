@@ -4,7 +4,7 @@ permalink: openshift/os-op-data-protection.html
 keywords: NetApp Solutions, redhat OpenShift, red hat OpenShift, redhat openshift container platform, ocp, openshift container platform, Advanced Cluster Management, ACM, Hub Cluster, containers, container workloads, VMware, customer managed storage, ONTAP 
 summary:  
 ---
-= Protección de datos mediante Astra
+= Protección de datos mediante Trident Protect
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -14,86 +14,14 @@ summary:
 
 
 [role="lead"]
-Esta página muestra las opciones de protección de datos para las aplicaciones basadas en Red Hat OpenShift Container que se ejecutan en VMware vSphere utilizando Trident Protect (ACC).
+Esta página muestra las opciones de protección de datos para aplicaciones basadas en Red Hat OpenShift Container que se ejecutan en VMware vSphere usando Trident Protect.
 
-A medida que los usuarios emprenden el proceso de modernización de sus aplicaciones con Red Hat OpenShift, se debe implementar una estrategia de protección de datos para protegerlos contra la eliminación accidental o cualquier otro error humano.  A menudo también se requiere una estrategia de protección por motivos regulatorios o de cumplimiento para proteger sus datos ante un desastre.
+A medida que los usuarios emprenden su viaje de modernización de aplicaciones con Red Hat OpenShift, debe haber una estrategia de protección de datos para protegerlos de un borrado accidental o cualquier otro error humano. A menudo también se requiere una estrategia de protección por motivos regulatorios o de cumplimiento para proteger sus datos de un desastre.
 
 Los requisitos de protección de datos varían desde volver a una copia de un punto en el tiempo hasta conmutar automáticamente a un dominio de falla diferente sin ninguna intervención humana.  Muchos clientes eligen ONTAP como su plataforma de almacenamiento preferida para sus aplicaciones Kubernetes debido a sus ricas características como multitenencia, multiprotocolo, alto rendimiento y ofertas de capacidad, replicación y almacenamiento en caché para ubicaciones de múltiples sitios, seguridad y flexibilidad.
 
-La protección de datos en ONTAP se puede lograr mediante **instantáneas**, **copias de seguridad y restauración** ad hoc o controladas por políticas.
+Para obtener más información sobre cómo proteger y migrar cargas de trabajo de contenedores usando Trident Protect, revisa la siguiente sección: - link:os-dp-tp-solution.html["Protege y migra aplicaciones en contenedores usando Trident Protect"]
 
-Tanto las copias de seguridad como las instantáneas protegen los siguientes tipos de datos: - **Los metadatos de la aplicación que representan el estado de la aplicación** - **Todos los volúmenes de datos persistentes asociados con la aplicación** - **Todos los artefactos de recursos que pertenecen a la aplicación**
-
-
-
-== Instantánea con ACC
-
-Se puede capturar una copia de los datos en un punto en el tiempo utilizando Snapshot con ACC.  La política de protección define la cantidad de copias de instantáneas que se deben conservar.  La opción de horario mínimo disponible es por hora.  Se pueden tomar copias instantáneas manuales a pedido en cualquier momento y en intervalos más cortos que las copias instantáneas programadas.  Las copias instantáneas se almacenan en el mismo volumen aprovisionado que la aplicación.
-
-
-
-=== Configuración de instantáneas con ACC
-
-image:rhhc-onprem-dp-snap.png["Vista instantánea de Trident Protect"]
-
-
-
-== Copia de seguridad y restauración con ACC
-
-Una copia de seguridad se basa en una instantánea.  Trident Protect puede tomar copias instantáneas usando CSI y realizar copias de seguridad usando la copia instantánea de un punto en el tiempo.  La copia de seguridad se almacena en un almacén de objetos externo (cualquier compatible con S3, incluido ONTAP S3 en una ubicación diferente).  Se puede configurar la política de protección para las copias de seguridad programadas y la cantidad de versiones de copia de seguridad a conservar.  El RPO mínimo es de una hora.
-
-
-
-=== Restaurar una aplicación desde una copia de seguridad mediante ACC
-
-ACC restaura la aplicación desde el depósito S3 donde se almacenan las copias de seguridad.
-
-image:rhhc-onprem-dp-br.png["Opción de restauración de Trident Protect"]
-
-
-
-== Ganchos de ejecución específicos de la aplicación
-
-Además, los ganchos de ejecución se pueden configurar para que se ejecuten junto con una operación de protección de datos de una aplicación administrada.  Si bien están disponibles las funciones de protección de datos a nivel de matriz de almacenamiento, a menudo se necesitan pasos adicionales para realizar copias de seguridad y restauraciones consistentes con las aplicaciones.  Los pasos adicionales específicos de la aplicación podrían ser: - antes o después de crear una copia instantánea.  - antes o después de crear una copia de seguridad.  - después de restaurar desde una copia instantánea o de respaldo.
-
-Astra Control puede ejecutar estos pasos específicos de la aplicación codificados como scripts personalizados llamados ganchos de ejecución.
-
-https://github.com/NetApp/Verda["Proyecto NetApp Verda en GitHub"]Proporciona ganchos de ejecución para aplicaciones nativas de la nube populares para que la protección de aplicaciones sea sencilla, sólida y fácil de orquestar.  Siéntete libre de contribuir a ese proyecto si tienes suficiente información para una aplicación que no está en el repositorio.
-
-
-
-== Ejemplo de gancho de ejecución para pre-instantánea de una aplicación redis.
-
-image:rhhc-onprem-dp-br-hook.png["Gancho de ejecución de Trident Protect"]
-
-
-
-== Replicación con ACC
-
-Para obtener protección regional o una solución de RPO y RTO bajos, una aplicación se puede replicar en otra instancia de Kubernetes que se ejecute en un sitio diferente, preferiblemente en otra región.  Trident Protect utiliza SnapMirror asíncrono de ONTAP con un RPO de tan solo 5 minutos.  La replicación se realiza replicando a ONTAP y luego una conmutación por error crea los recursos de Kubernetes en el clúster de destino.
-
-
-NOTE: Tenga en cuenta que la replicación es diferente de la copia de seguridad y la restauración, donde la copia de seguridad va a S3 y la restauración se realiza desde S3.  Consulte el enlace: https://docs.netapp.com/us-en/astra-control-center/concepts/data-protection.html#replication-to-a-remote-cluster [aquí] para obtener detalles adicionales sobre las diferencias entre los dos tipos de protección de datos.
-
-Referirselink:https://docs.netapp.com/us-en/astra-control-center/use/replicate_snapmirror.html["aquí"] para obtener instrucciones de configuración de SnapMirror .
-
-
-
-=== SnapMirror con ACC
-
-image:rhhc-onprem-dp-rep.png["Replicación de Trident Protect"]
-
-
-NOTE: Los controladores de almacenamiento san-economy y nas-economy no admiten la función de replicación.  Referirselink:https://docs.netapp.com/us-en/astra-control-center/get-started/requirements.html#astra-trident-requirements["aquí"] Para más detalles.
-
-
-
-=== Vídeo de demostración:
-
-link:https://www.netapp.tv/details/29504?mcid=35609780286441704190790628065560989458["Vídeo de demostración de recuperación ante desastres con Trident Protect"]
-
-.Protección de datos con Trident Protect
-video::0cec0c90-4c6f-4018-9e4f-b09700eefb3a[panopto,width=360]
 
 
 == Continuidad de negocio con MetroCluster
@@ -109,4 +37,4 @@ image:rhhc-onprem-dp-bc.png["Solución de Continuidad de Negocio con MetroCluste
 
 TIP: Para la configuración de backend de Trident (TBC), no especifique dataLIF ni SVM cuando utilice la configuración de MetroCluster .  Especifique la IP de administración de SVM para managementLIF y use las credenciales del rol vsadmin.
 
-Los detalles sobre las funciones de protección de datos de Trident Protect están disponibleslink:https://docs.netapp.com/us-en/astra-control-center/concepts/data-protection.html["aquí"]
+Detalles sobre las funciones de protección de datos de Trident Protect están disponibles link:https://docs.netapp.com/us-en/trident/trident-protect/learn-about-trident-protect.html["aquí"].
