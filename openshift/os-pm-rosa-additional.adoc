@@ -15,6 +15,7 @@ summary:
 
 
 
+[[additional-solutions]]
 == Soluciones adicionales
 
 Hay soluciones adicionales disponibles en otras secciones como se indica a continuación:

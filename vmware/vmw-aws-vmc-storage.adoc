@@ -18,6 +18,7 @@ El almacenamiento de NetApp se puede conectar a Amazon Web Services como almacen
 
 
 
+[[amazon-fsx-for-netapp-ontap-fsx-ontap-as-a-supplemental-nfs-datastore]]
 == Amazon FSx for NetApp ONTAP (FSx ONTAP) como almacén de datos NFS complementario
 
 Amazon FSx ONTAP ofrece excelentes opciones para implementar y administrar cargas de trabajo de aplicaciones junto con servicios de archivos, al tiempo que reduce el TCO al hacer que los requisitos de datos se integren perfectamente en la capa de aplicación.  Cualquiera que sea el caso de uso, elija VMware Cloud on AWS junto con Amazon FSx ONTAP para obtener rápidamente los beneficios de la nube, una infraestructura consistente y operaciones desde las instalaciones locales hasta AWS, portabilidad bidireccional de cargas de trabajo y capacidad y rendimiento de nivel empresarial.  Es el mismo proceso y procedimientos familiares utilizados para conectar el almacenamiento.
@@ -30,6 +31,7 @@ Para obtener más información, visite:
 
 
 
+[[amazon-fsx-for-netapp-ontap-as-guest-connected-storage]]
 == Amazon FSx for NetApp ONTAP como almacenamiento conectado para invitados
 
 Amazon FSx ONTAP es un servicio completamente administrado que proporciona almacenamiento de archivos altamente confiable, escalable, de alto rendimiento y rico en funciones, creado sobre el popular sistema de archivos ONTAP de NetApp.  FSx ONTAP combina las características, el rendimiento, las capacidades y las operaciones API familiares de los sistemas de archivos NetApp con la agilidad, la escalabilidad y la simplicidad de un servicio de AWS completamente administrado.
@@ -44,6 +46,7 @@ Para obtener más información, visitelink:vmw-aws-vmc-guest-storage.html#fsx-on
 
 
 
+[[cloud-volumes-ontap-cvo-as-guest-connected-storage]]
 == Cloud Volumes ONTAP (CVO) como almacenamiento conectado para invitados
 
 Cloud Volumes ONTAP, o CVO, es la solución de gestión de datos en la nube líder en la industria basada en el software de almacenamiento ONTAP de NetApp, disponible de forma nativa en Amazon Web Services (AWS), Microsoft Azure y Google Cloud Platform (GCP).

@@ -35,6 +35,7 @@ Trident Protect permite realizar instantáneas, copias de seguridad, restauracio
 
 
 
+[[create-appvault-for-object-storage]]
 == Crea AppVault para almacenamiento de objetos
 
 .Crear AppVault
@@ -105,6 +106,7 @@ image:rh-os-n-use-case-ocpv-tp-dp-008.png["Se creó ONTAP S3 Appvault"]
 ====
 
 
+[[create-a-vm-in-openshift-virtualization]]
 == Crear una máquina virtual en OpenShift Virtualization
 
 .Crear una máquina virtual en OpenShift Virtualization
@@ -132,6 +134,7 @@ image:rh-os-n-use-case-ocpv-tp-dp-007.png["vm, pods y pvc creados"]
 ====
 
 
+[[create-an-app]]
 == Crear una aplicación
 
 .Crear aplicación
@@ -163,6 +166,7 @@ image:rh-os-n-use-case-ocpv-tp-dp-009.png["Aplicación creada"]
 ====
 
 
+[[protect-the-app-by-creating-a-backup]]
 == Proteja la aplicación creando una copia de seguridad
 
 .Crear copias de seguridad
@@ -217,6 +221,7 @@ image:rh-os-n-use-case-ocpv-tp-dp-017.png["Copias de seguridad creadas a pedido 
 ====
 
 
+[[restore-from-backup]]
 == Restaurar desde una copia de seguridad
 
 .Restaurar desde copias de seguridad
@@ -301,6 +306,7 @@ image:rh-os-n-use-case-ocpv-tp-dp-023.png["VM en el nuevo espacio de nombres"]
 ====
 
 
+[[protect-the-app-using-snapshots]]
 == Proteger la aplicación usando instantáneas
 
 .Crear instantáneas
@@ -373,6 +379,7 @@ image:rh-os-n-use-case-ocpv-tp-dp-026.png["instantánea programada"]
 ====
 
 
+[[restore-from-snapshot]]
 == Restaurar desde una instantánea
 
 .Restaurar desde una instantánea
@@ -455,6 +462,7 @@ image:rh-os-n-use-case-ocpv-tp-dp-032.png["VM restaurada en nuevo espacio de nom
 ====
 
 
+[[restore-a-specific-vm]]
 == Restaurar una máquina virtual específica
 
 .Seleccionar máquinas virtuales específicas en un espacio de nombres para crear instantáneas/copias de seguridad y restaurar
@@ -548,6 +556,7 @@ image:rh-os-n-use-case-ocpv-tp-dp-038.png["máquina virtual centos creada"]
 ====
 
 
+[[video-demonstration]]
 == Demostración en video
 
 El siguiente video muestra una demostración de cómo proteger una máquina virtual mediante instantáneas

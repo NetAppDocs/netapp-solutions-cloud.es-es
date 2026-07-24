@@ -18,18 +18,21 @@ Explore la completa biblioteca de videos de NetApp que presenta soluciones multi
 
 
 
+[[supplemental-datastores]]
 == Almacenes de datos complementarios
 
 .Descripción general del almacén de datos complementario de Azure VMware Solution con Azure NetApp Files
 video::8c5ddb30-6c31-4cde-86e2-b01200effbd6[panopto,width=360]
 
 
+[[disaster-recovery]]
 == Recuperación ante desastres
 
 .Azure VMware Solution DR con Cloud Volumes ONTAP, SnapCenter y JetStream
 video::5cd19888-8314-4cfc-ba30-b01200efff4f[panopto,width=360]
 
 
+[[migration-workflows-hcx]]
 == Flujos de trabajo de migración (HCX)
 
 .Demostración de migración en frío con VMware HCX para AVS y ANF

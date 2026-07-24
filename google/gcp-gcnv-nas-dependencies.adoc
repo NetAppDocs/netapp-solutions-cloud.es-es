@@ -47,6 +47,7 @@ Al utilizar Google Cloud NetApp Volumes para recursos compartidos NAS, es posibl
 |===
 
 
+[[kerberos-keytab-rotationpassword-resets-for-machine-account-objects]]
 == Rotación de claves Kerberos y restablecimiento de contraseñas para objetos de cuenta de máquina
 
 Con las cuentas de máquinas SMB, Google Cloud NetApp Volumes programa restablecimientos periódicos de contraseñas para la cuenta de la máquina SMB.  Estos restablecimientos de contraseña se realizan mediante el cifrado Kerberos y funcionan según un cronograma cada cuarto domingo a una hora aleatoria entre las 11 p. m. y la 1 a. m.  Estos restablecimientos de contraseña cambian las versiones de clave Kerberos, rotan las tablas de claves almacenadas en el sistema Google Cloud NetApp Volumes y ayudan a mantener un mayor nivel de seguridad para los servidores SMB que se ejecutan en Google Cloud NetApp Volumes.  Las contraseñas de las cuentas de la máquina son aleatorias y los administradores no las conocen.
@@ -55,12 +56,14 @@ En el caso de las cuentas de máquinas NFS Kerberos, los restablecimientos de co
 
 
 
+[[network-ports-for-use-with-ldap-and-kerberos]]
 == Puertos de red para usar con LDAP y Kerberos
 
 Al utilizar LDAP y Kerberos, debe determinar los puertos de red que utilizan estos servicios.  Puede encontrar una lista completa de los puertos utilizados por Google Cloud NetApp Volumes en https://cloud.google.com/architecture/partners/netapp-cloud-volumes/security-considerations?hl=en_US["Documentación de Google Cloud NetApp Volumes sobre consideraciones de seguridad"^] .
 
 
 
+[[ldap]]
 == LDAP
 
 Google Cloud NetApp Volumes actúa como un cliente LDAP y utiliza consultas de búsqueda LDAP estándar para búsquedas de usuarios y grupos de identidades UNIX.  LDAP es necesario si pretende utilizar usuarios y grupos fuera de los usuarios predeterminados estándar proporcionados por Google Cloud NetApp Volumes.  LDAP también es necesario si planea utilizar NFS Kerberos con principales de usuario (como usuario1@dominio.com).  Actualmente, solo se admite LDAP mediante Microsoft Active Directory.
@@ -120,6 +123,7 @@ Para obtener más información sobre cómo configurar los atributos LDAP en Acti
 
 
 
+[[ldap-bind-information]]
 === Información de enlace LDAP
 
 Para consultar usuarios en LDAP, Google Cloud NetApp Volumes debe vincularse (iniciar sesión) al servicio LDAP.  Este inicio de sesión tiene permisos de solo lectura y se utiliza para consultar atributos LDAP UNIX para búsquedas de directorio.  Actualmente, los enlaces LDAP solo son posibles mediante el uso de una cuenta de máquina SMB.
@@ -136,6 +140,7 @@ Cuando LDAP está habilitado, ocurre lo siguiente en escenarios específicos.
 
 
 
+[[ldap-queries]]
 === Consultas LDAP
 
 Aunque los enlaces LDAP están cifrados, las consultas LDAP se transmiten a través de la red en texto sin formato mediante el puerto LDAP común 389.  Actualmente, este puerto conocido no se puede cambiar en Google Cloud NetApp Volumes.  Como resultado, alguien con acceso al rastreo de paquetes en la red puede ver nombres de usuarios y grupos, identificaciones numéricas y membresías de grupos.
@@ -144,6 +149,7 @@ Sin embargo, las máquinas virtuales de Google Cloud no pueden detectar el tráf
 
 
 
+[[ldap-client-configuration-defaults]]
 === Valores predeterminados de configuración del cliente LDAP
 
 Cuando LDAP está habilitado en una instancia de Google Cloud NetApp Volumes , se crea una configuración de cliente LDAP con detalles de configuración específicos de forma predeterminada.  En algunos casos, las opciones no se aplican a Google Cloud NetApp Volumes (no son compatibles) o no son configurables.
@@ -228,6 +234,7 @@ Cuando LDAP está habilitado en una instancia de Google Cloud NetApp Volumes , s
 |===
 
 
+[[using-ldap-for-asymmetric-name-mapping]]
 === Uso de LDAP para la asignación asimétrica de nombres
 
 Google Cloud NetApp Volumes, de forma predeterminada, asigna usuarios de Windows y usuarios de UNIX con nombres de usuario idénticos de forma bidireccional sin necesidad de una configuración especial.  Siempre que Google Cloud NetApp Volumes pueda encontrar un usuario UNIX válido (con LDAP), se produce una asignación de nombre 1:1.  Por ejemplo, si el usuario de Windows `johnsmith` Se utiliza entonces si Google Cloud NetApp Volumes puede encontrar un usuario de UNIX llamado `johnsmith` En LDAP, la asignación de nombres se realiza correctamente para ese usuario y todos los archivos y carpetas creados por él. `johnsmith` Muestra la propiedad correcta del usuario y todas las ACL que lo afectan. `johnsmith` se respetan independientemente del protocolo NAS en uso.  Esto se conoce como mapeo de nombres simétrico.
@@ -301,6 +308,7 @@ TEXT
 ....
 
 
+[[ldap-channel-binding]]
 === Enlace de canal LDAP
 
 Debido a una vulnerabilidad en los controladores de dominio de Windows Active Directory, https://msrc.microsoft.com/update-guide/vulnerability/ADV190023["Aviso de seguridad de Microsoft ADV190023"^] cambia la forma en que los controladores permiten enlaces LDAP.
@@ -309,6 +317,7 @@ El impacto para Google Cloud NetApp Volumes es el mismo que para cualquier clien
 
 
 
+[[dns]]
 == DNS
 
 Tanto Active Directory como Kerberos dependen del DNS para la resolución de nombre de host a IP y de IP a nombre de host.  El DNS requiere que el puerto 53 esté abierto.  Google Cloud NetApp Volumes no realiza ninguna modificación en los registros DNS y actualmente no admite el uso de https://support.google.com/domains/answer/6147083?hl=en["DNS dinámico"^] en interfaces de red.
@@ -324,12 +333,14 @@ NOTE: Google Cloud NetApp Volumes actualmente no admite DNSSEC y las consultas D
 
 
 
+[[file-access-auditing]]
 == Auditoría de acceso a archivos
 
 Actualmente no es compatible con Google Cloud NetApp Volumes.
 
 
 
+[[antivirus-protection]]
 == Protección antivirus
 
 Debe realizar un análisis antivirus en Google Cloud NetApp Volumes en el cliente de un recurso compartido NAS.  Actualmente no existe una integración de antivirus nativa con Google Cloud NetApp Volumes.

@@ -18,6 +18,7 @@ Esta guía te va a mostrar un enfoque sencillo de implementación para proteger 
 
 
 
+[[introduction]]
 == Introducción
 
 Los almacenes de datos suplementarios basados en Amazon FSx for NetApp ONTAP (FSx for ONTAP) para Amazon Elastic VMware Service (Amazon EVS) ofrecen una solución excelente para ejecutar tanto cargas de trabajo exigentes en cuanto a rendimiento—como aprovechar nConnect, el peering de Amazon Virtual Private Cloud (Amazon VPC) y el uso de varias conexiones de red por montaje de almacén de datos—como cargas de trabajo intensivas en almacenamiento.
@@ -26,24 +27,28 @@ Esta capacidad permite a los clientes superar las limitaciones del almacenamient
 
 
 
+[[overview]]
 == Descripción general
 
 A medida que las organizaciones escalan y consolidan entornos, la necesidad de proteger esas cargas de trabajo y el almacenamiento subyacente se vuelve cada vez más importante. SCV puede usarse para hacer copias de seguridad de datastores y máquinas virtuales directamente desde el cliente de Amazon EVS vSphere.
 
 
 
+[[purpose-of-this-guide]]
 == Propósito de esta Guía
 
 Esta guía proporciona instrucciones sobre cómo proteger un datastore FSx for ONTAP para Amazon EVS usando SCV. Se proporcionan ejemplos de escenarios para proteger VMs y bases de datos, así como de restauración.
 
 
 
+[[audience]]
 == Audiencia
 
 Este tutorial está destinado a arquitectos y administradores de la nube familiarizados con VMware vSphere, Amazon EVS, la consola de AWS y FSx para ONTAP.
 
 
 
+[[high-level-steps-for-deployment-and-configuration]]
 == Pasos a grandes rasgos para el despliegue y la configuración
 
 A continuación se indican los pasos a grandes rasgos para implementar y configurar SCV para proteger tus máquinas virtuales y almacenes de datos en Amazon EVS:

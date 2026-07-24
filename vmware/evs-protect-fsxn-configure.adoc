@@ -18,6 +18,7 @@ Esta sección cubre los pasos para configurar SnapCenter Plug-in for VMware. Las
 
 
 
+[[adding-the-storage-system]]
 == Agregar el sistema de almacenamiento
 
 El siguiente paso para proteger las cargas de trabajo con SVC es añadir el link:https://docs.netapp.com/us-en/sc-plugin-vmware-vsphere/scpivs44_add_storage_01.html["sistema de almacenamiento"]. Añadir almacenamiento permite que SCV detecte y gestione las operaciones de backup y restauración dentro de vCenter. Incluye el endpoint de gestión de FSx for NetApp ONTAP o la IP del endpoint de administración de la máquina virtual de almacenamiento (SVM) como sistema de almacenamiento para habilitar el backup y la restauración de máquinas virtuales.
@@ -37,6 +38,7 @@ Si la versión de SCV es 6.2, ve a link:https://mysupport.netapp.com/site/produc
 
 
 
+[[create-a-backup-policy]]
 == Crea una política de backup
 
 Una estrategia de backup sólida debe definir factores clave como la programación del backup, los datos que se van a respaldar y el periodo de retención de los backups. Las copias snapshot se pueden programar cada hora o cada día para proteger almacenes de datos completos. Programar los backups de esta manera no solo protege los almacenes de datos, sino que también permite realizar operaciones de backup y restauración para las VMs y VMDKs que están dentro de esos almacenes de datos.
@@ -69,6 +71,7 @@ Una vez creada la política, el siguiente paso es crear el grupo de recursos que
 
 
 
+[[create-a-resource-group]]
 == Crear un grupo de recursos
 
 Un grupo de recursos sirve como contenedor para máquinas virtuales y almacenes de datos que requieren protección. Los recursos pueden añadirse o eliminarse de un grupo de recursos en cualquier momento, proporcionando flexibilidad al gestionar las configuraciones de backup.
@@ -92,6 +95,7 @@ image:evs-protect-fsxn-005.png["Figura que representa el diálogo para el paso a
 
 
 
+[[backing-up-resource-groups]]
 == Backup de grupos de recursos
 
 Las operaciones de backup se ejecutan en todos los recursos definidos dentro de un grupo de recursos. Si un grupo de recursos tiene una política adjunta y una programación configurada, los backups ocurren automáticamente según la programación.

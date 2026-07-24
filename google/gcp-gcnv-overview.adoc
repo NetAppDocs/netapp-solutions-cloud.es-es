@@ -20,6 +20,7 @@ La seguridad, especialmente en la nube, donde la infraestructura está fuera del
 
 
 
+[[intended-audience]]
 == Público objetivo
 
 El público al que va dirigido este documento incluye, entre otros, los siguientes roles:

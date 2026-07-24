@@ -18,6 +18,7 @@ La estrategia de respaldo 3-2-1 es un método de protección de datos aceptado p
 
 
 
+[[overview]]
 == Descripción general
 
 La estrategia se compone de tres reglas fundamentales:
@@ -31,6 +32,7 @@ Este documento de solución cubre una solución de copias de seguridad 3-2-1 que
 
 
 
+[[use-cases]]
 === Casos de uso
 
 Esta solución aborda los siguientes casos de uso:
@@ -41,6 +43,7 @@ Esta solución aborda los siguientes casos de uso:
 
 
 
+[[netapp-ontap-data-storage]]
 === Almacenamiento de datos NetApp ONTAP
 
 ONTAP es la solución de almacenamiento líder en la industria de NetApp que ofrece almacenamiento unificado ya sea que acceda a través de protocolos SAN o NAS.  La estrategia de respaldo 3-2-1 garantiza que los datos locales estén protegidos en más de un tipo de medio y NetApp ofrece plataformas que van desde flash de alta velocidad hasta medios de menor costo.
@@ -51,6 +54,7 @@ Para obtener más información sobre todas las plataformas de hardware de NetApp
 
 
 
+[[snapcenter-plug-in-for-vmware-vsphere]]
 === Plugin de SnapCenter para VMware vSphere
 
 El complemento SnapCenter para VMware vSphere es una oferta de protección de datos que está estrechamente integrada con VMware vSphere y permite una fácil gestión de copias de seguridad y restauraciones de máquinas virtuales.  Como parte de esa solución, SnapMirror proporciona un método rápido y confiable para crear una segunda copia de seguridad inmutable de los datos de la máquina virtual en un clúster de almacenamiento ONTAP secundario.  Con esta arquitectura instalada, las operaciones de restauración de máquinas virtuales se pueden iniciar fácilmente desde las ubicaciones de respaldo principales o secundarias.
@@ -61,6 +65,7 @@ Para obtener información detallada sobre SCV, consulte https://docs.netapp.com/
 
 
 
+[[bluexp-backup-and-recovery-for-virtual-machines]]
 === BlueXP backup and recovery para máquinas virtuales
 
 BlueXP backup and recovery es una herramienta basada en la nube para la gestión de datos que proporciona un único plano de control para una amplia gama de operaciones de respaldo y recuperación en entornos locales y en la nube.  Parte de la suite de BlueXP backup and recovery NetApp BlueXP es una función que se integra con el complemento SnapCenter para VMware vSphere (en las instalaciones) para extender una copia de los datos al almacenamiento de objetos en la nube.  Esto establece una tercera copia de los datos fuera del sitio que proviene de las copias de seguridad del almacenamiento primario o secundario.  La BlueXP backup and recovery facilita la configuración de políticas de almacenamiento que transfieren copias de sus datos desde cualquiera de estas dos ubicaciones locales.
@@ -126,6 +131,7 @@ El propósito de esta solución es demostrar la protección de datos de las máq
 ====
 
 
+[[high-level-architecture]]
 == Arquitectura de alto nivel
 
 La prueba/validación de esta solución se realizó en un laboratorio que puede o no coincidir con el entorno de implementación final.
@@ -134,6 +140,7 @@ image:bxp-scv-hybrid-004.png["Diagrama de arquitectura de la solución"]
 
 
 
+[[solution-deployment]]
 == Implementación de la solución
 
 En esta solución, proporcionamos instrucciones detalladas para implementar y validar una solución que utiliza el SnapCenter Plug-in for VMware vSphere, junto con la BlueXP backup and recovery, para realizar la copia de seguridad y la recuperación de máquinas virtuales de Windows y Linux dentro de un clúster de VMware vSphere ubicado en un centro de datos local.  Las máquinas virtuales en esta configuración se almacenan en almacenes de datos NFS alojados por un clúster de almacenamiento ONTAP A300.  Además, un clúster de almacenamiento ONTAP A300 independiente sirve como destino secundario para los volúmenes replicados mediante SnapMirror.  Además, se utilizaron el almacenamiento de objetos alojado en Amazon Web Services y Azure Blob como destinos para una tercera copia de los datos.
@@ -146,6 +153,7 @@ Para obtener información detallada sobre la BlueXP backup and recovery, consult
 
 
 
+[[establish-snapmirror-relationships-between-ontap-clusters]]
 === Establecer relaciones SnapMirror entre clústeres ONTAP
 
 El SnapCenter Plug-in for VMware vSphere utiliza la tecnología ONTAP SnapMirror para administrar el transporte de copias secundarias de SnapMirror y/o SnapVault a un clúster ONTAP secundario.
@@ -359,6 +367,7 @@ ONTAP-Dest::> snapmirror initialize -destination-path DestSVM:DestVol
 ====
 
 
+[[configure-the-snapcenter-plug-in-for-vmware-vsphere]]
 === Configurar el SnapCenter Plug-in for VMware vSphere
 
 Una vez instalado, se puede acceder al SnapCenter Plug-in for VMware vSphere desde la interfaz de administración de vCenter Server Appliance.  SCV administrará las copias de seguridad de los almacenes de datos NFS montados en los hosts ESXi y que contienen las máquinas virtuales Windows y Linux.
@@ -478,6 +487,7 @@ image:bxp-scv-hybrid-015.png["Monitorear el progreso del trabajo"]
 ====
 
 
+[[configure-backups-to-object-storage-in-bluexp-backup-and-recovery]]
 === Configurar copias de seguridad en el almacenamiento de objetos en la BlueXP backup and recovery
 
 Para que BlueXP administre la infraestructura de datos de manera efectiva, requiere la instalación previa de un Conector.  El conector ejecuta las acciones involucradas en el descubrimiento de recursos y la gestión de operaciones de datos.
@@ -606,6 +616,7 @@ NOTE: En este punto es posible que la transferencia de datos no comience inmedia
 ====
 
 
+[[restoring-virtual-machines-in-the-case-of-data-loss]]
 === Restaurar máquinas virtuales en caso de pérdida de datos
 
 Garantizar la protección de sus datos es solo un aspecto de la protección integral de datos.  Igualmente crucial es la capacidad de restaurar rápidamente los datos desde cualquier ubicación en caso de pérdida de datos o de un ataque de ransomware.  Esta capacidad es vital para mantener operaciones comerciales sin problemas y alcanzar los objetivos del punto de recuperación.
@@ -681,6 +692,7 @@ image:bxp-scv-hybrid-039.png["Revisar la restauración desde la pestaña Monitor
 ====
 
 
+[[conclusion]]
 == Conclusión
 
 La estrategia de respaldo 3-2-1, cuando se implementa con el SnapCenter Plug-in for VMware vSphere y la BlueXP backup and recovery para máquinas virtuales, ofrece una solución sólida, confiable y rentable para la protección de datos.  Esta estrategia no solo garantiza la redundancia y la accesibilidad de los datos, sino que también proporciona la flexibilidad de restaurar datos desde cualquier ubicación y desde sistemas de almacenamiento ONTAP locales y almacenamiento de objetos basado en la nube.
@@ -689,6 +701,7 @@ El caso de uso presentado en esta documentación se centra en tecnologías de pr
 
 
 
+[[additional-information]]
 == Información adicional
 
 Para conocer más sobre las tecnologías presentadas en esta solución consulte la siguiente información adicional.

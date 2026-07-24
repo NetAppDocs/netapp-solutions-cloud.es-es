@@ -18,6 +18,7 @@ Toda organización exitosa está en un camino de transformación y modernizació
 
 
 
+[[use-cases]]
 == Casos de uso
 
 Si bien la solución Azure VMware ofrece capacidades híbridas únicas para el cliente, las opciones de almacenamiento nativo limitadas han restringido su utilidad para las organizaciones con cargas de trabajo con gran capacidad de almacenamiento.  Debido a que el almacenamiento está directamente vinculado a los hosts, la única forma de escalar el almacenamiento es agregar más hosts, lo que puede aumentar los costos entre un 35 % y un 40 % o más para cargas de trabajo con uso intensivo de almacenamiento.  Estas cargas de trabajo necesitan almacenamiento adicional, no potencia adicional, pero eso significa pagar por hosts adicionales.
@@ -37,10 +38,12 @@ NOTE: Comuníquese con los arquitectos de soluciones de NetApp o Microsoft en su
 
 
 
+[[vmware-cloud-options-in-azure]]
 == Opciones de VMware Cloud en Azure
 
 
 
+[[azure-vmware-solution]]
 === Solución VMware de Azure
 
 Azure VMware Solution (AVS) es un servicio de nube híbrida que proporciona SDDC de VMware totalmente funcionales dentro de una nube pública de Microsoft Azure.  AVS es una solución propia totalmente administrada y respaldada por Microsoft y verificada por VMware que utiliza la infraestructura de Azure.  Por lo tanto, los clientes obtienen VMware ESXi para la virtualización informática, vSAN para el almacenamiento hiperconvergente y NSX para redes y seguridad, todo ello mientras aprovechan la presencia global de Microsoft Azure, las instalaciones de centros de datos líderes en su clase y la proximidad al rico ecosistema de servicios y soluciones nativos de Azure.  Una combinación de Azure VMware Solution SDDC y Azure NetApp Files proporciona el mejor rendimiento con una latencia de red mínima.
@@ -54,12 +57,14 @@ Independientemente de la nube utilizada, cuando se implementa un VMware SDDC, el
 
 
 
+[[conclusion]]
 == Conclusión
 
 Ya sea que su objetivo sea una nube completa o una nube híbrida, los archivos de Azure NetApp brindan excelentes opciones para implementar y administrar las cargas de trabajo de las aplicaciones junto con los servicios de archivos, al tiempo que reducen el TCO al hacer que los requisitos de datos se integren perfectamente con la capa de aplicación.  Cualquiera que sea el caso de uso, elija Azure VMware Solution junto con Azure NetApp Files para obtener rápidamente beneficios de la nube, infraestructura y operaciones consistentes en las instalaciones y en múltiples nubes, portabilidad bidireccional de cargas de trabajo y capacidad y rendimiento de nivel empresarial.  Es el mismo proceso y procedimientos familiares utilizados para conectar el almacenamiento.  Recuerde que lo único que cambió fue la posición de los datos junto con los nuevos nombres; las herramientas y los procesos siguen siendo los mismos, y Azure NetApp Files ayuda a optimizar la implementación general.
 
 
 
+[[takeaways]]
 == Comida para llevar
 
 Los puntos clave de este documento incluyen:
@@ -73,6 +78,7 @@ Los puntos clave de este documento incluyen:
 
 
 
+[[where-to-find-additional-information]]
 == Dónde encontrar información adicional
 
 Para obtener más información sobre la información descrita en este documento, consulte los siguientes enlaces de sitios web:

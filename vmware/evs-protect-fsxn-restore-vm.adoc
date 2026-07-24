@@ -18,6 +18,7 @@ Esta sección cubre los pasos para restaurar VMs desde backups. SCV se puede usa
 
 
 
+[[steps-to-perform-restore-operation]]
 == Pasos para realizar la operación de restauración
 
 Para realizar la operación de restauración, sigue estos pasos:
@@ -54,6 +55,7 @@ NOTE: La operación de restauración también puede activarse desde el nivel ind
 
 
 
+[[steps-to-restore-a-deleted-vm]]
 == Pasos para restaurar una VM eliminada
 
 Restaurar una VM eliminada es un proceso sencillo con SCV.

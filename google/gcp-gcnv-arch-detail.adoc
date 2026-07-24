@@ -24,12 +24,14 @@ La parte sobre la línea punteada muestra el plano de control del servicio, que 
 
 
 
+[[tenancy-model]]
 == Modelo de arrendamiento
 
 En Google Cloud NetApp Volumes, los proyectos individuales se consideran inquilinos únicos.  Esto significa que la manipulación de volúmenes, copias instantáneas, etc., se realizan proyecto por proyecto.  En otras palabras, todos los volúmenes son propiedad del proyecto en el que fueron creados y solo ese proyecto puede administrar y acceder a los datos dentro de ellos de forma predeterminada.  Esta se considera la vista del plano de control del servicio.
 
 
 
+[[shared-vpcs]]
 === VPC compartidas
 
 En la vista del plano de datos, Google Cloud NetApp Volumes puede conectarse a una VPC compartida.  Puede crear volúmenes en el proyecto de alojamiento o en uno de los proyectos de servicio conectados a la VPC compartida.  Todos los proyectos (host o servicio) conectados a esa VPC compartida pueden alcanzar los volúmenes en la capa de red (TCP/IP).  Debido a que todos los clientes con conectividad de red en la VPC compartida pueden acceder potencialmente a los datos a través de protocolos NAS, se debe usar el control de acceso en el volumen individual (como listas de control de acceso de usuarios/grupos (ACL) y nombres de host/direcciones IP para exportaciones NFS) para controlar quién puede acceder a los datos.
@@ -42,6 +44,7 @@ En otras palabras, en la capa de red, todos los proyectos conectados a la VPC co
 
 
 
+[[vpc-service-controls]]
 === Controles de servicio de VPC
 
 Los controles de servicio de VPC establecen un perímetro de control de acceso alrededor de los servicios de Google Cloud que están conectados a Internet y son accesibles en todo el mundo.  Estos servicios proporcionan control de acceso a través de las identidades de los usuarios, pero no pueden restringir desde qué ubicación de red se originan las solicitudes.  Los controles de servicio de VPC cierran esa brecha al introducir la capacidad de restringir el acceso a redes definidas.
@@ -52,6 +55,8 @@ En resumen, el plano de datos de Google Cloud NetApp Volumes proporciona la capa
 
 
 
+[[packet-sniffingtrace-considerations]]
+[[packet-sniffing]]
 === Consideraciones sobre rastreo y detección de paquetes
 
 Las capturas de paquetes pueden ser útiles para solucionar problemas de red u otros problemas (como permisos NAS, conectividad LDAP, etc.), pero también pueden usarse de forma maliciosa para obtener información sobre direcciones IP de red, direcciones MAC, nombres de usuarios y grupos, y qué nivel de seguridad se está utilizando en los puntos finales.  Debido a la forma en que se configuran las redes, las VPC y las reglas de firewall de Google Cloud, debería ser difícil obtener acceso no deseado a los paquetes de red sin credenciales de inicio de sesión del usuario olink:gcp-gcnv-control-plane-arch.html#jwt-tokens["Tokens JWT"] en las instancias de la nube.  Las capturas de paquetes solo son posibles en puntos finales (como máquinas virtuales [VM]) y solo son posibles en puntos finales internos a la VPC, a menos que se utilice una VPC compartida o un túnel de red externo/reenvío de IP para permitir explícitamente el tráfico externo a los puntos finales.  No hay forma de rastrear el tráfico fuera de los clientes.
@@ -71,6 +76,7 @@ image:ncvs-gc-004.png["Figura que muestra el diálogo de entrada/salida o repres
 
 
 
+[[vm-network-interfaces]]
 === Interfaces de red de VM
 
 Un truco que los atacantes podrían intentar es agregar una nueva tarjeta de interfaz de red (NIC) a una máquina virtual en https://en.wikipedia.org/wiki/Promiscuous_mode["modo promiscuo"^] (duplicación de puertos) o habilitar el modo promiscuo en una NIC existente para rastrear todo el tráfico.  En Google Cloud, agregar una nueva NIC requiere que una máquina virtual se apague por completo, lo que genera alertas para que los atacantes no puedan hacerlo sin ser detectados.

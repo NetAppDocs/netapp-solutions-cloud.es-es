@@ -18,6 +18,7 @@ Los datos en tránsito se pueden cifrar en la capa de protocolo NAS, y la propia
 
 
 
+[[google-cloud-network]]
 == Red de Google Cloud
 
 Google Cloud cifra el tráfico a nivel de red como se describe en https://cloud.google.com/security/encryption-in-transit["Cifrado en tránsito"^] en la documentación de Google.  Como se menciona en la sección "Arquitectura de Google Cloud NetApp Volumes ", Google Cloud NetApp Volumes se entrega desde un proyecto de producción de PSA controlado por NetApp.
@@ -28,12 +29,14 @@ Aunque la ruta de datos de NetApp Volumes-Performance no está completamente cif
 
 
 
+[[nas-protocols]]
 == Protocolos NAS
 
 Los protocolos NAS NFS y SMB proporcionan cifrado de transporte opcional en la capa de protocolo.
 
 
 
+[[smb-encryption]]
 === Cifrado SMB
 
 https://docs.microsoft.com/en-us/windows-server/storage/file-server/smb-security["Cifrado SMB"^]Proporciona cifrado de extremo a extremo de datos SMB y protege los datos contra escuchas clandestinas en redes no confiables.  Puede habilitar el cifrado tanto para la conexión de datos del cliente/servidor (solo disponible para clientes compatibles con SMB3.x) como para la autenticación del controlador de servidor/dominio.
@@ -44,6 +47,7 @@ Google Cloud NetApp Volumes admite los cifrados de seguridad RC4-HMAC, AES-128-C
 
 
 
+[[nfsv4-1-kerberos]]
 === NFSv4.1 Kerberos
 
 Para NFSv4.1, NetApp Volumes-Performance ofrece autenticación Kerberos como se describe en https://datatracker.ietf.org/doc/html/rfc7530["RFC7530"^] Puede habilitar Kerberos por volumen.

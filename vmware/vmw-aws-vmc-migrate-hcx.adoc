@@ -18,6 +18,7 @@ Un caso de uso común de VMware Cloud (VMC) en Amazon Web Services (AWS), con su
 
 
 
+[[overview-migrating-virtual-machines-with-vmware-hcx-fsx-ontap-supplemental-datastores-and-vmware-cloud]]
 == Descripción general: Migración de máquinas virtuales con VMware HCX, almacenes de datos complementarios de FSx ONTAP y VMware Cloud
 
 VMware HCX es principalmente una plataforma de movilidad diseñada para simplificar la migración de la carga de trabajo, el reequilibrio de la carga de trabajo y la continuidad del negocio en las nubes.  Se incluye como parte de VMware Cloud on AWS y ofrece muchas formas de migrar cargas de trabajo y puede usarse para operaciones de recuperación ante desastres (DR).
@@ -68,6 +69,7 @@ image:fsx-hcx-001.png["Figura que muestra el diálogo de entrada/salida o repres
 ====
 
 
+[[solution-deployment]]
 == Implementación de la solución
 
 Siga la serie de pasos para completar la implementación de esta solución:
@@ -318,12 +320,14 @@ NOTE: El almacén de datos de VMC FSx ONTAP de destino debe tener espacio sufici
 ====
 
 
+[[conclusion]]
 == Conclusión
 
 Ya sea que su objetivo sea una nube completa o una nube híbrida y que los datos residan en cualquier tipo o proveedor de almacenamiento en las instalaciones, Amazon FSx ONTAP junto con HCX brindan excelentes opciones para implementar y migrar las cargas de trabajo al mismo tiempo que reducen el TCO al hacer que los requisitos de los datos se integren perfectamente con la capa de aplicación.  Cualquiera que sea el caso de uso, elija VMC junto con el almacén de datos FSx ONTAP para obtener rápidamente los beneficios de la nube, una infraestructura consistente y operaciones en las instalaciones locales y en múltiples nubes, portabilidad bidireccional de cargas de trabajo y capacidad y rendimiento de nivel empresarial.  Es el mismo proceso y procedimientos familiares que se utilizan para conectar el almacenamiento y migrar máquinas virtuales mediante la replicación de VMware vSphere, VMware vMotion o incluso la copia NFC.
 
 
 
+[[takeaways]]
 == Comida para llevar
 
 Los puntos clave de este documento incluyen:
@@ -335,6 +339,7 @@ Los puntos clave de este documento incluyen:
 
 
 
+[[where-to-find-additional-information]]
 == Dónde encontrar información adicional
 
 Para obtener más información sobre la información descrita en este documento, consulte los siguientes enlaces de sitios web:

@@ -18,6 +18,7 @@ La siguiente sección muestra cómo proteger las bases de datos que se ejecutan 
 
 
 
+[[setting-up-scsql]]
 == Configurar SCSQL
 
 La configuración para usar SCSQL para proteger bases de datos en VMDKs es la siguiente:
@@ -49,6 +50,7 @@ image:evs-protect-fsxn-027.png["Figura que representa el diálogo para el paso a
 
 
 
+[[setting-up-a-backup-policy]]
 == Configurar una política de backup
 
 Los siguientes pasos te mostrarán cómo configurar una política de backup.
@@ -81,6 +83,7 @@ image:evs-protect-fsxn-032.png["Figura que representa el diálogo para el paso a
 
 
 
+[[monitoring-a-backup]]
 == Supervisar una copia de seguridad
 
 Una vez que hayas configurado una política de backup, puedes supervisar tus operaciones de backup a medida que se realizan. Puedes hacer esto haciendo clic en Backup now para iniciar una operación de backup bajo demanda o esperando a que tu política de backup programada entre en acción.
@@ -94,6 +97,7 @@ image:evs-protect-fsxn-033.png["Figura que representa el diálogo para el paso a
 
 
 
+[[restore-of-databases-residing-on-the-vmdks]]
 == Restauración de bases de datos que residen en los VMDKs
 
 La base de datos en el VMDK se puede restaurar a un momento específico.

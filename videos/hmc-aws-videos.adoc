@@ -18,6 +18,7 @@ Explore la completa videoteca de NetApp que presenta soluciones multicloud híbr
 
 
 
+[[guest-connected-storage]]
 == Almacenamiento conectado para invitados
 
 .Almacenamiento conectado invitado de Windows con FSx ONTAP mediante iSCSI
@@ -26,6 +27,7 @@ video::0d03e040-634f-4086-8cb5-b01200fb8515[panopto,width=360]
 video::c3befe1b-4f32-4839-a031-b01200fb6d60[panopto,width=360]
 
 
+[[tco-and-supplemental-datastores]]
 == TCO y almacenes de datos complementarios
 
 .Ahorros en el TCO de VMware Cloud on AWS con Amazon FSx ONTAP
@@ -34,6 +36,7 @@ video::f0fedec5-dc17-47af-8821-b01200f00e08[panopto,width=360]
 video::2065dcc1-f31a-4e71-a7d5-b01200f01171[panopto,width=360]
 
 
+[[migration-workflows-hcx]]
 == Flujos de trabajo de migración (HCX)
 
 .Configuración e implementación de VMware HCX para VMC

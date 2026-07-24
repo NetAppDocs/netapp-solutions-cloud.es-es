@@ -20,12 +20,14 @@ La arquitectura general de Google Cloud NetApp Volumes se puede dividir en dos c
 
 
 
+[[control-plane]]
 == Plano de control
 
 El plano de control en Google Cloud NetApp Volumes es la infraestructura de backend administrada por los administradores de Google Cloud NetApp Volumes y el software de automatización nativo de NetApp .  Este plano es completamente transparente para los usuarios finales e incluye redes, hardware de almacenamiento, actualizaciones de software, etc., para ayudar a brindar valor a una solución residente en la nube como Google Cloud NetApp Volumes.
 
 
 
+[[data-plane]]
 == Plano de datos
 
 El plano de datos en Google Cloud NetApp Volumes incluye los volúmenes de datos reales y la configuración general de Google Cloud NetApp Volumes (como control de acceso, autenticación Kerberos, etc.).  El plano de datos está completamente bajo el control de los usuarios finales y los consumidores de la plataforma Google Cloud NetApp Volumes .

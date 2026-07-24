@@ -26,6 +26,7 @@ image:dr-draas-nfs-001.png["Figura que muestra el diálogo de entrada/salida o r
 
 
 
+[[getting-started]]
 == Empezando
 
 Para comenzar con la BlueXP disaster recovery, utilice la consola de BlueXP y luego acceda al servicio.
@@ -58,6 +59,7 @@ image:dr-draas-nfs-003.png["Figura que muestra el diálogo de entrada/salida o r
 
 
 
+[[bluexp-disaster-recovery-configuration]]
 == Configuración de BlueXP disaster recovery
 
 El primer paso para prepararse para la recuperación ante desastres es descubrir y agregar los recursos de almacenamiento y vCenter locales a la BlueXP disaster recovery.
@@ -82,6 +84,7 @@ Una vez que se agregan los vCenters, se activa el descubrimiento automático.
 
 
 
+[[configuring-storage-replication-between-source-site-array-and-destination-site-array]]
 == Configuración de la replicación de almacenamiento entre la matriz del sitio de origen y la matriz del sitio de destino
 
 SnapMirror proporciona replicación de datos en un entorno NetApp .  Basada en la tecnología NetApp Snapshot, la replicación de SnapMirror es extremadamente eficiente porque replica solo los bloques que se han modificado o agregado desde la actualización anterior.  SnapMirror se configura fácilmente mediante NetApp OnCommand System Manager o la CLI de ONTAP .  BlueXP DRaaS también crea la relación SnapMirror siempre que el peering de clúster y SVM esté configurado de antemano.
@@ -93,6 +96,7 @@ NOTE: Si la relación SnapMirror ya está configurada para el volumen a través 
 
 
 
+[[how-to-set-it-up-for-vmware-disaster-recovery]]
 == Cómo configurarlo para VMware Disaster Recovery
 
 El proceso para crear la replicación de SnapMirror sigue siendo el mismo para cualquier aplicación.  El proceso puede ser manual o automatizado.  La forma más sencilla es aprovechar BlueXP para configurar la replicación de SnapMirror mediante el simple arrastrar y soltar del sistema ONTAP de origen en el entorno al destino para activar el asistente que lo guía a través del resto del proceso.
@@ -113,6 +117,7 @@ NOTE: Si la relación SnapMirror ya está configurada para el volumen a través 
 
 
 
+[[what-can-bluexp-disaster-recovery-do-for-you]]
 == ¿Qué puede hacer por usted la BlueXP disaster recovery ?
 
 Una vez agregados los sitios de origen y destino, la BlueXP disaster recovery realiza un descubrimiento profundo automático y muestra las máquinas virtuales junto con los metadatos asociados.  La BlueXP disaster recovery también detecta automáticamente las redes y los grupos de puertos utilizados por las máquinas virtuales y los completa.
@@ -194,6 +199,7 @@ BlueXP DRaaS consta de los siguientes flujos de trabajo:
 
 
 
+[[test-failover]]
 == Prueba de conmutación por error
 
 La conmutación por error de prueba en BlueXP DRaaS es un procedimiento operativo que permite a los administradores de VMware validar completamente sus planes de recuperación sin interrumpir sus entornos de producción.
@@ -220,6 +226,7 @@ image:dr-draas-nfs-026.png["Figura que muestra el diálogo de entrada/salida o r
 
 
 
+[[cleanup-failover-test-operation]]
 == Operación de prueba de conmutación por error de limpieza
 
 La operación de prueba de conmutación por error de limpieza se produce después de que se haya completado la prueba del plan de replicación y el administrador de VMware responda al mensaje de limpieza.
@@ -236,6 +243,7 @@ Cuando el administrador de VMware realiza una operación de recuperación, BlueX
 
 
 
+[[planned-migration-and-fail-over]]
 == Migración planificada y conmutación por error
 
 BlueXP DRaaS tiene dos métodos para realizar una conmutación por error real: migración planificada y conmutación por error.  El primer método, la migración planificada, incorpora el apagado de la máquina virtual y la sincronización de la replicación del almacenamiento en el proceso para recuperar o mover eficazmente las máquinas virtuales al sitio de destino.  La migración planificada requiere acceso al sitio de origen.  El segundo método, conmutación por error, es una conmutación por error planificada/no planificada en la que las máquinas virtuales se recuperan en el sitio de destino desde el último intervalo de replicación de almacenamiento que pudo completarse.  Dependiendo del RPO que se diseñó en la solución, se puede esperar cierta cantidad de pérdida de datos en el escenario de recuperación ante desastres.
@@ -256,6 +264,7 @@ image:dr-draas-nfs-029.png["Figura que muestra el diálogo de entrada/salida o r
 
 
 
+[[failback]]
 == Recuperación por recuperación
 
 Una conmutación por recuperación es un procedimiento opcional que restaura la configuración original de los sitios de origen y destino después de una recuperación.
@@ -276,6 +285,7 @@ Para obtener más detalles sobre cómo acceder y configurar BlueXP DRaaS, consul
 
 
 
+[[monitoring-and-dashboard]]
 == Monitoreo y tablero de control
 
 Desde BlueXP o la CLI de ONTAP , puede supervisar el estado de salud de la replicación para los volúmenes de almacén de datos adecuados, y el estado de una conmutación por error o de una conmutación por error de prueba se puede rastrear a través de la Supervisión de trabajos.

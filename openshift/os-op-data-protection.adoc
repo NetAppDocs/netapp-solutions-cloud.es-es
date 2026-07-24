@@ -24,6 +24,7 @@ Para obtener más información sobre cómo proteger y migrar cargas de trabajo d
 
 
 
+[[business-continuity-with-metrocluster]]
 == Continuidad de negocio con MetroCluster
 
 La mayor parte de nuestra plataforma de hardware para ONTAP tiene características de alta disponibilidad para proteger contra fallas del dispositivo, evitando la necesidad de realizar recuperación ante desastres.  Pero para protegerse de incendios o cualquier otro desastre y continuar el negocio con cero RPO y bajo RTO, a menudo se utiliza una solución MetroCluster .

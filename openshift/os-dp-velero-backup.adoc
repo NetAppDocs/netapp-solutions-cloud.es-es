@@ -18,6 +18,7 @@ En esta sección se describe cómo crear copias de seguridad a pedido para máqu
 
 
 
+[[steps-to-create-a-backup-of-an-app]]
 == Pasos para crear una copia de seguridad de una aplicación
 
 Para crear una copia de seguridad a pedido de una aplicación (metadatos de la aplicación y volúmenes persistentes de la aplicación), haga clic en la pestaña **Copia de seguridad** para crear un recurso personalizado de copia de seguridad (CR).  Se proporciona un yaml de muestra para crear el CR de respaldo.  Usando este yaml, se realizará una copia de seguridad de la aplicación y su almacenamiento persistente en el espacio de nombres especificado.  Se pueden configurar parámetros adicionales como se muestra en lalink:https://docs.openshift.com/container-platform/4.14/backup_and_restore/application_backup_and_restore/backing_up_and_restoring/oadp-creating-backup-cr.html["documentación"] .
@@ -48,6 +49,7 @@ image:redhat-openshift-oadp-backup-002.png["Copia de seguridad de objetos en S3"
 
 
 
+[[creating-scheduled-backups-for-apps]]
 == Creación de copias de seguridad programadas para aplicaciones
 
 Para crear copias de seguridad según un cronograma, debe crear una CR programada.  La programación es simplemente una expresión Cron que le permite especificar la hora en la que desea crear la copia de seguridad.  A continuación se muestra un ejemplo de yaml para crear un CR de programación.

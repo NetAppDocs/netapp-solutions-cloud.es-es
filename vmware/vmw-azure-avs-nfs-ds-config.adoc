@@ -37,6 +37,7 @@ NOTE: Comuníquese con los arquitectos de soluciones de Azure y NetApp para plan
 
 
 
+[[detailed-architecture]]
 == Arquitectura detallada
 
 Desde una perspectiva de alto nivel, esta arquitectura describe cómo lograr la conectividad de la nube híbrida y la portabilidad de aplicaciones en entornos locales y Azure.  También describe el uso de Azure NetApp Files como un almacén de datos NFS complementario y como una opción de almacenamiento interno para máquinas virtuales invitadas alojadas en la solución Azure VMware.
@@ -45,6 +46,7 @@ image:vmware-dr-001.png["Figura que muestra el diálogo de entrada/salida o repr
 
 
 
+[[sizing]]
 == Apresto
 
 El aspecto más importante en la migración o recuperación ante desastres es determinar el tamaño correcto para el entorno de destino.  Es muy importante comprender cuántos nodos se requieren para realizar un ejercicio de elevación y traslado desde las instalaciones locales a la solución VMware de Azure.
@@ -64,6 +66,7 @@ NOTE: Las máquinas virtuales invitadas utilizadas con almacenamiento interno se
 
 
 
+[[deploying-and-configuring-azure-vmware-solution]]
 == Implementación y configuración de Azure VMware Solution
 
 Al igual que en las instalaciones locales, la planificación de una solución VMware de Azure es fundamental para lograr un entorno exitoso listo para producción para la creación de máquinas virtuales y la migración.
@@ -79,6 +82,7 @@ El proceso de configuración se puede dividir en tres partes:
 
 
 
+[[configure-azure-netapp-files-with-azure-vmware-solution]]
 == Configurar Azure NetApp Files con Azure VMware Solution
 
 La nueva integración entre Azure NetApp Files le permite crear almacenes de datos NFS a través de las API/CLI del proveedor de recursos de Azure VMware Solution con volúmenes de Azure NetApp Files y montar los almacenes de datos en los clústeres de su elección en una nube privada.  Además de alojar los VMDK de máquinas virtuales y aplicaciones, los volúmenes de archivos de Azure NetApp también se pueden montar desde máquinas virtuales creadas en el entorno SDDC de Azure VMware Solution.  Los volúmenes se pueden montar en el cliente Linux y asignarse en un cliente Windows, porque Azure NetApp Files admite los protocolos Bloque de mensajes de servidor (SMB) y Sistema de archivos de red (NFS).
@@ -217,6 +221,7 @@ image:vmware-dr-005.png["Figura que muestra el diálogo de entrada/salida o repr
 ====
 
 
+[[sizing-and-performance-optimization]]
 == Optimización del tamaño y el rendimiento
 
 Azure NetApp Files admite tres niveles de servicio: Estándar (16 MBps por terabyte), Premium (64 MBps por terabyte) y Ultra (128 MBps por terabyte). Aprovisionar el tamaño de volumen correcto es importante para un rendimiento óptimo de la carga de trabajo de la base de datos. Con Azure NetApp Files, el rendimiento del volumen y el límite de rendimiento se determinan en función de los siguientes factores:
@@ -244,6 +249,7 @@ Consulte estolink:https://learn.microsoft.com/en-us/azure/azure-netapp-files/per
 |===
 
 
+[[performance-considerations]]
 == Consideraciones de rendimiento
 
 Es importante comprender que con la versión 3 de NFS solo hay una tubería activa para la conexión entre el host ESXi y un único destino de almacenamiento.  Esto significa que, si bien puede haber conexiones alternativas disponibles para la conmutación por error, el ancho de banda para un solo almacén de datos y el almacenamiento subyacente están limitados a lo que una sola conexión puede proporcionar.
@@ -268,6 +274,7 @@ Consulte estolink:https://learn.microsoft.com/en-us/azure/azure-netapp-files/per
 |===
 
 
+[[increasing-the-size-of-the-datastore]]
 == Aumentar el tamaño del almacén de datos
 
 La remodelación del volumen y los cambios dinámicos del nivel de servicio son completamente transparentes para el SDDC.  En Azure NetApp Files, estas capacidades proporcionan optimizaciones continuas de rendimiento, capacidad y costos.  Aumente el tamaño de los almacenes de datos NFS modificando el tamaño del volumen desde el Portal de Azure o mediante la CLI.  Una vez que haya terminado, acceda a vCenter, vaya a la pestaña del almacén de datos, haga clic con el botón derecho en el almacén de datos apropiado y seleccione Actualizar información de capacidad.  Este enfoque se puede utilizar para aumentar la capacidad del almacén de datos y aumentar el rendimiento del mismo de manera dinámica y sin tiempo de inactividad.  Este proceso también es completamente transparente para las aplicaciones.
@@ -284,6 +291,7 @@ La remodelación del volumen y los cambios dinámicos del nivel de servicio son 
 |===
 
 
+[[workloads]]
 == Cargas de trabajo
 
 .Migración

@@ -20,6 +20,7 @@ Cada cliente obtiene su propia subred única, cuyo acceso está restringido a ot
 
 
 
+[[physical-security]]
 == Seguridad física
 
 Con la aprobación previa adecuada, solo los ingenieros en el sitio y los ingenieros de soporte de campo (FSE) con credencial de NetApp tienen acceso a la jaula y a los racks para realizar trabajos físicos.  No se permite la gestión de almacenamiento ni de red.  Sólo estos recursos en el sitio pueden realizar tareas de mantenimiento de hardware.
@@ -28,6 +29,7 @@ Para los ingenieros en el sitio, se genera un ticket para la declaración de tra
 
 
 
+[[operations-team]]
 == Equipo de operaciones
 
 El equipo de operaciones de Google Cloud NetApp Volumes está formado por ingeniería de producción y un ingeniero de confiabilidad del sitio (SRE) para Google Cloud NetApp Volumes , además de ingenieros de soporte de campo de NetApp y socios para hardware.  Todos los miembros del equipo de operaciones están acreditados para trabajar en Google Cloud y se mantienen registros detallados del trabajo para cada ticket generado.  Además, existe un estricto proceso de control y aprobación de cambios para garantizar que cada decisión sea analizada adecuadamente.
@@ -36,6 +38,7 @@ El equipo de SRE administra el plano de control y cómo se enrutan los datos des
 
 
 
+[[customer-responsibilities]]
 == Responsabilidades del cliente
 
 Los clientes de Google Cloud NetApp Volumes administran el Active Directory de su organización y la administración de roles de usuario, así como las operaciones de volumen y datos.  Los clientes pueden tener roles administrativos y pueden delegar permisos a otros usuarios finales dentro del mismo proyecto de Google Cloud utilizando los dos roles predefinidos que proporcionan NetApp y Google Cloud (Administrador y Visualizador).
@@ -44,6 +47,7 @@ El administrador puede vincular cualquier VPC dentro del proyecto del cliente a 
 
 
 
+[[malicious-sre-protection]]
 == Protección contra SRE maliciosa
 
 Una inquietud que podría surgir es ¿cómo protege Google Cloud NetApp Volumes contra escenarios en los que hay un SRE malicioso o cuando las credenciales de SRE se han visto comprometidas?
@@ -52,6 +56,7 @@ El acceso al entorno de producción está restringido a un número limitado de p
 
 
 
+[[volume-life-cycle]]
 == Ciclo de vida del volumen
 
 Google Cloud NetApp Volumes administra solo los objetos dentro del servicio, no los datos dentro de los volúmenes.  Solo los clientes que acceden a los volúmenes pueden administrar los datos, las ACL, los propietarios de archivos, etc.  Los datos de estos volúmenes están cifrados en reposo y el acceso está limitado a los inquilinos de la instancia de Google Cloud NetApp Volumes .
@@ -62,12 +67,14 @@ En los casos en que se rescinde un contrato de Google Cloud NetApp Volumes , Net
 
 
 
+[[certifications]]
 == Certificaciones
 
 Google Cloud NetApp Volumes para Google Cloud actualmente está certificado según los estándares ISO/IEC 27001:2013 e ISO/IEC 27018:2019.  El servicio también recibió recientemente su informe de certificación SOC2 Tipo I.  Para obtener información sobre el compromiso de NetApp con la seguridad y privacidad de los datos, consulte https://www.netapp.com/company/trust-center/compliance/["Cumplimiento: seguridad y privacidad de datos"^] .
 
 
 
+[[gdpr]]
 == RGPD
 
 Nuestros compromisos con la privacidad y el cumplimiento del RGPD están disponibles en varios de nuestros https://www.netapp.com/how-to-buy/sales-terms-and-conditions%22%20/o%20%22SEO%20-%20Sales%20Terms%20and%20Conditions["contratos de clientes"^] , como el nuestro https://netapp.na1.echosign.com/public/esignWidget?wid=CBFCIBAA3AAABLblqZhCqPPgcufskl_71q-FelD4DHz5EMJVOkqqT0iiORT10DlfZnZeMpDrse5W6K9LEw6o*["Anexo Data Processing del cliente"^] , que incluye el https://ec.europa.eu/info/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_en["Cláusulas contractuales estándar"^] Proporcionado por la Comisión Europea.  También asumimos estos compromisos en nuestra Política de Privacidad, respaldada por los valores fundamentales establecidos en nuestro Código de Conducta corporativo.

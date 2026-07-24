@@ -18,6 +18,7 @@ Una descripción general de los casos de uso importantes para la organización d
 
 
 
+[[popular-use-cases]]
 == Casos de uso populares
 
 Los casos de uso incluyen:
@@ -39,6 +40,7 @@ A lo largo de esta documentación, se detallarán referencias de carga de trabaj
 
 
 
+[[inside-the-it-journey]]
 === Dentro del viaje de TI
 
 La mayoría de las organizaciones están en un viaje hacia la transformación y la modernización.  Como parte de este proceso, las empresas están intentando utilizar sus inversiones existentes en VMware mientras aprovechan los beneficios de la nube y exploran formas de hacer que el proceso de migración sea lo más fluido posible.  Este enfoque haría que sus esfuerzos de modernización fueran muy fáciles porque los datos ya están en la nube.
@@ -47,6 +49,7 @@ La respuesta más fácil a este escenario son las ofertas de VMware en cada hipe
 
 
 
+[[understanding-the-importance-of-supplemental-nfs-storage-options]]
 === Comprender la importancia de las opciones de almacenamiento NFS suplementarias
 
 Si bien VMware en cualquier nube ofrece capacidades híbridas únicas para cada cliente, las opciones limitadas de almacenamiento NFS complementario han restringido su utilidad para las organizaciones con cargas de trabajo con gran capacidad de almacenamiento.  Debido a que el almacenamiento está directamente vinculado a los hosts, la única forma de escalar el almacenamiento es agregar más hosts, y eso puede aumentar los costos entre un 35 y un 40 por ciento o más para cargas de trabajo intensivas en almacenamiento.  Estas cargas de trabajo solo necesitan almacenamiento adicional, no potencia adicional.  Pero eso significa pagar por hosts adicionales.

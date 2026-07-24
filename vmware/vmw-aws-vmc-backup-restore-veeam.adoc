@@ -18,12 +18,14 @@ Veeam Backup & Replication es una solución eficaz y confiable para proteger dat
 
 
 
+[[overview]]
 == Descripción general
 
 VMware Cloud (en AWS) admite el uso de almacenes de datos NFS como almacenamiento complementario, y FSx ONTAP es una solución segura para los clientes que necesitan almacenar grandes cantidades de datos para sus aplicaciones en la nube que pueden escalar independientemente de la cantidad de hosts ESXi en el clúster SDDC.  Este servicio de almacenamiento integrado de AWS ofrece un almacenamiento altamente eficiente con todas las capacidades tradicionales de NetApp ONTAP .
 
 
 
+[[use-cases]]
 === Casos de uso
 
 Esta solución aborda los siguientes casos de uso:
@@ -35,6 +37,7 @@ Esta solución aborda los siguientes casos de uso:
 
 
 
+[[nfs-datastores-using-amazon-fsx-ontap]]
 === Almacenes de datos NFS que utilizan Amazon FSx ONTAP
 
 Todas las máquinas virtuales de esta solución residen en almacenes de datos NFS complementarios de FSx ONTAP .  El uso de FSx ONTAP como un almacén de datos NFS complementario tiene varios beneficios.  Por ejemplo, le permite:
@@ -82,6 +85,7 @@ El propósito de esta solución es demostrar la protección de datos de las máq
 ====
 
 
+[[high-level-architecture]]
 == Arquitectura de alto nivel
 
 La prueba/validación de esta solución se realizó en un laboratorio que puede o no coincidir con el entorno de implementación final.  Para obtener más información, consulte las siguientes secciones.
@@ -106,6 +110,7 @@ El propósito de esta solución es demostrar la protección de datos de las máq
 ====
 
 
+[[solution-deployment]]
 == Implementación de la solución
 
 En esta solución, proporcionamos instrucciones detalladas para implementar y validar una solución que utiliza el software Veeam Backup and Replication para realizar copias de seguridad y recuperaciones de máquinas virtuales de servidores de archivos SQL Server, Oracle y Windows y Linux en un VMware Cloud SDDC en AWS.  Las máquinas virtuales de esta solución residen en un almacén de datos NFS complementario alojado por FSx ONTAP.  Además, se utiliza un sistema de archivos FSx ONTAP separado para alojar volúmenes iSCSI que se utilizarán para los repositorios de respaldo de Veeam.
@@ -120,6 +125,7 @@ Para conocer las consideraciones y limitaciones al utilizar Veeam Backup and Rep
 
 
 
+[[deploy-veeam-proxy-server]]
 === Implementar el servidor proxy de Veeam
 
 Un servidor proxy de Veeam es un componente del software Veeam Backup & Replication que actúa como intermediario entre la fuente y el destino de la copia de seguridad o replicación.  El servidor proxy ayuda a optimizar y acelerar la transferencia de datos durante los trabajos de respaldo al procesar los datos localmente y puede usar diferentes modos de transporte para acceder a los datos mediante las API de VMware vStorage para protección de datos o mediante acceso directo al almacenamiento.
@@ -178,6 +184,7 @@ image:aws-vmc-veeam-010.png["Configurar reglas de tráfico de red"]
 ====
 
 
+[[configure-storage-and-backup-repositories]]
 === Configurar repositorios de almacenamiento y de respaldo
 
 El servidor principal de Veeam Backup y el servidor proxy de Veeam tienen acceso a un repositorio de respaldo en forma de almacenamiento conectado directamente.  En esta sección cubrimos la creación de un sistema de archivos FSx ONTAP , el montaje de LUN iSCSI en los servidores Veeam y la creación de repositorios de respaldo.
@@ -278,6 +285,7 @@ image:aws-vmc-veeam-016.png["Elija Montar servidor"]
 ====
 
 
+[[configure-veeam-backup-jobs]]
 === Configurar trabajos de respaldo de Veeam
 
 Los trabajos de respaldo deben crearse utilizando los repositorios de respaldo en la sección anterior.  La creación de trabajos de respaldo es una parte normal del repertorio de cualquier administrador de almacenamiento y no cubrimos todos los pasos aquí.  Para obtener información más completa sobre la creación de trabajos de respaldo en Veeam, consulte la https://www.veeam.com/documentation-guides-datasheets.html?productId=8&version=product%3A8%2F221["Documentación técnica del Centro de ayuda de Veeam"^] .
@@ -307,6 +315,7 @@ image:aws-vmc-veeam-018.png["Política de retención a largo plazo"]
 ====
 
 
+[[restore-application-vms-with-veeam-full-restore]]
 === Restaurar máquinas virtuales de aplicaciones con la restauración completa de Veeam
 
 Realizar una restauración completa con Veeam es el primer paso para realizar una restauración de una aplicación.  Validamos que las restauraciones completas de nuestras máquinas virtuales se encendieron y que todos los servicios funcionaron normalmente.
@@ -315,6 +324,7 @@ Restaurar servidores es una parte normal del repertorio de cualquier administrad
 
 
 
+[[restore-sql-server-databases]]
 === Restaurar bases de datos de SQL Server
 
 Veeam Backup & Replication ofrece varias opciones para restaurar bases de datos de SQL Server.  Para esta validación utilizamos Veeam Explorer para SQL Server con Instant Recovery para ejecutar restauraciones de nuestras bases de datos de SQL Server.  SQL Server Instant Recovery es una función que le permite restaurar rápidamente bases de datos de SQL Server sin tener que esperar una restauración completa de la base de datos.  Este proceso de recuperación rápida minimiza el tiempo de inactividad y garantiza la continuidad del negocio.  Así es como funciona:
@@ -360,6 +370,7 @@ Para obtener información más detallada sobre cómo realizar operaciones de res
 
 
 
+[[restore-oracle-databases-with-veeam-explorer]]
 === Restaurar bases de datos de Oracle con Veeam Explorer
 
 Veeam Explorer para bases de datos Oracle brinda la capacidad de realizar una restauración de base de datos Oracle estándar o una restauración ininterrumpida mediante Instant Recovery.  También admite la publicación de bases de datos para un acceso rápido, la recuperación de bases de datos de Data Guard y restauraciones desde copias de seguridad de RMAN.
@@ -443,6 +454,7 @@ image:aws-vmc-veeam-036.png["Seleccione un punto de restauración de la lista"]
 ====
 
 
+[[conclusion]]
 == Conclusión
 
 VMware Cloud es una potente plataforma para ejecutar aplicaciones críticas para el negocio y almacenar datos confidenciales.  Una solución de protección de datos segura es esencial para las empresas que confían en VMware Cloud para garantizar la continuidad del negocio y ayudar a protegerse contra las amenazas cibernéticas y la pérdida de datos.  Al elegir una solución de protección de datos confiable y sólida, las empresas pueden estar seguras de que sus datos críticos están seguros y protegidos, pase lo que pase.
@@ -451,6 +463,7 @@ El caso de uso presentado en esta documentación se centra en tecnologías de pr
 
 
 
+[[additional-information]]
 == Información adicional
 
 Para conocer más sobre las tecnologías presentadas en esta solución consulte la siguiente información adicional.

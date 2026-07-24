@@ -18,6 +18,7 @@ Esta sección mostrará los pasos sobre cómo implementar FSx para ONTAP como un
 
 
 
+[[high-level-deployment-steps]]
 == Pasos de implementación de alto nivel
 
 La implementación del sistema de archivos FSx para ONTAP para su uso como almacén de datos NFS para Amazon EVS y el establecimiento de la conectividad entre los dos servicios incluirán los siguientes pasos:
@@ -29,6 +30,7 @@ La implementación del sistema de archivos FSx para ONTAP para su uso como almac
 
 
 
+[[prerequisites]]
 == Prerrequisitos
 
 Los siguientes requisitos previos deben estar establecidos antes de comenzar el proceso para configurar un FSx para ONTAP como un almacén de datos NFS para Amazon EVS:
@@ -49,6 +51,7 @@ NOTE: Su sistema de archivos FSx para ONTAP debe implementarse en la misma AZ qu
 
 
 
+[[create-an-fsx-for-ontap-file-system]]
 == Crear un sistema de archivos FSx para ONTAP
 
 Los siguientes pasos le mostrarán cómo aprovisionar y montar un sistema de archivos FSx para ONTAP :
@@ -154,6 +157,7 @@ NOTE: Para crear sistemas de archivos FSx adicionales para ONTAP , puede seguir 
 
 
 
+[[validating-vpc-and-virtualization-environment-routing-and-security-groups]]
 == Validación de grupos de seguridad y enrutamiento de entornos de virtualización y VPC
 
 Validar los grupos de enrutamiento y seguridad de VPC y SDDC es importante para garantizar que el entorno de virtualización de Amazon EVS y los componentes del sistema de archivos de FSx for ONTAP puedan funcionar juntos correctamente.
@@ -207,6 +211,7 @@ image:evs-mount-fsxn-017.png["Figura que representa el diálogo para el paso ant
 
 
 
+[[attaching-an-fsx-for-ontap-nfs-volume-to-amazon-evs-for-use-as-a-datastore]]
 == Cómo conectar un volumen NFS de FSx para ONTAP a Amazon EVS para usarlo como almacén de datos
 
 Ahora que su sistema de archivos FSx para ONTAP ha sido aprovisionado y se han validado todos los parámetros de conectividad adecuados, es momento de conectar un volumen de almacenamiento FSx para ONTAP a Amazon EVS.  Los siguientes pasos mostrarán cómo acceder a vCenter y montar el volumen FSx para ONTAP como un almacén de datos NFS:

@@ -18,6 +18,7 @@ Lea los blogs que ofrecen orientación práctica y mejores prácticas para integ
 
 
 
+[[vmware-integration-with-aws-and-amazon-fsx-for-ontap]]
 == Integración de VMware con AWS y Amazon FSx para ONTAP
 
 * link:https://bluexp.netapp.com/blog/aws-fsxn-blg-migrate-vmware-to-amazon-ec2-iscsi-based-fsx-for-ontap["Migre máquinas virtuales de VMware a AWS mediante el protocolo iSCSI de Amazon EC2 y Amazon FSx ONTAP"]
@@ -28,6 +29,7 @@ Lea los blogs que ofrecen orientación práctica y mejores prácticas para integ
 
 
 
+[[azure-vmware-solution]]
 == Solución VMware de Azure
 
 * link:https://www.netapp.com/blog/vmware-optimize-storage-workloads/["Optimiza el almacenamiento y las cargas de trabajo de VMware con uso intensivo de datos en cualquier cloud"]
@@ -36,6 +38,7 @@ Lea los blogs que ofrecen orientación práctica y mejores prácticas para integ
 
 
 
+[[google-cloud-vmware-engine]]
 == Motor VMware de Google Cloud
 
 * link:https://www.netapp.com/blog/cloud-volumes-service-google-cloud-vmware-engine/["Compatibilidad del almacén de datos de Google Cloud NetApp Volumes con Google Cloud VMware Engine (NetApp)"]
@@ -45,6 +48,7 @@ Lea los blogs que ofrecen orientación práctica y mejores prácticas para integ
 
 
 
+[[data-protection-and-management]]
 == Protección y gestión de datos
 
 * link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/3-2-1-Data-Protection-for-VMware-with-SnapCenter-Plug-in-and-BlueXP-backup-and/ba-p/446180["Protección de datos 3-2-1 para VMware con el complemento SnapCenter y BlueXP Backup and Recovery para máquinas virtuales"]
@@ -53,6 +57,7 @@ Lea los blogs que ofrecen orientación práctica y mejores prácticas para integ
 
 
 
+[[netapp-for-openshift-container-workloads]]
 == NetApp para cargas de trabajo de contenedores OpenShift
 
 * link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/NetApp-ONTAP-doubles-up-as-storage-for-logs-in-Red-Hat-OpenShift-Container/ba-p/449280["NetApp ONTAP también funciona como almacenamiento de registros en la plataforma de contenedores Red Hat OpenShift"]
@@ -60,6 +65,7 @@ Lea los blogs que ofrecen orientación práctica y mejores prácticas para integ
 
 
 
+[[vmware-sovereign-cloud]]
 == Nube soberana de VMware
 
 * link:https://blogs.vmware.com/cloud/2021/10/06/vmware-sovereign-cloud/["Presentamos la nueva iniciativa Sovereign Cloud"]

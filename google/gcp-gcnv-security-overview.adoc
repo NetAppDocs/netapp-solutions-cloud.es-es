@@ -18,6 +18,7 @@ Google Cloud NetApp Volumes en Google Cloud ofrece una multitud de formas de pro
 
 
 
+[[secure-architecture-and-tenancy-model]]
 == Arquitectura segura y modelo de arrendamiento
 
 Google Cloud NetApp Volumes proporciona una arquitectura segura en Google Cloud al segmentar la administración de servicios (plano de control) y el acceso a los datos (plano de datos) en diferentes puntos finales para que ninguno pueda afectar al otro (consulte la secciónlink:gcp-gcnv-arch-detail.html["Arquitectura de Google Cloud NetApp Volumes"] ).  Utiliza Google https://cloud.google.com/vpc/docs/private-services-access?hl=en_US["acceso a servicios privados"^] (PSA) marco para proporcionar el servicio.  Este marco distingue entre el productor de servicios, que es proporcionado y operado por NetApp, y el consumidor de servicios, que es una nube privada virtual (VPC) en un proyecto de cliente, que aloja a los clientes que desean acceder a los recursos compartidos de archivos de Google Cloud NetApp Volumes .
@@ -26,12 +27,14 @@ En esta arquitectura, los inquilinos (ver la secciónlink:gcp-gcnv-arch-detail.h
 
 
 
+[[strong-identity-management-for-the-control-plane]]
 == Gestión de identidad sólida para el plano de control
 
 En el plano de control donde se lleva a cabo la configuración de Google Cloud NetApp Volumes , la administración de identidades se realiza mediante https://cloud.google.com/iam/docs/overview["Gestión de acceso a la identidad (IAM)"^] .  IAM es un servicio estándar que le permite controlar la autenticación (inicios de sesión) y la autorización (permisos) para las instancias de proyectos de Google Cloud.  Toda la configuración se realiza con las API de Google Cloud NetApp Volumes a través de un transporte HTTPS seguro utilizando cifrado TLS 1.2, y la autenticación se realiza mediante tokens JWT para mayor seguridad.  La interfaz de usuario de la consola de Google para Google Cloud NetApp Volumes traduce la entrada del usuario en llamadas a la API de Google Cloud NetApp Volumes .
 
 
 
+[[security-hardening-limiting-attack-surfaces]]
 == Fortalecimiento de la seguridad: limitación de las superficies de ataque
 
 Parte de una seguridad eficaz es limitar la cantidad de superficies de ataque disponibles en un servicio.  Las superficies de ataque pueden incluir una variedad de cosas, incluidos datos en reposo, transferencias en vuelo, inicios de sesión y los conjuntos de datos en sí.
@@ -40,6 +43,7 @@ Un servicio administrado elimina algunas de las superficies de ataque inherentes
 
 
 
+[[zero-trust-model]]
 == Modelo de confianza cero
 
 Históricamente, la filosofía de seguridad de TI ha sido confiar pero verificar, y se ha manifestado en confiar únicamente en mecanismos externos (como firewalls y sistemas de detección de intrusiones) para mitigar las amenazas.  Sin embargo, los ataques y las brechas han evolucionado para eludir la verificación en entornos a través de phishing, ingeniería social, amenazas internas y otros métodos que proporcionan la verificación para ingresar a las redes y causar estragos.
@@ -57,18 +61,21 @@ Los Google Cloud NetApp Volumes que se ejecutan en Google Cloud se adhieren al m
 
 
 
+[[encryption]]
 == Cifrado
 
 Cifrar datos en reposo (ver la secciónlink:gcp-gcnv-data-encrypt-at-rest.html["Cifrado de datos en reposo"] ) mediante cifrados XTS-AES-256 con NetApp Volume Encryption (NVE) y en tránsito conlink:gcp-gcnv-data-encrypt-in-transit.html#smb-encryption["Cifrado SMB"] o soporte NFS Kerberos 5p.  Quédese tranquilo sabiendo que las transferencias de replicación entre regiones están protegidas por encriptación TLS 1.2 (consulte el enlace de la sección:gcp-gcnv-security-considerations.html#Detección, prevención y mitigación de ransomware, malware y virus#cross-region-replication["Replicación entre regiones"]).  Además, la red de Google también proporciona comunicaciones cifradas (consulte la secciónlink:gcp-gcnv-data-encrypt-in-transit.html["Cifrado de datos en tránsito"] ) para una capa adicional de protección contra ataques.  Para obtener más información sobre el cifrado de transporte, consulte la secciónlink:gcp-gcnv-data-encrypt-in-transit.html#google-cloud-network["Red de Google Cloud"] .
 
 
 
+[[data-protection-and-backups]]
 == Protección de datos y copias de seguridad
 
 La seguridad no se trata sólo de la prevención de ataques.  También se trata de cómo nos recuperamos de los ataques si ocurren.  Esta estrategia incluye protección de datos y copias de seguridad.  Google Cloud NetApp Volumes proporciona métodos para replicar a otras regiones en caso de interrupciones (consulte la secciónlink:gcp-gcnv-security-considerations.html#cross-region-replication["Replicación entre regiones"] ) o si un conjunto de datos se ve afectado por un ataque de ransomware.  También puede realizar copias de seguridad asincrónicas de datos en ubicaciones fuera de la instancia de Google Cloud NetApp Volumes mediantelink:gcp-gcnv-security-considerations.html#cloud-volumes-service-backup["Copia de seguridad de Google Cloud NetApp Volumes"] .  Con copias de seguridad periódicas, la mitigación de eventos de seguridad puede llevar menos tiempo y ahorrar dinero y angustia a los administradores.
 
 
 
+[[fast-ransomware-mitigation-with-industry-leading-snapshot-copies]]
 == Mitigación rápida de ransomware con copias Snapshot líderes en la industria
 
 Además de la protección de datos y las copias de seguridad, Google Cloud NetApp Volumes proporciona soporte para copias Snapshot inmutables (consulte la secciónlink:gcp-gcnv-security-considerations.html#immutable-snapshot-copies["Copias de instantáneas inmutables"] ) de volúmenes que permiten la recuperación de ataques de ransomware (consulte la secciónlink:gcp-gcnv-service-operation.html["Operación del servicio"] ) en cuestión de segundos después de descubrir el problema y con una interrupción mínima.  El tiempo de recuperación y los efectos dependen de la programación de la instantánea, pero puede crear copias de instantáneas que proporcionen deltas de tan solo una hora en ataques de ransomware.  Las copias instantáneas tienen un efecto insignificante en el rendimiento y el uso de la capacidad y son un enfoque de bajo riesgo y alta recompensa para proteger sus conjuntos de datos.

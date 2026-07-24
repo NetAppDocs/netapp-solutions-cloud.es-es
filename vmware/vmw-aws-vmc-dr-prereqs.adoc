@@ -18,12 +18,14 @@ En esta solución, SnapCenter proporciona instantáneas consistentes con las apl
 
 
 
+[[technology]]
 == Tecnología
 
 Esta solución incluye tecnologías innovadoras de NetApp, VMware, Amazon Web Services (AWS) y Veeam.
 
 
 
+[[vmware]]
 === VMware
 
 .Fundación VMware Cloud
@@ -70,6 +72,7 @@ Para obtener más información sobre VMware NSX, siga https://docs.vmware.com/en
 ====
 
 
+[[netapp]]
 === NetApp
 
 .ONTAP de NetApp
@@ -107,6 +110,7 @@ Para obtener más información sobre NetApp SnapCenter, siga https://docs.netapp
 ====
 
 
+[[third-party-data-protection]]
 === Protección de datos de terceros
 
 .Veeam Backup & Replication
@@ -119,6 +123,7 @@ Para obtener más información sobre Veeam Backup & Replication, siga https://ww
 ====
 
 
+[[public-cloud]]
 === Nube pública
 
 .Gestión de identidad y acceso de AWS
@@ -151,6 +156,7 @@ Para obtener más información sobre Amazon FSx ONTAP, siga https://aws.amazon.c
 ====
 
 
+[[overview-aws-guest-connected-storage-disaster-recovery]]
 == Descripción general: recuperación ante desastres del almacenamiento conectado a invitados de AWS
 
 Esta sección proporciona instrucciones para ayudar a los usuarios a verificar, configurar y validar sus entornos locales y en la nube para su uso con NetApp y VMware.  Específicamente, esta solución se centra en el caso de uso conectado a invitados de VMware con ONTAP AFF local y VMware Cloud y AWS FSx ONTAP para la nube.  Esta solución se demuestra con dos aplicaciones: Oracle y MS SQL en un escenario de recuperación ante desastres.
@@ -436,6 +442,7 @@ La siguiente tabla enumera los requisitos del puerto de SnapCenter .
 ====
 
 
+[[networking]]
 == Redes
 
 Esta solución requiere una comunicación exitosa desde el clúster ONTAP local a las direcciones de red del clúster de interconexión AWS FSx ONTAP para realizar operaciones de NetApp SyncMirror .  Además, un servidor de respaldo de Veeam debe tener acceso a un bucket de AWS S3.  En lugar de utilizar el transporte de Internet, se puede utilizar un enlace VPN o Direct Connect existente como enlace privado a un bucket S3.
@@ -558,6 +565,7 @@ Muchas opciones de seguridad proporcionan una comunicación segura en la VPC de 
 ====
 
 
+[[storage]]
 == Almacenamiento
 
 Los sistemas NetApp AFF Serie A ofrecen una infraestructura de almacenamiento de alto rendimiento con opciones de gestión de datos flexibles que están habilitadas para la nube para satisfacer una amplia variedad de escenarios empresariales.  En esta solución, utilizamos un ONTAP AFF A300 como nuestro sistema de almacenamiento local principal.
@@ -638,6 +646,7 @@ VMware Cloud SDDC viene con dos almacenes de datos VSAN denominados `vsandatasto
 ====
 
 
+[[compute]]
 == Calcular
 
 VMware vSphere proporciona infraestructura virtualizada en el centro de datos y en todos los principales proveedores de nube.  Este ecosistema es ideal para escenarios de recuperación ante desastres en los que el cómputo virtualizado se mantiene constante independientemente de la ubicación.  Esta solución utiliza recursos informáticos virtualizados de VMware tanto en la ubicación del centro de datos como en VMware Cloud en AWS.
@@ -660,6 +669,7 @@ image:dr-vmc-aws-009.png["Figura que muestra el diálogo de entrada/salida o rep
 ====
 
 
+[[bluexp-backup-and-recovery-tools]]
 == Herramientas de BlueXP backup and recovery
 
 Para realizar una conmutación por error de nuestras máquinas virtuales de aplicaciones y volúmenes de bases de datos a los servicios de VMware Cloud Volume que se ejecutan en AWS, fue necesario instalar y configurar una instancia en ejecución de SnapCenter Server y Veeam Backup and Replication Server.  Una vez completada la conmutación por error, estas herramientas también deben configurarse para reanudar las operaciones de respaldo normales hasta que se planifique y ejecute una conmutación por error al centro de datos local.

@@ -18,6 +18,7 @@ En este documento, te damos una guía detallada paso a paso para desplegar, conf
 
 
 
+[[conclusion]]
 == Conclusión
 
 En resumen, cuando usas FSx para ONTAP para optimizar el TCO de un despliegue de Amazon EVS, SCV ofrece un método sencillo y eficiente para hacer backup de VMs. Puede hacer backup y restaurar VMs de manera rápida y sin complicaciones, ya que se basa en copias Snapshot, que tardan literalmente segundos en completarse.
