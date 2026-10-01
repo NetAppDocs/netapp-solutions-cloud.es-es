@@ -13,13 +13,11 @@ summary:
 :imagesdir: ../media/
 
 
+[role="lead"]
+Consulta las siguientes soluciones adicionales:
 
+* link:https://docs.netapp.com/us-en/netapp-solutions-containers/openshift/os-solution-overview.html["Solución de contenedores Red Hat OpenShift para entornos locales"^]
+* link:https://docs.netapp.com/us-en/netapp-solutions-containers/openshift/os-rosa-solution-overview.html["Solución de contenedores de Red Hat OpenShift Service on AWS"^]
+* link:https://docs.netapp.com/us-en/netapp-solutions-virtualization/openshift/osv-storage-getting-started.html["Solución de virtualización de Red Hat OpenShift para entornos locales"^]
+* link:https://docs.netapp.com/us-en/netapp-solutions-virtualization/openshift/osv-rosa-overview.html["Solución de virtualización de Red Hat OpenShift Service on AWS"^]
 
-[[additional-solutions]]
-== Soluciones adicionales
-
-Hay soluciones adicionales disponibles en otras secciones como se indica a continuación:
-
-Para soluciones de Red Hat OpenShift Container, consultelink:https://docs.netapp.com/us-en/netapp-solutions-containers/openshift/os-solution-overview.html["aquí"^] .
-
-Para soluciones de virtualización de Red Hat OpenShift en las instalaciones, consultelink:https://docs.netapp.com/us-en/netapp-solutions-virtualization/openshift/osv-deployment-prerequisites.html["aquí"^] .

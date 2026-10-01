@@ -70,7 +70,7 @@ Esto se instala utilizando el Operador de administración de clúster avanzado e
 [%collapsible%open]
 ====
 * Instalar NetApp Trident en los tres clústeres: concentrador, de origen y de destino
-* Consulte las instruccioneslink:https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy-operator.html["aquí"] .
+* Consulta las instrucciones link:https://docs.netapp.com/us-en/trident/trident-install/kubernetes-deploy-operator.html["aquí"].
 * Cree un backend de almacenamiento para ontap-nas.
 * Cree una clase de almacenamiento para ontap-nas.
 * Consulte las instruccioneslink:https://docs.netapp.com/us-en/trident/trident-use/create-stor-class.html["aquí"] .
