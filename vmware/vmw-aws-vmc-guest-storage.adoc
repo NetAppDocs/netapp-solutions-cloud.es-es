@@ -300,7 +300,7 @@ Los recursos compartidos y LUN de Cloud Volumes ONTAP se pueden montar desde má
 Para replicar volúmenes de un entorno local a la nube con fines de recuperación ante desastres o migración, establezca conectividad de red a AWS, ya sea mediante una VPN de sitio a sitio o DirectConnect.  La replicación de datos desde las instalaciones locales a Cloud Volumes ONTAP está fuera del alcance de este documento.  Para replicar datos entre sistemas locales y Cloud Volumes ONTAP , consultelink:https://docs.netapp.com/us-en/occm/task_replicating_data.html#setting-up-data-replication-between-systems["Configuración de la replicación de datos entre sistemas"] .
 
 
-NOTE: Utilice ellink:https://cloud.netapp.com/cvo-sizer["Dimensionador de Cloud Volumes ONTAP"] para dimensionar con precisión las instancias de Cloud Volumes ONTAP .  Además, supervise el rendimiento local para usarlo como entrada en el dimensionador de Cloud Volumes ONTAP .
+NOTE: Utiliza link:https://bluexp.netapp.com/cvo-sizer["Dimensionador de Cloud Volumes ONTAP"^] para dimensionar con precisión las instancias de Cloud Volumes ONTAP. Además, supervisa el rendimiento local para utilizar esos datos como información de entrada en la herramienta de dimensionamiento de Cloud Volumes ONTAP.
 
 . Inicie sesión en NetApp Cloud Central; se muestra la pantalla Vista de Fabric.  Localice la pestaña Cloud Volumes ONTAP y seleccione Ir a Cloud Manager.  Después de iniciar sesión, se mostrará la pantalla Canvas.
 

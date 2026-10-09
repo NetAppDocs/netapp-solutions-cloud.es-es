@@ -22,4 +22,4 @@ Todos los volúmenes de Google Cloud NetApp Volumes están cifrados en reposo me
 
 A partir de noviembre de 2021, estuvo disponible la vista previa de la funcionalidad de claves de cifrado administradas por el cliente (CMEK).  Esto le permite cifrar las claves por volumen con una clave maestra por proyecto y por región alojada en https://cloud.google.com/kms/docs["Servicio de administración de claves de Google (KMS)."^] KMS le permite conectar administradores de claves externos.
 
-Para obtener información sobre cómo configurar KMS para NetApp Volumes-Performance, consulte https://cloud.google.com/architecture/partners/netapp-cloud-volumes/customer-managed-keys?hl=en_US["Configuración de claves de cifrado administradas por el cliente"^] .
+Para obtener información sobre cómo configurar KMS para NetApp Volumes-Performance, consulta https://docs.cloud.google.com/netapp/volumes/docs/configure-and-use/cmek/cmek-overview["Configuración de claves de cifrado administradas por el cliente"^].
