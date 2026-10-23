@@ -37,7 +37,7 @@ El proceso de configuración se puede dividir en los siguientes pasos:
 Cree un clúster OpenShift en AWS desde el Asistente de administración avanzada de clústeres (ACM).  Consulte las instruccioneslink:https://docs.openshift.com/dedicated/osd_install_access_delete_cluster/creating-an-aws-cluster.html["aquí"] .
 
 
-NOTE: También puede crear el clúster en AWS desde la consola de OpenShift Hybrid Cloud.  Referirselink:https://docs.openshift.com/container-platform/4.10/installing/installing_aws/installing-aws-default.html["aquí"] para obtener instrucciones.
+NOTE: También puedes crear el clúster en AWS desde la consola de nube híbrida de OpenShift. Consulta link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.10/html/installing/installing-on-aws["aquí"^] para obtener instrucciones.
 
 
 TIP: Al crear el clúster utilizando ACM, tiene la posibilidad de personalizar la instalación editando el archivo yaml después de completar los detalles en la vista de formulario.  Una vez creado el clúster, puede iniciar sesión mediante SSH en los nodos del clúster para solucionar problemas o realizar una configuración manual adicional.  Utilice la clave ssh que proporcionó durante la instalación y el nombre de usuario core para iniciar sesión.

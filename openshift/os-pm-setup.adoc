@@ -55,7 +55,7 @@ image:rhhc-default-storage-class.png["Figura que muestra el diálogo de entrada/
 
 .Implementar una aplicación usando OpenShift GitOps (Argo CD)
 * Instalar el operador GitOps de OpenShift en el clúster.  Consulte las instruccioneslink:https://docs.openshift.com/container-platform/4.10/cicd/gitops/installing-openshift-gitops.html["aquí"] .
-* Configurar una nueva instancia de Argo CD para el clúster.  Consulte las instruccioneslink:https://docs.openshift.com/container-platform/4.10/cicd/gitops/setting-up-argocd-instance.html["aquí"] .
+* SetUp una nueva instancia de Argo CD para el clúster. Consulta las instrucciones link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.10/html/cicd/gitops#gitops-argo-cd-installation_setting-up-argocd-instance["aquí"^].
 
 
 Abre la consola de Argo CD e implementa una aplicación. Como ejemplo, puedes implementar una aplicación de Jenkins con Argo CD usando un Helm Chart. Al crear la aplicación, se proporcionaron los siguientes detalles: Project: default cluster: +'https://kubernetes.default.svc'+[] (sin las comillas) Namespace: Jenkins la url del Helm Chart: +'https://charts.bitnami.com/bitnami'+[] (sin las comillas)
