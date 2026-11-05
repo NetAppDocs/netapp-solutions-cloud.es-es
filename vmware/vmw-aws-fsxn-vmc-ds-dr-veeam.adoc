@@ -53,7 +53,7 @@ image:dr-veeam-fsx-001.png["Diagrama del escenario de recuperación ante desastr
 === Pasos de alto nivel
 
 . El software Veeam Backup and Replication se ejecuta en un entorno local con conectividad de red adecuada.
-. Configurar VMware Cloud en AWS, consulte el artículo VMware Cloud Tech Zonelink:https://vmc.techzone.vmware.com/fsx-guide["Guía de implementación de la integración de VMware Cloud on AWS con Amazon FSx ONTAP"] Para implementar, configure VMware Cloud on AWS SDDC y FSx ONTAP como almacén de datos NFS.  (Se puede utilizar un entorno de luz piloto configurado con una configuración mínima para fines de recuperación ante desastres.  Las máquinas virtuales conmutarán a este clúster en caso de un incidente y se podrán agregar nodos adicionales).
+. Para configurar VMware Cloud on AWS, consulta el artículo de VMware Cloud Tech Zone link:https://www.vmware.com/docs/vmware-cloud-on-aws-integration-with-amazon-fsx-for-netapp-ontap-deployment-guide["Guía de implementación de la integración de VMware Cloud on AWS con Amazon FSx ONTAP"^] para implementar y configurar VMware Cloud on AWS SDDC y FSx ONTAP como datastore NFS. (Se puede usar un entorno pilot-light configurado con una configuración mínima para fines de DR. Las VMs conmutarán por error a este clúster en caso de incidente y se pueden añadir nodos adicionales).
 . Configure trabajos de replicación para crear réplicas de máquinas virtuales mediante Veeam Backup and Replication.
 . Cree un plan de conmutación por error y realice la conmutación por error.
 . Vuelva a las máquinas virtuales de producción una vez que se complete el evento de desastre y el sitio principal esté activo.

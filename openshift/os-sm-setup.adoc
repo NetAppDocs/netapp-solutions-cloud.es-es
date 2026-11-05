@@ -34,7 +34,7 @@ El proceso de configuración se puede dividir en los siguientes pasos:
 * Cree una zona alojada privada de Route 53 y un solucionador de DNS para la VPC.
 
 
-Cree un clúster OpenShift en AWS desde el Asistente de administración avanzada de clústeres (ACM).  Consulte las instruccioneslink:https://docs.openshift.com/dedicated/osd_install_access_delete_cluster/creating-an-aws-cluster.html["aquí"] .
+Crea un clúster de OpenShift en AWS desde el asistente de Advanced Cluster Management (ACM). Consulta las instrucciones link:https://docs.redhat.com/en/documentation/openshift_dedicated/4/html/openshift_dedicated_clusters_on_aws/osd-creating-a-cluster-on-aws["aquí"^].
 
 
 NOTE: También puedes crear el clúster en AWS desde la consola de nube híbrida de OpenShift. Consulta link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.10/html/installing/installing-on-aws["aquí"^] para obtener instrucciones.

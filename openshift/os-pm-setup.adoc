@@ -27,7 +27,7 @@ El proceso de configuración se puede dividir en los siguientes pasos:
 
 .Instalar clústeres ROSA
 * Cree dos VPC y configure la conectividad de emparejamiento de VPC entre las VPC.
-* Referirselink:https://docs.openshift.com/rosa/welcome/index.html["aquí"] para obtener instrucciones sobre cómo instalar los clústers ROSA.
+* Consulta link:https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws_classic_architecture/4["aquí"^] para ver instrucciones para instalar clústeres ROSA.
 
 
 .Instalar FSx ONTAP
@@ -54,7 +54,7 @@ image:rhhc-trident-helm.png["Figura que muestra el diálogo de entrada/salida o 
 image:rhhc-default-storage-class.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]
 
 .Implementar una aplicación usando OpenShift GitOps (Argo CD)
-* Instalar el operador GitOps de OpenShift en el clúster.  Consulte las instruccioneslink:https://docs.openshift.com/container-platform/4.10/cicd/gitops/installing-openshift-gitops.html["aquí"] .
+* Instala el operador OpenShift GitOps en el clúster. Consulta las instrucciones link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.10/html/cicd/gitops#installing-openshift-gitops["aquí"^].
 * SetUp una nueva instancia de Argo CD para el clúster. Consulta las instrucciones link:https://docs.redhat.com/en/documentation/openshift_container_platform/4.10/html/cicd/gitops#gitops-argo-cd-installation_setting-up-argocd-instance["aquí"^].
 
 
