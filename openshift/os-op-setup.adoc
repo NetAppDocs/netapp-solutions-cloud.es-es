@@ -53,7 +53,7 @@ Esto se instala utilizando el Operador de administración de clúster avanzado e
 [%collapsible%open]
 ====
 * Los clústeres adicionales se pueden implementar mediante el ACM en el clúster central.
-* Consulte las instruccioneslink:https://access.redhat.com/documentation/en-us/red_hat_advanced_cluster_management_for_kubernetes/2.7/html/clusters/cluster_mce_overview#vsphere_prerequisites["aquí"] .
+* Consulta las instrucciones link:https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.7/html/clusters/cluster_mce_overview#vsphere_prerequisites["aquí"^].
 
 
 ====
