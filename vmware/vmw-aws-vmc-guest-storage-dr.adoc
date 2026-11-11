@@ -428,8 +428,8 @@ El paso final para configurar Veeam es crear trabajos de respaldo utilizando el 
 ====
 
 
-[[bluexp-backup-and-recovery-tools-and-configuration]]
-=== Herramientas y configuración de BlueXP backup and recovery
+[[netapp-backup-and-recovery-tools-and-configuration]]
+=== NetApp herramientas y configuración de Backup and Recovery
 
 Para realizar una conmutación por error de las máquinas virtuales de la aplicación y los volúmenes de bases de datos a los servicios de VMware Cloud Volume que se ejecutan en AWS, debe instalar y configurar una instancia en ejecución de SnapCenter Server y Veeam Backup and Replication Server.  Una vez completada la conmutación por error, también debe configurar estas herramientas para reanudar las operaciones de respaldo normales hasta que se planifique y ejecute una conmutación por error al centro de datos local.
 

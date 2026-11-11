@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
 permalink: vmware/vmw-hybrid-dr-overview.html 
-keywords: dr, draas, bluexp, disaster recovery, vmfs datastore, nfs datastore, overview 
-summary: Esta sección del documento describe la configuración de BlueXP DRaaS para configurar la recuperación ante desastres de las máquinas virtuales VMware locales en otro sitio designado. 
+keywords: dr, draas, Console, disaster recovery, vmfs datastore, nfs datastore, overview 
+summary: Esta sección del documento describe la configuración de NetApp Disaster Recovery para configurar la recuperación ante desastres de las máquinas virtuales de VMware locales en otro sitio designado. 
 ---
 = Descripción general
 :hardbreaks:
@@ -14,7 +14,7 @@ summary: Esta sección del documento describe la configuración de BlueXP DRaaS 
 
 
 [role="lead"]
-La recuperación ante desastres es una preocupación primordial en la mente de todos los administradores de VMware.  Debido a que VMware encapsula servidores enteros en una serie de archivos que conforman la máquina virtual, los administradores aprovechan técnicas basadas en almacenamiento en bloques, como clones, instantáneas y réplicas, para proteger estas máquinas virtuales.  Las matrices ONTAP ofrecen replicación incorporada para transferir datos de volumen y, por lo tanto, las máquinas virtuales que residen en los LUN del almacén de datos designados, de un sitio a otro.  BlueXP DRaaS se integra con vSphere y automatiza todo el flujo de trabajo para lograr una conmutación por error y recuperación sin inconvenientes en caso de desastre.  Al combinar la replicación de almacenamiento con la automatización inteligente, los administradores ahora tienen una forma manejable no solo de configurar, automatizar y probar planes de recuperación ante desastres, sino también los medios para ejecutarlos fácilmente en caso de desastre.
+La recuperación ante desastres es una de las principales preocupaciones de todos los administradores de VMware. Como VMware encapsula servidores completos en una serie de archivos que conforman la máquina virtual, los administradores aprovechan técnicas basadas en almacenamiento en bloques, como clones, instantáneas y réplicas, para proteger estas máquinas virtuales. Las cabinas ONTAP ofrecen replicación integrada para transferir datos de volumen y, por lo tanto, las máquinas virtuales que residen en los LUN de datastore designados, de un sitio a otro. NetApp Disaster Recovery se integra con vSphere y automatiza todo el flujo de trabajo para una conmutación por error y una conmutación de retorno fluidas en caso de desastre. Al combinar la replicación de almacenamiento con la automatización inteligente, los administradores ahora tienen una forma manejable no solo de configurar, automatizar y probar los planes de recuperación ante desastres, sino también los medios para ejecutarlos fácilmente en caso de desastre.
 
 La parte que consume más tiempo de una conmutación por error de DR en un entorno VMware vSphere es la ejecución de los pasos necesarios para inventariar, registrar, reconfigurar y encender las máquinas virtuales en el sitio de DR.  Una solución ideal tiene un RPO bajo (medido en minutos) y un RTO bajo (medido en minutos a horas).  Un factor que a menudo se pasa por alto en una solución de DR es la capacidad de probar la solución de DR de manera eficiente en un intervalo periódico.
 
@@ -27,6 +27,6 @@ Para diseñar una solución de recuperación ante desastres, tenga en cuenta los
 
 Para obtener más información técnica sobre las soluciones disponibles, consulte:
 
-* link:vmw-hybrid-dr-nfs.html["Recuperación ante desastres con BlueXP DRaaS para almacenes de datos NFS"]
-* link:vmw-hybrid-dr-vmfs.html["Recuperación ante desastres con BlueXP DRaaS para almacenes de datos VMFS"]
+* link:vmw-hybrid-dr-nfs.html["NetApp Disaster Recovery para almacenes de datos NFS"]
+* link:vmw-hybrid-dr-vmfs.html["NetApp Disaster Recovery para almacenes de datos VMFS"]
 

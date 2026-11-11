@@ -310,14 +310,14 @@ Utilice copias instantáneas de Azure NetApp Files para protección general y us
 
 NOTE: Con los almacenes de datos ANF, la opción Restaurar a nuevo volumen se puede usar para clonar un volumen de almacén de datos completo, y el volumen restaurado se puede montar como otro almacén de datos en los hosts dentro de AVS SDDC.  Una vez montado un almacén de datos, las máquinas virtuales dentro de él se pueden registrar, reconfigurar y personalizar como si fueran máquinas virtuales clonadas individualmente.
 
-.BlueXP backup and recovery para máquinas virtuales
+.NetApp Backup and Recovery para máquinas virtuales
 [%collapsible%open]
 =====
-La BlueXP backup and recovery para máquinas virtuales proporciona una GUI de cliente web vSphere en vCenter para proteger las máquinas virtuales de Azure VMware Solution y los almacenes de datos de archivos de Azure NetApp a través de políticas de copia de seguridad.  Estas políticas pueden definir la programación, la retención y otras capacidades.  La funcionalidad de BlueXP backup and recovery para máquinas virtuales se puede implementar mediante el comando Ejecutar.
+NetApp Backup and Recovery for Virtual Machines proporciona una GUI de cliente web de vSphere en vCenter para proteger las máquinas virtuales de Azure VMware Solution y los almacenes de datos de archivos de Azure NetApp mediante políticas de backup. Estas políticas pueden definir la programación, la retención y otras capacidades. La funcionalidad de NetApp Backup and Recovery for Virtual Machines se puede implementar mediante el comando Run.
 
 Las políticas de configuración y protección se pueden instalar completando los siguientes pasos:
 
-. Instale la BlueXP backup and recovery para la máquina virtual en la nube privada de Azure VMware Solution mediante el comando Ejecutar.
+. Instala NetApp Backup and Recovery for Virtual Machine en la nube privada de Azure VMware Solution mediante el comando Run.
 . Agregue las credenciales de suscripción a la nube (valor de cliente y secreto) y luego agregue una cuenta de suscripción a la nube (cuenta de NetApp y grupo de recursos asociado) que contenga los recursos que desea proteger.
 . Cree una o más políticas de respaldo que administren la retención, la frecuencia y otras configuraciones para las copias de seguridad del grupo de recursos.
 . Cree un contenedor para agregar uno o más recursos que necesiten protegerse con políticas de respaldo.

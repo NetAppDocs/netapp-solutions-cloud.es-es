@@ -4,7 +4,7 @@ permalink: vmware/vmw-hybrid-321-dp-scv.html
 keywords: disaster recovery, vmc, vmware cloud, aws, amazon web services, nfs datastore, fsxn, FSx ONTAP, FSx ONTAP, backup, restore, sql server, oracle 
 summary:  
 ---
-= Protección de datos 3-2-1 para VMware con complemento SnapCenter y BlueXP backup and recovery para máquinas virtuales
+= Protección de datos 3-2-1 para VMware con SnapCenter Plug-in y NetApp Backup and Recovery para proteger las cargas de trabajo de VMware
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -28,7 +28,7 @@ La estrategia se compone de tres reglas fundamentales:
 . Por último, asegúrese de que al menos una copia de seguridad esté fuera del sitio.  El almacenamiento externo funciona como medida de seguridad contra desastres localizados, como incendios o inundaciones, que podrían inutilizar las copias locales.
 
 
-Este documento de solución cubre una solución de copias de seguridad 3-2-1 que utiliza el SnapCenter Plug-in for VMware vSphere (SCV) para crear copias de seguridad primarias y secundarias de nuestras máquinas virtuales locales y la BlueXP backup and recovery para máquinas virtuales para realizar una copia de seguridad de nuestros datos en el almacenamiento en la nube o StorageGRID.
+Este documento de la solución abarca una solución de backups 3-2-1 que usa SnapCenter Plug-in for VMware vSphere (SCV) para crear backups primarios y secundarios de nuestras máquinas virtuales on-premises y NetApp Backup and Recovery para máquinas virtuales para hacer backup de una copia de nuestros datos en almacenamiento en la cloud o en StorageGRID.
 
 
 
@@ -38,7 +38,7 @@ Este documento de solución cubre una solución de copias de seguridad 3-2-1 que
 Esta solución aborda los siguientes casos de uso:
 
 * Copia de seguridad y restauración de máquinas virtuales y almacenes de datos locales mediante el SnapCenter Plug-in for VMware vSphere.
-* Copia de seguridad y restauración de máquinas virtuales y almacenes de datos locales, alojados en clústeres ONTAP y respaldados en almacenamiento de objetos mediante la BlueXP backup and recovery para máquinas virtuales.
+* Copia de seguridad y restauración de máquinas virtuales y datastores locales, alojados en clústeres de ONTAP y con backup en almacenamiento de objetos mediante NetApp Backup and Recovery para máquinas virtuales.
 
 
 
@@ -65,22 +65,22 @@ Para obtener información detallada sobre SCV, consulte https://docs.netapp.com/
 
 
 
-[[bluexp-backup-and-recovery-for-virtual-machines]]
-=== BlueXP backup and recovery para máquinas virtuales
+[[netapp-backup-and-recovery-to-protect-vmware-workloads]]
+=== NetApp Backup and Recovery para proteger las cargas de trabajo de VMware
 
-BlueXP backup and recovery es una herramienta basada en la nube para la gestión de datos que proporciona un único plano de control para una amplia gama de operaciones de respaldo y recuperación en entornos locales y en la nube.  Parte de la suite de BlueXP backup and recovery NetApp BlueXP es una función que se integra con el complemento SnapCenter para VMware vSphere (en las instalaciones) para extender una copia de los datos al almacenamiento de objetos en la nube.  Esto establece una tercera copia de los datos fuera del sitio que proviene de las copias de seguridad del almacenamiento primario o secundario.  La BlueXP backup and recovery facilita la configuración de políticas de almacenamiento que transfieren copias de sus datos desde cualquiera de estas dos ubicaciones locales.
+NetApp Backup and Recovery es una herramienta de gestión de datos basada en la nube que proporciona un único plano de control para una amplia gama de operaciones de backup y recuperación tanto en entornos on-premises como en la nube. Parte de la suite NetApp Backup and Recovery for VM es una función que se integra con SnapCenter Plug-in for VMware vSphere (on-premises) para ampliar una copia de los datos al almacenamiento de objetos en la nube. Esto establece una tercera copia de los datos fuera del sitio a partir de los backups del almacenamiento primario o secundario. NetApp Backup and Recovery for VMs te facilita configurar políticas de almacenamiento que transfieren copias de tus datos desde cualquiera de estas dos ubicaciones on-premises.
 
-Al elegir entre las copias de seguridad primarias y secundarias como fuente en BlueXP Backup and Recovery, se implementará una de dos topologías:
+Elegir entre las copias de seguridad primaria y secundaria como origen en NetApp Backup and Recovery dará como resultado la implementación de una de estas dos topologías:
 
-*Topología de abanico*: cuando el SnapCenter Plug-in for VMware vSphere inicia una copia de seguridad, inmediatamente se toma una instantánea local.  Luego, SCV inicia una operación SnapMirror que replica la instantánea más reciente en el clúster ONTAP secundario.  En BlueXP Backup and Recovery, una política especifica el clúster ONTAP principal como la fuente para una copia instantánea de los datos que se transferirán al almacenamiento de objetos en el proveedor de nube de su elección.
+*Topología en abanico* – cuando el SnapCenter Plug-in for VMware vSphere inicia un backup, se toma inmediatamente una instantánea local. A continuación, SCV inicia una operación SnapMirror que replica la instantánea más reciente en el clúster ONTAP secundario. En NetApp Backup and Recovery, una política especifica el clúster ONTAP primario como origen de una copia de instantánea de los datos que se transferirán al almacenamiento de objetos en el proveedor de nube que elijas.
 
 image:bxp-scv-hybrid-001.png["Topología de abanico,800,418"]
 
-*Topología en cascada*: la creación de copias de datos primarias y secundarias mediante SCV es idéntica a la topología de abanico mencionada anteriormente.  Sin embargo, esta vez se crea una política en BlueXP Backup and Recovery que especifica que la copia de seguridad en el almacenamiento de objetos se originará desde el clúster ONTAP secundario.
+*Topología en cascada* – crear las copias de datos primarias y secundarias mediante SCV es idéntico a la topología en abanico mencionada anteriormente. Sin embargo, esta vez se crea una política en NetApp Backup and Recovery que especifica que el backup en el almacenamiento de objetos se originará desde el clúster ONTAP secundario.
 
 image:bxp-scv-hybrid-002.png["Topología en cascada"]
 
-La BlueXP backup and recovery puede crear copias de seguridad de instantáneas de ONTAP locales en AWS Glacier, Azure Blob y almacenamiento de GCP Archive.
+NetApp Backup and Recovery puede crear copias de backup de snapshots de ONTAP locales en AWS Glacier, Azure Blob y el almacenamiento GCP Archive.
 
 image:bxp-scv-hybrid-003.png["Topología en cascada"]
 
@@ -89,7 +89,7 @@ Además, puede utilizar NetApp StorageGRID como destino de respaldo de almacenam
 .Descripción general de la implementación de la solución
 [%collapsible%open]
 ====
-Esta lista proporciona los pasos de alto nivel necesarios para configurar esta solución y ejecutar operaciones de copia de seguridad y restauración desde SCV y la BlueXP backup and recovery:
+Esta lista recoge los pasos a grandes rasgos necesarios para configurar esta solución y realizar operaciones de backup y restauración desde SCV y NetApp Console:
 
 . Configure la relación SnapMirror entre los clústeres ONTAP que se utilizarán para copias de datos primarias y secundarias.
 . Configurar el complemento SnapCenter para VMware vSphere.
@@ -100,7 +100,7 @@ Esta lista proporciona los pasos de alto nivel necesarios para configurar esta s
 .. Ejecutar los primeros trabajos de copia de seguridad
 
 
-. Configurar la BlueXP backup and recovery para máquinas virtuales
+. Configura NetApp Backup and Recovery para máquinas virtuales
 +
 .. Añadir entorno de trabajo
 .. Descubra los dispositivos SCV y vCenter
@@ -109,7 +109,7 @@ Esta lista proporciona los pasos de alto nivel necesarios para configurar esta s
 
 
 . Restaurar máquinas virtuales desde el almacenamiento primario y secundario mediante SCV.
-. Restaure máquinas virtuales desde el almacenamiento de objetos mediante la copia de seguridad y restauración de BlueXP .
+. Restaurar máquinas virtuales desde el almacenamiento de objetos mediante NetApp Console.
 
 
 ====
@@ -120,10 +120,10 @@ El propósito de esta solución es demostrar la protección de datos de las máq
 
 . Clúster de almacenamiento ONTAP con almacenes de datos NFS o VMFS conectados a VMware vSphere.  Se admiten almacenes de datos NFS y VMFS.  Para esta solución se utilizaron almacenes de datos NFS.
 . Clúster de almacenamiento ONTAP secundario con relaciones SnapMirror establecidas para volúmenes utilizados para almacenes de datos NFS.
-. Conector BlueXP instalado para el proveedor de nube utilizado para copias de seguridad de almacenamiento de objetos.
+. Se ha instalado el agente de NetApp Console para el proveedor de nube usado para los backups del almacenamiento de objetos.
 . Las máquinas virtuales que se respaldarán se encuentran en almacenes de datos NFS que residen en el clúster de almacenamiento ONTAP principal.
-. Conectividad de red entre el conector BlueXP y las interfaces de administración del clúster de almacenamiento ONTAP local.
-. Conectividad de red entre el conector BlueXP y la máquina virtual del dispositivo SCV local y entre el conector BlueXP y vCenter.
+. Conectividad de red entre el agente de NetApp Console y las interfaces de gestión del clúster de almacenamiento ONTAP local.
+. Conectividad de red entre el agente de NetApp Console y la máquina virtual del dispositivo SCV local, así como entre el agente de NetApp Console y vCenter.
 . Conectividad de red entre los LIF entre clústeres de ONTAP locales y el servicio de almacenamiento de objetos.
 . DNS configurado para la administración de SVM en clústeres de almacenamiento ONTAP primarios y secundarios.  Para obtener más información, consulte https://docs.netapp.com/us-en/ontap/networking/configure_dns_for_host-name_resolution.html#configure-an-svm-and-data-lifs-for-host-name-resolution-using-an-external-dns-server["Configurar DNS para la resolución del nombre de host"] .
 
@@ -143,13 +143,13 @@ image:bxp-scv-hybrid-004.png["Diagrama de arquitectura de la solución"]
 [[solution-deployment]]
 == Implementación de la solución
 
-En esta solución, proporcionamos instrucciones detalladas para implementar y validar una solución que utiliza el SnapCenter Plug-in for VMware vSphere, junto con la BlueXP backup and recovery, para realizar la copia de seguridad y la recuperación de máquinas virtuales de Windows y Linux dentro de un clúster de VMware vSphere ubicado en un centro de datos local.  Las máquinas virtuales en esta configuración se almacenan en almacenes de datos NFS alojados por un clúster de almacenamiento ONTAP A300.  Además, un clúster de almacenamiento ONTAP A300 independiente sirve como destino secundario para los volúmenes replicados mediante SnapMirror.  Además, se utilizaron el almacenamiento de objetos alojado en Amazon Web Services y Azure Blob como destinos para una tercera copia de los datos.
+En esta solución, ofrecemos instrucciones detalladas para implementar y validar una solución que utiliza SnapCenter Plug-in for VMware vSphere, junto con Backup and Recovery, para realizar el backup y la recuperación de máquinas virtuales Windows y Linux dentro de un clúster de VMware vSphere ubicado en un centro de datos on-premises. Las máquinas virtuales de esta configuración se almacenan en datastores NFS alojados en un clúster de almacenamiento ONTAP A300. Además, un clúster de almacenamiento ONTAP A300 independiente sirve como destino secundario para volúmenes replicados mediante SnapMirror. Además, el almacenamiento de objetos alojado en Amazon Web Services y Azure Blob se utilizó como destino para una tercera copia de los datos.
 
-Revisaremos la creación de relaciones SnapMirror para copias secundarias de nuestras copias de seguridad administradas por SCV y la configuración de trabajos de copia de seguridad tanto en SCV como en la BlueXP backup and recovery.
+Repasaremos cómo crear relaciones de SnapMirror para las copias secundarias de nuestros backups gestionados por SCV y la configuración de las tareas de backup tanto en SCV como en NetApp Console.
 
 Para obtener información detallada sobre el SnapCenter Plug-in for VMware vSphere, consulte https://docs.netapp.com/us-en/sc-plugin-vmware-vsphere/["Documentación del SnapCenter Plug-in for VMware vSphere"] .
 
-Para obtener información detallada sobre la BlueXP backup and recovery, consulte https://docs.netapp.com/us-en/bluexp-backup-recovery/index.html["Documentación de BlueXP backup and recovery"] .
+Para obtener información detallada sobre Backup and Recovery, consulta  https://docs.netapp.com/us-en/data-services-backup-recovery/index.html["Documentación de copia de seguridad y recuperación"].
 
 
 
@@ -160,18 +160,18 @@ El SnapCenter Plug-in for VMware vSphere utiliza la tecnología ONTAP SnapMirror
 
 Las políticas de respaldo de SCV tienen la opción de utilizar relaciones SnapMirror o SnapVault .  La principal diferencia es que al utilizar la opción SnapMirror , el programa de retención configurado para las copias de seguridad en la política será el mismo en las ubicaciones principal y secundaria.  SnapVault está diseñado para archivar y al utilizar esta opción se puede establecer un programa de retención separado con la relación SnapMirror para las copias de instantáneas en el clúster de almacenamiento ONTAP secundario.
 
-La configuración de las relaciones de SnapMirror se puede realizar en BlueXP , donde muchos de los pasos están automatizados, o se puede realizar mediante el Administrador del sistema y la CLI de ONTAP .  Todos estos métodos se analizan a continuación.
+La configuración de las relaciones de SnapMirror se puede hacer en NetApp Console, donde muchos de los pasos están automatizados, o se puede hacer con System Manager y la CLI de ONTAP. Todos estos métodos se analizan a continuación.
 
 
 
-==== Establecer relaciones de SnapMirror con BlueXP
+==== Establecer relaciones de SnapMirror con NetApp Console
 
-Los siguientes pasos deben completarse desde la consola web de BlueXP :
+Debes completar los siguientes pasos desde NetApp Console:
 
 .Configuración de replicación para sistemas de almacenamiento ONTAP primarios y secundarios
 [%collapsible%open]
 ====
-Comience iniciando sesión en la consola web de BlueXP y navegando hasta Canvas.
+Empieza iniciando sesión en la NetApp Console y ve a Systems.
 
 . Arrastre y suelte el sistema de almacenamiento ONTAP de origen (principal) en el sistema de almacenamiento ONTAP de destino (secundario).
 +
@@ -416,7 +416,7 @@ NOTE: Al crear una política en el complemento SnapCenter , verá opciones para 
 
 +
 
-NOTE: Las etiquetas de instantáneas son útiles porque se pueden usar para implementar políticas con un período de retención específico para las copias de SnapVault replicadas en el clúster ONTAP secundario.  Cuando se utiliza SCV con BlueXP Backup and Restore, el campo de etiqueta de instantánea debe estar en blanco o [subrayado]#coincidir# con la etiqueta especificada en la política de respaldo de BlueXP .
+NOTE: Las etiquetas de Snapshot son útiles, ya que se pueden usar para aplicar políticas con un período de retención específico para las copias de SnapVault replicadas en el clúster secundario de ONTAP. Cuando se usa SCV con NetApp Data Services, el campo de etiqueta de Snapshot debe estar en blanco o [underline]#coincidir# con la etiqueta especificada en la política de backup.
 
 . Repita el procedimiento para cada política requerida.  Por ejemplo, políticas separadas para copias de seguridad diarias, semanales y mensuales.
 
@@ -450,7 +450,7 @@ image:bxp-scv-hybrid-011.png["Abarcando almacenes de datos"]
 
 +
 
-NOTE: Actualmente, la BlueXP backup and recovery no admite la realización de copias de seguridad de máquinas virtuales con VMDK que abarquen varios almacenes de datos.
+NOTE: La función de copia de seguridad y recuperación para proteger las cargas de trabajo de VMware no admite actualmente la realización de copias de seguridad de máquinas virtuales con archivos VMDK que abarquen varios datastores.
 
 . En la página siguiente, seleccione las políticas que se asociarán con el grupo de recursos y haga clic en *Siguiente*.
 +
@@ -458,7 +458,7 @@ image:bxp-scv-hybrid-012.png["Política del grupo de recursos"]
 
 +
 
-NOTE: Al realizar copias de seguridad de instantáneas administradas por SCV en un almacenamiento de objetos mediante la BlueXP backup and recovery, cada grupo de recursos solo se puede asociar con una única política.
+NOTE: Al realizar una copia de seguridad de snapshots gestionadas por SCV en almacenamiento de objetos mediante Backup and Recovery, cada grupo de recursos solo puede asociarse a una única política.
 
 . Seleccione una programación que determinará en qué momentos se ejecutarán las copias de seguridad.  Haga clic en *Siguiente*.
 +
@@ -471,7 +471,7 @@ image:bxp-scv-hybrid-013.png["Política del grupo de recursos"]
 .Ejecutar una tarea de respaldo
 [%collapsible%open]
 ====
-En este paso final, ejecute un trabajo de respaldo y supervise su progreso.  Se debe completar con éxito al menos un trabajo de respaldo en SCV antes de que se puedan descubrir recursos desde BlueXP backup and recovery.
+En este último paso, ejecuta una tarea de copia de seguridad y supervisa su progreso. Debes completar correctamente al menos una tarea de copia de seguridad en SCV antes de poder detectar recursos desde NetApp Console.
 
 . En el SnapCenter Plug-in for VMware vSphere, navegue hasta *Grupos de recursos* en el menú de la izquierda.
 . Para iniciar un trabajo de respaldo, seleccione el grupo de recursos deseado y haga clic en el botón *Ejecutar ahora*.
@@ -487,23 +487,23 @@ image:bxp-scv-hybrid-015.png["Monitorear el progreso del trabajo"]
 ====
 
 
-[[configure-backups-to-object-storage-in-bluexp-backup-and-recovery]]
-=== Configurar copias de seguridad en el almacenamiento de objetos en la BlueXP backup and recovery
+[[configure-backups-to-object-storage-in-netapp-console]]
+=== Configura backups en almacenamiento de objetos en NetApp Console
 
-Para que BlueXP administre la infraestructura de datos de manera efectiva, requiere la instalación previa de un Conector.  El conector ejecuta las acciones involucradas en el descubrimiento de recursos y la gestión de operaciones de datos.
+Para que NetApp Console gestione la infraestructura de datos de forma eficaz, necesitas instalar antes un agente de Console. El agente de Console ejecuta las acciones necesarias para detectar recursos y gestionar las operaciones de datos.
 
-Para obtener más información sobre el conector BlueXP , consulte https://docs.netapp.com/us-en/bluexp-setup-admin/concept-connectors.html["Aprenda sobre los conectores"] en la documentación de BlueXP .
+Para obtener más información sobre el agente de NetApp Console, consulta  https://docs.netapp.com/us-en/console-setup-admin/concept-agents.html["Conoce los agentes de Console"] en la documentación de NetApp Console.
 
-Una vez instalado el conector para el proveedor de nube que se utilice, será posible ver una representación gráfica del almacenamiento de objetos desde el Canvas.
+Una vez que instales el agente para el proveedor de nube que estés utilizando, podrás ver una representación gráfica del almacenamiento de objetos desde Systems.
 
-Para configurar la BlueXP backup and recovery para realizar copias de seguridad de los datos administrados por SCV en las instalaciones, complete los siguientes pasos:
+Para configurar Backup and Recovery para hacer copias de seguridad de los datos gestionados por SCV on-premises, sigue estos pasos:
 
-.Añadir entornos de trabajo al Canvas
+.Añade el sistema de almacenamiento ONTAP a Systems
 [%collapsible%open]
 ====
-El primer paso es agregar los sistemas de almacenamiento ONTAP locales a BlueXP
+El primer paso es añadir los sistemas de almacenamiento ONTAP locales a NetApp Console.
 
-. Desde el lienzo, seleccione *Agregar entorno de trabajo* para comenzar.
+. En Systems, haz clic en *+ Add* para empezar.
 +
 image:bxp-scv-hybrid-016.png["Añadir entorno de trabajo"]
 
@@ -523,7 +523,7 @@ image:bxp-scv-hybrid-018.png["Agregar credenciales del sistema de almacenamiento
 ====
 Para descubrir el almacén de datos local y los recursos de la máquina virtual, agregue información para el agente de datos SCV y credenciales para el dispositivo de administración de vCenter.
 
-. Desde el menú izquierdo de BlueXP , seleccione *Protección > Copia de seguridad y recuperación > Máquinas virtuales*
+. En la selección del menú de la izquierda de NetApp Console *Protection > Backup and recovery > Workloads >VMware*
 +
 image:bxp-scv-hybrid-019.png["Seleccionar máquinas virtuales"]
 
@@ -546,14 +546,14 @@ image:bxp-scv-hybrid-023.png["Ver los recursos disponibles"]
 
 
 ====
-.Crear políticas de copia de seguridad de BlueXP
+.Crear políticas de respaldo
 [%collapsible%open]
 ====
-En la BlueXP backup and recovery para máquinas virtuales, cree políticas para especificar el período de retención, la fuente de la copia de seguridad y la política de archivo.
+En NetApp Backup and Recovery for Virtual Machines, crea políticas para especificar el período de retención, el origen del backup y la política de archivado.
 
-Para obtener más información sobre la creación de políticas, consulte https://docs.netapp.com/us-en/bluexp-backup-recovery/task-create-policies-vms.html["Crear una política para realizar copias de seguridad de almacenes de datos"] .
+Para obtener más información sobre cómo crear grupos de protección, consulta https://docs.netapp.com/us-en/data-services-backup-recovery/br-use-vmware-protection-groups.html#create-a-protection-group["Crear un grupo de protección"].
 
-. Desde la página principal de BlueXP backup and recovery para máquinas virtuales, acceda al menú desplegable *Configuración* y seleccione *Políticas*.
+. Desde la página principal de NetApp Backup and Recovery for Virtual Machines, accede al menú desplegable *Settings* y selecciona *Policies*.
 +
 image:bxp-scv-hybrid-024.png["Seleccionar máquinas virtuales"]
 
@@ -583,7 +583,7 @@ El paso final es activar la protección de datos para los almacenes de datos ind
 
 Para obtener más información consulta https://docs.netapp.com/us-en/data-services-backup-recovery/br-use-vmware-backup.html["Haz copias de seguridad de las cargas de trabajo de VMware"^].
 
-. Desde la página principal de BlueXP backup and recovery para máquinas virtuales, acceda al menú desplegable de configuración del almacén de datos del cual se realizará la copia de seguridad y seleccione *Activar copia de seguridad*.
+. Desde la página principal de NetApp Backup and Recovery for Virtual Machines, accede al menú desplegable de configuración del datastore del que quieres hacer una copia de seguridad y selecciona *Activar copia de seguridad*.
 +
 image:bxp-scv-hybrid-026.png["Activar copia de seguridad"]
 
@@ -609,7 +609,7 @@ image:bxp-scv-hybrid-031.png["Revisar y activar"]
 
 +
 
-NOTE: En este punto es posible que la transferencia de datos no comience inmediatamente.  El BlueXP backup and recovery escanea cada hora en busca de instantáneas pendientes y luego las transfiere al almacenamiento de objetos.
+NOTE: En este momento, es posible que la transferencia de datos no comience de inmediato. NetApp Backup and Recovery busca cada hora las instantáneas pendientes y, a continuación, las transfiere al almacenamiento de objetos.
 
 
 
@@ -623,7 +623,7 @@ Garantizar la protección de sus datos es solo un aspecto de la protección inte
 
 NetApp ofrece una estrategia 3-2-1 altamente adaptable, que proporciona un control personalizado sobre los cronogramas de retención en las ubicaciones de almacenamiento primario, secundario y de objetos.  Esta estrategia proporciona la flexibilidad de adaptar los enfoques de protección de datos a necesidades específicas.
 
-Esta sección proporciona una descripción general del proceso de restauración de datos tanto del SnapCenter Plug-in for VMware vSphere como de la BlueXP backup and recovery para máquinas virtuales.
+Esta sección proporciona una visión general del proceso de restauración de datos tanto desde el SnapCenter Plug-in for VMware vSphere como desde NetApp Backup and Recovery para máquinas virtuales.
 
 
 
@@ -659,16 +659,16 @@ image:bxp-scv-hybrid-035.png["Elija primaria o secundaria"]
 ====
 
 
-==== Restauración de máquinas virtuales desde BlueXP backup and recovery para máquinas virtuales
+==== Restaurar máquinas virtuales desde NetApp Backup and Recovery for Virtual Machines
 
-La BlueXP backup and recovery para máquinas virtuales permite restaurar máquinas virtuales a su ubicación original.  Se accede a las funciones de restauración a través de la consola web de BlueXP .
+NetApp Backup and Recovery for Virtual Machines permite restaurar las máquinas virtuales a su ubicación original. Se accede a las funciones de restauración a través de la consola web de NetApp Backup and Recovery.
 
 Para obtener más información consulta https://docs.netapp.com/us-en/data-services-backup-recovery/br-use-vmware-restore.html["Restaurar datos de máquinas virtuales desde la nube"^].
 
-.Restaurar máquinas virtuales desde la BlueXP backup and recovery
+.Restaura máquinas virtuales desde NetApp Backup and Recovery
 [%collapsible%open]
 ====
-Para restaurar una máquina virtual desde la BlueXP backup and recovery, complete los siguientes pasos.
+Para restaurar una máquina virtual desde NetApp Backup and Recovery, sigue estos pasos.
 
 . Vaya a *Protección > Copia de seguridad y recuperación > Máquinas virtuales* y haga clic en Máquinas virtuales para ver la lista de máquinas virtuales disponibles para restaurar.
 +
@@ -695,9 +695,9 @@ image:bxp-scv-hybrid-039.png["Revisar la restauración desde la pestaña Monitor
 [[conclusion]]
 == Conclusión
 
-La estrategia de respaldo 3-2-1, cuando se implementa con el SnapCenter Plug-in for VMware vSphere y la BlueXP backup and recovery para máquinas virtuales, ofrece una solución sólida, confiable y rentable para la protección de datos.  Esta estrategia no solo garantiza la redundancia y la accesibilidad de los datos, sino que también proporciona la flexibilidad de restaurar datos desde cualquier ubicación y desde sistemas de almacenamiento ONTAP locales y almacenamiento de objetos basado en la nube.
+La estrategia de backup 3-2-1, cuando se implementa con SnapCenter Plug-in for VMware vSphere y NetApp Backup and Recovery para máquinas virtuales, ofrece una solución sólida, fiable y rentable para la protección de datos. Esta estrategia no solo garantiza la redundancia y la accesibilidad de los datos, sino que también ofrece la flexibilidad de restaurar datos desde cualquier ubicación y tanto desde sistemas de almacenamiento ONTAP locales como desde almacenamiento de objetos basado en la nube.
 
-El caso de uso presentado en esta documentación se centra en tecnologías de protección de datos probadas que resaltan la integración entre NetApp, VMware y los principales proveedores de nube.  El SnapCenter Plug-in for VMware vSphere proporciona una integración perfecta con VMware vSphere, lo que permite una gestión eficiente y centralizada de las operaciones de protección de datos.  Esta integración optimiza los procesos de respaldo y recuperación de máquinas virtuales, lo que permite una fácil programación, monitoreo y operaciones de restauración flexibles dentro del ecosistema VMware.  La BlueXP backup and recovery para máquinas virtuales ofrece una solución única (1) en 3-2-1 al brindar copias de seguridad seguras y con espacio de aire de los datos de las máquinas virtuales en un almacenamiento de objetos basado en la nube.  La interfaz intuitiva y el flujo de trabajo lógico proporcionan una plataforma segura para el archivo a largo plazo de datos críticos.
+El caso de uso que se presenta en esta documentación se centra en tecnologías de protección de datos probadas que destacan la integración entre NetApp, VMware y los principales proveedores de cloud. El SnapCenter Plug-in for VMware vSphere proporciona una integración perfecta con VMware vSphere, lo que permite una gestión eficiente y centralizada de las operaciones de protección de datos. Esta integración agiliza los procesos de backup y recuperación de las máquinas virtuales, lo que permite programar, supervisar y realizar operaciones de restauración flexibles fácilmente dentro del ecosistema de VMware. NetApp Backup and Recovery para máquinas virtuales proporciona el uno (1) de 3-2-1 al ofrecer backups seguros en entrehierro de los datos de las máquinas virtuales en almacenamiento de objetos basado en cloud. La interfaz intuitiva y el flujo de trabajo lógico proporcionan una plataforma segura para el archivado a largo plazo de datos críticos.
 
 
 
@@ -707,5 +707,5 @@ El caso de uso presentado en esta documentación se centra en tecnologías de pr
 Para conocer más sobre las tecnologías presentadas en esta solución consulte la siguiente información adicional.
 
 * https://docs.netapp.com/us-en/sc-plugin-vmware-vsphere/["Documentación del SnapCenter Plug-in for VMware vSphere"]
-* https://docs.netapp.com/us-en/bluexp-family/["Documentación de BlueXP"]
+* https://docs.netapp.com/us-en/console-family/index.html["NetApp documentación de la consola"]
 

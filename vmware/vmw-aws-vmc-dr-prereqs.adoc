@@ -311,25 +311,25 @@ Debes poder realizar las siguientes tareas:
 
 
 =====
-.Verificación de la cuenta de Cloud Manager
+.NetApp verificación de la cuenta de NetApp Console
 [%collapsible%open]
 =====
-Debe poder implementar recursos con NetApp Cloud Manager.  Para comprobar que puede hacerlo, realice las siguientes tareas:
+Debes poder implementar recursos con NetApp Console. Para comprobar que puedes hacerlo, realiza las siguientes tareas:
 
-* https://docs.netapp.com/us-en/bluexp-setup-admin/concept-modes.html["Regístrate en Cloud Central"^]Si aún no lo has hecho.
-* https://docs.netapp.com/us-en/cloud-manager-setup-admin/task-logging-in.html["Iniciar sesión en Cloud Manager"^] .
-* https://docs.netapp.com/us-en/cloud-manager-setup-admin/task-setting-up-netapp-accounts.html["Configurar espacios de trabajo y usuarios"^] .
-* https://docs.netapp.com/us-en/cloud-manager-setup-admin/concept-connectors.html["Crear un conector"^] .
+* https://docs.netapp.com/us-en/console-setup-admin/concept-overview.html["Comprende cómo funciona NetApp Console"].
+* https://docs.netapp.com/us-en/console-setup-admin/task-logging-in.html["Inicia sesión en NetApp Console"^].
+* https://docs.netapp.com/us-en/console-setup-admin/concept-agents.html#when-you-need-a-console-agent["Averigua cuándo necesitas un agente de NetApp Console"].
+* https://docs.netapp.com/us-en/console-setup-admin/task-install-agent-aws-console.html["Implementar el agente de NetApp Console en AWS"^].
 
 
-=====
-.Amazon FSx ONTAP
-[%collapsible%open]
 =====
 Debe poder realizar la siguiente tarea después de tener una cuenta de AWS:
 
 * Cree un usuario administrativo de IAM capaz de aprovisionar Amazon FSx para el sistema de archivos NetApp ONTAP .
 
+
+[]
+=====
 
 =====
 ====
@@ -669,8 +669,8 @@ image:dr-vmc-aws-009.png["Figura que muestra el diálogo de entrada/salida o rep
 ====
 
 
-[[bluexp-backup-and-recovery-tools]]
-== Herramientas de BlueXP backup and recovery
+[[netapp-backup-and-recovery-tools]]
+== Herramientas de NetApp Backup and Recovery
 
 Para realizar una conmutación por error de nuestras máquinas virtuales de aplicaciones y volúmenes de bases de datos a los servicios de VMware Cloud Volume que se ejecutan en AWS, fue necesario instalar y configurar una instancia en ejecución de SnapCenter Server y Veeam Backup and Replication Server.  Una vez completada la conmutación por error, estas herramientas también deben configurarse para reanudar las operaciones de respaldo normales hasta que se planifique y ejecute una conmutación por error al centro de datos local.
 

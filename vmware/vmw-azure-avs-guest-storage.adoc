@@ -150,7 +150,7 @@ image:azure-cvo-guest-004.png["Figura que muestra el diálogo de entrada/salida 
 +
 image:azure-cvo-guest-005.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]
 
-. Seleccione los servicios complementarios para la implementación de Cloud Volumes ONTAP , incluidos BlueXP Classification, BlueXP backup and recovery y Cloud Insights.  Seleccione los servicios y luego haga clic en Continuar.
+. Selecciona los servicios complementarios para la implementación de Cloud Volumes ONTAP, incluidos NetApp Data Classification, NetApp Backup and Recovery y Data Infrastructure Insights. Selecciona los servicios y luego haz clic en Continue.
 +
 image:azure-cvo-guest-006.png["Figura que muestra el diálogo de entrada/salida o representa contenido escrito"]
 

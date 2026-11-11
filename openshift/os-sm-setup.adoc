@@ -43,7 +43,7 @@ NOTE: También puedes crear el clúster en AWS desde la consola de nube híbrida
 TIP: Al crear el clúster utilizando ACM, tiene la posibilidad de personalizar la instalación editando el archivo yaml después de completar los detalles en la vista de formulario.  Una vez creado el clúster, puede iniciar sesión mediante SSH en los nodos del clúster para solucionar problemas o realizar una configuración manual adicional.  Utilice la clave ssh que proporcionó durante la instalación y el nombre de usuario core para iniciar sesión.
 
 ====
-.Implemente Cloud Volumes ONTAP en AWS usando BlueXP.
+.Implementa Cloud Volumes ONTAP en AWS con la consola de NetApp.
 [%collapsible%open]
 ====
 * Instale el conector en el entorno VMware local.  Consulte las instruccioneslink:https://docs.netapp.com/us-en/cloud-manager-setup-admin/task-install-connector-on-prem.html#install-the-connector["aquí"] .

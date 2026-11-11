@@ -21,7 +21,7 @@ Lea los blogs que ofrecen orientación práctica y mejores prácticas para integ
 [[vmware-integration-with-aws-and-amazon-fsx-for-ontap]]
 == Integración de VMware con AWS y Amazon FSx para ONTAP
 
-* link:https://bluexp.netapp.com/blog/aws-fsxn-blg-migrate-vmware-to-amazon-ec2-iscsi-based-fsx-for-ontap["Migre máquinas virtuales de VMware a AWS mediante el protocolo iSCSI de Amazon EC2 y Amazon FSx ONTAP"]
+* link:https://www.netapp.com/blog/aws-fsxn-blg-migrate-vmware-to-amazon-ec2-iscsi-based-fsx-for-ontap/["Migre máquinas virtuales de VMware a AWS mediante el protocolo iSCSI de Amazon EC2 y Amazon FSx ONTAP"]
 * link:https://aws.amazon.com/about-aws/whats-new/2025/06/amazon-elastic-vmware-service-fsx-netapp-ontap/["Amazon EVS ahora se integra con FSx para ONTAP"]
 * link:https://www.netapp.com/blog/amazon-elastic-vmware-service-fsx-ontap/["Amazon EVS anuncia compatibilidad con FSx para ONTAP"]
 * link:https://www.netapp.com/blog/aws-fsxo-blg-configure-hybrid-cloud-with-fsx-for-netapp-ontap-and-vmware-cloud-on-aws-sddc-using-vmware-hcx/["Configurar la nube híbrida con FSx ONTAP y VMware Cloud en AWS SDDC mediante VMware HCX"]
@@ -51,7 +51,7 @@ Lea los blogs que ofrecen orientación práctica y mejores prácticas para integ
 [[data-protection-and-management]]
 == Protección y gestión de datos
 
-* link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/3-2-1-Data-Protection-for-VMware-with-SnapCenter-Plug-in-and-BlueXP-backup-and/ba-p/446180["Protección de datos 3-2-1 para VMware con el complemento SnapCenter y BlueXP Backup and Recovery para máquinas virtuales"]
+* link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/3-2-1-Data-Protection-for-VMware-with-SnapCenter-Plug-in-and-BlueXP-backup-and/ba-p/446180["3-2-1 protección de datos para VMware con SnapCenter Plug-in y NetApp Backup and Recovery para las VM"]
 * link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/Observability-for-the-Modern-Datacenter-with-NetApp-Cloud-Insights/ba-p/447495["Observabilidad para el centro de datos moderno con NetApp Cloud Insights"]
 
 
