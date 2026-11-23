@@ -246,7 +246,6 @@
   <block id="71b0cde5c82d4fce43062f4c6ab6ffed" category="paragraph">El tipo de cifrado más fuerte disponible actualmente para Kerberos es AES-256-CTS-HMAC-SHA1.  Google Cloud NetApp Volumes admite AES-256-CTS-HMAC-SHA1, AES-128-CTS-HMAC-SHA1, DES3 y DES para NFS.  También admite ARCFOUR-HMAC (RC4) para tráfico CIFS/SMB, pero no para NFS.</block>
   <block id="59417c70dd426d4c6a1a81a09043bb7b" category="paragraph">Kerberos proporciona tres niveles de seguridad diferentes para montajes NFS que ofrecen opciones sobre qué tan fuerte debe ser la seguridad de Kerberos.</block>
   <block id="710c8a535ea62cee124026e31e71a5bd" category="inline-link">Opciones de montaje comunes</block>
-  <block id="e67cbf2de1080fc7770dec46df05c0e9" category="paragraph">Según Red Hat<block ref="1849b335749f623c227052141b2e8b11" category="inline-link-rx"></block> documentación:</block>
   <block id="babd6b3b4aea27ca41d56a231f2625af" category="paragraph">Como regla general, cuanto más interviene el nivel de seguridad de Kerberos, peor es el rendimiento, ya que el cliente y el servidor dedican tiempo a cifrar y descifrar operaciones NFS para cada paquete enviado.  Muchos clientes y servidores NFS brindan soporte para la descarga de AES-NI a las CPU para una mejor experiencia general, pero el impacto en el rendimiento de Kerberos 5p (cifrado completo de extremo a extremo) es significativamente mayor que el impacto de Kerberos 5 (autenticación de usuario).</block>
   <block id="986c123032dbfdac18bc180d1a2c3562" category="paragraph">La siguiente tabla muestra las diferencias en lo que hace cada nivel por la seguridad y el rendimiento.</block>
   <block id="f12149bd43eabe8557e021017cfb9b1f" category="cell">Nivel de seguridad</block>
@@ -1318,7 +1317,6 @@
   <block id="9e925e9341b490bfd3b4c4ca3b0c1ef2" category="inline-link-macro">este</block>
   <block id="bc4ca673b1da75d1fc9d8fb4c7d5be52" category="admonition">Recuerde lo siguiente: - Crear una clave pública y privada ssh para proporcionarla al instalador.  Estas claves se utilizarán para iniciar sesión en los nodos maestro y de trabajo si es necesario.  - Descargue el programa instalador desde el instalador asistido.  Este programa se utiliza para iniciar las máquinas virtuales que crea en el entorno VMware vSphere para los nodos maestro y de trabajo.  - Las máquinas virtuales deben tener los requisitos mínimos de CPU, memoria y disco duro.  (Consulte los comandos de creación de vm en<block ref="ad56d2cae35f81c0593c34aac3d8101d" category="inline-link-macro-rx"></block> página para los nodos maestro y de trabajo que proporcionan esta información) - El diskUUID debe estar habilitado en todas las máquinas virtuales.  - Cree un mínimo de 3 nodos para el maestro y 3 nodos para el trabajador.  - Una vez que el instalador los descubra, active el botón de alternancia de integración de VMware vSphere.</block>
   <block id="5ee7e5d095a85988457e6852e94af6e8" category="example-title">Instalar la gestión avanzada de clústeres en el clúster del concentrador</block>
-  <block id="643c48205940ae10b1f2c5f6f8aa5f64" category="paragraph">Esto se instala utilizando el Operador de administración de clúster avanzado en el clúster central.  Consulte las instrucciones<block ref="4bb39576c102d9630dc961b3998ecbd9" category="inline-link-macro-rx"></block> .</block>
   <block id="c0090a527266898baf1b6d9a9978eeb3" category="example-title">Instalar dos clústeres OCP adicionales (origen y destino)</block>
   <block id="a4fcf9c2586b5e93f63d9c1290438839" category="list-text">Los clústeres adicionales se pueden implementar mediante el ACM en el clúster central.</block>
   <block id="4cb2dca6265c22cd883513131d603c5f" category="example-title">Configurar el almacenamiento de NetApp ONTAP</block>
@@ -1463,7 +1461,6 @@
   <block id="8b35ba920859760c3b7ab07c1f52df88" category="inline-link-macro">Documentación del producto de la plataforma OpenShift Container</block>
   <block id="010bce66eda52af8597098e33d12e767" category="inline-link-macro">Instalación de clústeres de la plataforma de contenedores OpenShift</block>
   <block id="9e4f27bab2ba4dcc223eabe15d060c22" category="inline-link-macro">Documentación del producto de gestión avanzada de clústeres</block>
-  <block id="0de84e35816fe2bf24a2d62358c71ec0" category="list-text"><block ref="0de84e35816fe2bf24a2d62358c71ec0" category="inline-link-macro-rx"></block></block>
   <block id="1a28b2dbd24896f9ae4e7ea905e79d07" category="inline-link-macro">Creación de un clúster mediante ACM</block>
   <block id="88c39d9e07dd53d7dfe71bcc634dd892" category="inline-link-macro">Implementación de Red Hat Quay en OpenShift</block>
   <block id="10f0fa4079121b371145e16713fdbb44" category="inline-link-macro">Trident</block>
@@ -6113,10 +6110,7 @@
   <block id="b67b5c15053211b1d63473f9df5b1ab8" category="list-text">Descarga el programa de instalación y el pull secret e implementa el clúster siguiendo los pasos que se indican en la documentación <block ref="072197b16ac4bac15f286e5c622d9439" category="inline-link-macro-rx"></block>.</block>
   <block id="bd203bf7c34fef7dccc4c39161c78dc8" category="admonition">También puedes crear el clúster en AWS desde la consola de nube híbrida de OpenShift. Consulta <block ref="adab8e48d805755a937b8ae49e0ee7b7" category="inline-link-macro-rx"></block> para obtener instrucciones.</block>
   <block id="b272b3fad6d7e2dc24417fce138d59f0" category="list-text"><block ref="b272b3fad6d7e2dc24417fce138d59f0" category="inline-link-macro-rx"></block></block>
-  <block id="2e5e19e6aa211b5fbf5ec029c54234c3" category="list-text"><block ref="2e5e19e6aa211b5fbf5ec029c54234c3" category="inline-link-macro-rx"></block></block>
   <block id="ae28a5decafe6d5c821bf3f3af745b68" category="list-text"><block ref="ae28a5decafe6d5c821bf3f3af745b68" category="inline-link-macro-rx"></block></block>
-  <block id="b538fa533b3feb4047e609177c09e0c1" category="list-text"><block ref="b538fa533b3feb4047e609177c09e0c1" category="inline-link-macro-rx"></block></block>
-  <block id="8c6518684f03117be0fa781cb78c25fd" category="list-text"><block ref="8c6518684f03117be0fa781cb78c25fd" category="inline-link-macro-rx"></block></block>
   <block id="122f25fa4135a6f278aee53402db3807" category="list-text"><block ref="122f25fa4135a6f278aee53402db3807" category="inline-link-macro-rx"></block></block>
   <block id="1bc28ada1e3a8c93363efbd956281f27" category="list-text"><block ref="1bc28ada1e3a8c93363efbd956281f27" category="inline-link-macro-rx"></block></block>
   <block id="f16dd96ff15aa34fe7db06e2c8c45330" category="list-text"><block ref="ce06c104c0af95b337c108430c00cd74" category="inline-link-macro-rx"></block> - Verda (de código abierto) cuenta con una colección de hooks de ejecución de referencia para aplicaciones populares nativas de la nube que hacen un uso intensivo de datos</block>
@@ -6313,4 +6307,10 @@
   <block id="cda22072a0914c289d071ab25b6c1978" category="sidebar">NetApp Recuperación ante desastres para almacenes de datos VMFS</block>
   <block id="51f76c45eb7b32a058fa55ae940a99f6" category="sidebar">Recuperación ante desastres para datastores NFS</block>
   <block id="6de29981a8cf2b52481f931babfac751" category="sidebar">Recuperación ante desastres para almacenes de datos VMFS</block>
+  <block id="a1eed947bb61e8bc603007f81e00de2e" category="paragraph">Según la documentación de RedHat<block ref="c27a12af4b20a1ce93e32b79d2b84a68" category="inline-link-rx"></block>:</block>
+  <block id="10d4600ffb9809c11fd9fbcccc467f7b" category="paragraph">Esto se instala usando Advanced Cluster Management Operator en el Hub Cluster. Consulta las instrucciones <block ref="e42622b652f9818f19937989d1f442be" category="inline-link-macro-rx"></block>.</block>
+  <block id="cf6d8997b5ec040231c35073edec56e3" category="list-text"><block ref="cf6d8997b5ec040231c35073edec56e3" category="inline-link-macro-rx"></block></block>
+  <block id="e3e35e1b84c784f9defb3d94a3007b10" category="list-text"><block ref="e3e35e1b84c784f9defb3d94a3007b10" category="inline-link-macro-rx"></block></block>
+  <block id="07d84ad3f5d033273b418d24d10bfcee" category="list-text"><block ref="07d84ad3f5d033273b418d24d10bfcee" category="inline-link-macro-rx"></block></block>
+  <block id="fda45d1fe193d65714509cae66e08eed" category="list-text"><block ref="fda45d1fe193d65714509cae66e08eed" category="inline-link-macro-rx"></block></block>
 </blocks>

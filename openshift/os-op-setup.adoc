@@ -46,7 +46,7 @@ TIP: Recuerde lo siguiente: - Crear una clave pública y privada ssh para propor
 .Instalar la gestión avanzada de clústeres en el clúster del concentrador
 [%collapsible%open]
 ====
-Esto se instala utilizando el Operador de administración de clúster avanzado en el clúster central.  Consulte las instruccioneslink:https://access.redhat.com/documentation/en-us/red_hat_advanced_cluster_management_for_kubernetes/2.7/html/install/installing#doc-wrapper["aquí"] .
+Esto se instala usando Advanced Cluster Management Operator en el Hub Cluster. Consulta las instrucciones link:https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.7/html/install/installing#doc-wrapper["aquí"^].
 
 ====
 .Instalar dos clústeres OCP adicionales (origen y destino)

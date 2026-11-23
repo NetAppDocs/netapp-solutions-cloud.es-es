@@ -56,7 +56,7 @@ El tipo de cifrado más fuerte disponible actualmente para Kerberos es AES-256-C
 
 Kerberos proporciona tres niveles de seguridad diferentes para montajes NFS que ofrecen opciones sobre qué tan fuerte debe ser la seguridad de Kerberos.
 
-Según Red Hat https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/storage_administration_guide/s1-nfs-client-config-options["Opciones de montaje comunes"^] documentación:
+Según la documentación de RedHat https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/6/html/storage_administration_guide/s1-nfs-client-config-options["Opciones de montaje comunes"^]:
 
 ....
 sec=krb5 uses Kerberos V5 instead of local UNIX UIDs and GIDs to authenticate users.
